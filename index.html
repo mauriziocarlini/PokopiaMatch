@@ -613,6 +613,22 @@
       flex-direction: column;
       align-items: stretch;
     }
+
+    .results-count {
+      text-align: left;
+    }
+
+    .summary-card .result-top > div:first-child {
+      display: block;
+    }
+
+    .summary-card .name-line {
+      justify-content: flex-start;
+    }
+
+    .summary-card button {
+      width: 100%;
+    }
   }
 </style>
 </head>
@@ -1150,7 +1166,6 @@ function renderResultsFromState() {
             renderSpecialtyTags(item.other.specialties) +
           '</div>' +
         '</div>' +
-        '<div class="score">' + item.sharedFavorites.length + ' shared favorites</div>' +
       '</div>' +
       '<div class="result-meta">' +
         '<div>' +
