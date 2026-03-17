@@ -174,37 +174,117 @@
     margin-bottom: 14px;
   }
 
+  .specialty-picker {
+    position: relative;
+  }
+
+  .specialty-input-wrap {
+    border: 3px solid var(--line);
+    background: #fff;
+    min-height: 50px;
+    padding: 8px;
+  }
+
+  .specialty-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    padding: 5px 8px;
+    border: 2px solid var(--line);
+    background: var(--shared);
+    font-size: 12px;
+  }
+
+  .chip button {
+    width: auto;
+    min-height: auto;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .chip button:active {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .specialty-search {
+    width: 100%;
+    min-height: 34px;
+    padding: 6px 4px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+  }
+
+  .specialty-search::placeholder {
+    color: var(--muted);
+  }
+
+  .specialty-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    max-height: 220px;
+    overflow: auto;
+    border: 3px solid var(--line);
+    background: var(--panel);
+    box-shadow: var(--shadow);
+  }
+
+  .specialty-suggestion {
+    width: 100%;
+    min-width: 0;
+    text-align: left;
+    padding: 10px 12px;
+    border: 0;
+    border-bottom: 2px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    box-shadow: none;
+  }
+
+  .specialty-suggestion:last-child {
+    border-bottom: 0;
+  }
+
+  .specialty-suggestion.active,
+  .specialty-suggestion:hover,
+  .specialty-suggestion:focus {
+    background: var(--accent-3);
+    outline: 0;
+  }
+
+  .specialty-empty {
+    padding: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    background: #fff;
+  }
+
   .specialty-toolbar .count,
   .status,
   .muted {
     color: var(--muted);
     font-size: 13px;
     line-height: 1.6;
-  }
-
-  .specialty-grid {
-    display: grid;
-    gap: 8px;
-    max-height: 380px;
-    overflow: auto;
-    padding-right: 4px;
-  }
-
-  .specialty-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 10px;
-    border: 2px solid var(--line);
-    background: #fff;
-    font-size: 13px;
-  }
-
-  .specialty-option input {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--accent);
-    flex: 0 0 auto;
   }
 
   .results-shell {
@@ -375,7 +455,20 @@
             <div class="count" id="filterCount">No active filters.</div>
             <button type="button" class="secondary" id="clearFiltersBtn">Clear filters</button>
           </div>
-          <div class="specialty-grid" id="specialtiesBox"></div>
+          <div class="specialty-picker">
+            <div class="specialty-input-wrap" id="specialtyCombobox">
+              <div class="specialty-chips" id="selectedSpecialties"></div>
+              <input
+                id="specialtySearch"
+                class="specialty-search"
+                type="text"
+                placeholder="Type to filter specialties..."
+                autocomplete="off"
+                aria-label="Search specialties"
+              >
+            </div>
+            <div class="specialty-dropdown" id="specialtyDropdown" hidden></div>
+          </div>
         </section>
 
         <section class="panel">
@@ -417,6 +510,9 @@
 
 <script>
 let DATA = [];
+let ALL_SPECIALTIES = [];
+let selectedSpecialties = [];
+let activeSuggestionIndex = -1;
 
 function escapeHtml(value) {
   return String(value)
@@ -437,7 +533,7 @@ function getAllSpecialties(data) {
 }
 
 function getSelectedSpecialties() {
-  return Array.from(document.querySelectorAll('input[name="specialty"]:checked')).map((el) => el.value);
+  return selectedSpecialties.slice();
 }
 
 function renderTags(items, sharedItems) {
@@ -462,19 +558,147 @@ function renderMinSharedOptions(maxFavorites) {
 }
 
 function renderSpecialties() {
-  const specialties = getAllSpecialties(DATA);
-  const box = document.getElementById('specialtiesBox');
+  ALL_SPECIALTIES = getAllSpecialties(DATA);
+  renderSelectedSpecialtyChips();
+  renderSpecialtySuggestions();
+}
 
-  box.innerHTML = specialties.map((specialty) => {
-    const safe = escapeHtml(specialty);
-    return '<label class="specialty-option"><input type="checkbox" name="specialty" value="' + safe + '"> <span>' + safe + '</span></label>';
+function getAvailableSpecialties(query) {
+  const normalizedQuery = query.trim().toLowerCase();
+
+  return ALL_SPECIALTIES
+    .filter((specialty) => !selectedSpecialties.includes(specialty))
+    .filter((specialty) => specialty.toLowerCase().includes(normalizedQuery));
+}
+
+function renderSelectedSpecialtyChips() {
+  const chips = document.getElementById('selectedSpecialties');
+
+  chips.innerHTML = selectedSpecialties.map((specialty) => {
+    return '<span class="chip">' +
+      '<span>' + escapeHtml(specialty) + '</span>' +
+      '<button type="button" data-remove-specialty="' + escapeHtml(specialty) + '" aria-label="Remove ' + escapeHtml(specialty) + '">x</button>' +
+    '</span>';
   }).join('');
 
-  document.querySelectorAll('input[name="specialty"]').forEach((input) => {
-    input.addEventListener('change', () => {
-      updateFilterCount();
-      renderPokemonSelect();
+  chips.querySelectorAll('[data-remove-specialty]').forEach((button) => {
+    button.addEventListener('click', () => {
+      removeSpecialty(button.getAttribute('data-remove-specialty'));
     });
+  });
+}
+
+function renderSpecialtySuggestions() {
+  const input = document.getElementById('specialtySearch');
+  const dropdown = document.getElementById('specialtyDropdown');
+  const available = getAvailableSpecialties(input.value);
+
+  if (available.length === 0) {
+    activeSuggestionIndex = -1;
+    dropdown.innerHTML = '<div class="specialty-empty">No matching specialties.</div>';
+    dropdown.hidden = input.value.trim() === '' && selectedSpecialties.length === ALL_SPECIALTIES.length;
+    return;
+  }
+
+  if (activeSuggestionIndex >= available.length) {
+    activeSuggestionIndex = 0;
+  }
+
+  dropdown.innerHTML = available.map((specialty, index) => {
+    const activeClass = index === activeSuggestionIndex ? ' active' : '';
+    return '<button type="button" class="specialty-suggestion' + activeClass + '" data-specialty="' + escapeHtml(specialty) + '">' + escapeHtml(specialty) + '</button>';
+  }).join('');
+
+  dropdown.hidden = false;
+
+  dropdown.querySelectorAll('[data-specialty]').forEach((button) => {
+    button.addEventListener('click', () => {
+      addSpecialty(button.getAttribute('data-specialty'));
+    });
+  });
+}
+
+function addSpecialty(specialty) {
+  if (!specialty || selectedSpecialties.includes(specialty)) {
+    return;
+  }
+
+  selectedSpecialties.push(specialty);
+  selectedSpecialties.sort((a, b) => a.localeCompare(b));
+  const input = document.getElementById('specialtySearch');
+  input.value = '';
+  activeSuggestionIndex = -1;
+  renderSelectedSpecialtyChips();
+  renderSpecialtySuggestions();
+  updateFilterCount();
+  renderPokemonSelect();
+  input.focus();
+}
+
+function removeSpecialty(specialty) {
+  selectedSpecialties = selectedSpecialties.filter((item) => item !== specialty);
+  activeSuggestionIndex = -1;
+  renderSelectedSpecialtyChips();
+  renderSpecialtySuggestions();
+  updateFilterCount();
+  renderPokemonSelect();
+}
+
+function setupSpecialtyAutocomplete() {
+  const input = document.getElementById('specialtySearch');
+  const dropdown = document.getElementById('specialtyDropdown');
+
+  input.addEventListener('focus', () => {
+    renderSpecialtySuggestions();
+  });
+
+  input.addEventListener('input', () => {
+    activeSuggestionIndex = -1;
+    renderSpecialtySuggestions();
+  });
+
+  input.addEventListener('keydown', (event) => {
+    const available = getAvailableSpecialties(input.value);
+
+    if (event.key === 'Backspace' && input.value === '' && selectedSpecialties.length) {
+      removeSpecialty(selectedSpecialties[selectedSpecialties.length - 1]);
+      return;
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (!available.length) return;
+      activeSuggestionIndex = (activeSuggestionIndex + 1) % available.length;
+      renderSpecialtySuggestions();
+      return;
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (!available.length) return;
+      activeSuggestionIndex = activeSuggestionIndex <= 0 ? available.length - 1 : activeSuggestionIndex - 1;
+      renderSpecialtySuggestions();
+      return;
+    }
+
+    if (event.key === 'Enter') {
+      if (!available.length) return;
+      event.preventDefault();
+      const index = activeSuggestionIndex >= 0 ? activeSuggestionIndex : 0;
+      addSpecialty(available[index]);
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      dropdown.hidden = true;
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    const combobox = document.getElementById('specialtyCombobox');
+    if (!combobox.contains(event.target) && !dropdown.contains(event.target)) {
+      dropdown.hidden = true;
+    }
   });
 }
 
@@ -644,9 +868,11 @@ function searchCompatibility() {
 }
 
 function clearFilters() {
-  document.querySelectorAll('input[name="specialty"]').forEach((input) => {
-    input.checked = false;
-  });
+  selectedSpecialties = [];
+  document.getElementById('specialtySearch').value = '';
+  activeSuggestionIndex = -1;
+  renderSelectedSpecialtyChips();
+  renderSpecialtySuggestions();
   updateFilterCount();
   renderPokemonSelect();
 }
@@ -673,6 +899,7 @@ async function loadData() {
       .sort((a, b) => a.name.localeCompare(b.name));
 
     renderSpecialties();
+    setupSpecialtyAutocomplete();
     renderPokemonSelect();
     renderMinSharedOptions(Math.max(...DATA.map((pokemon) => pokemon.favorites.length), 1));
     updateFilterCount();
