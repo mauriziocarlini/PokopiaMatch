@@ -305,7 +305,9 @@
   }
 
   .live-filters {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 8px;
   }
 
@@ -314,7 +316,7 @@
   }
 
   .live-filter-title {
-    margin: 0;
+    margin: 0 8px 0 0;
     font-size: 12px;
     line-height: 1.6;
     color: var(--muted);
@@ -383,6 +385,11 @@
 
   .summary-card {
     padding: 16px;
+  }
+
+  .summary-card .result-top {
+    align-items: center;
+    margin-bottom: 0;
   }
 
   .summary-card h3 {
@@ -700,7 +707,7 @@ function renderFavoriteFilterTags(items) {
 
 function renderFlavorFilterTag(flavor) {
   const activeClass = activeResultFlavorFilter ? ' active' : '';
-  return '<div><div class="live-filter-title">Favorite flavor</div><div class="tag-list"><button type="button" class="tag toggle-tag flavor-filter' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button></div></div>';
+  return '<button type="button" class="tag toggle-tag flavor-filter' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button>';
 }
 
 function getPokemonProfile(pokemon) {
@@ -1012,7 +1019,7 @@ function renderSummary(base) {
             renderSpecialtyTags(base.specialties) +
           '</div>' +
         '</div>' +
-        '<div class="score starting">Starting Pokemon</div>' +
+        '<div class="score starting">Find matches for</div>' +
       '</div>' +
     '</div>';
 }
@@ -1030,8 +1037,8 @@ function renderLiveFilters(base) {
 
   container.hidden = false;
   container.innerHTML =
-    '<div class="live-filter-title">Filter visible matches by starting Pokemon preferences</div>' +
-    (base.interests.length ? '<div><div class="live-filter-title">Favorites</div>' + renderFavoriteFilterTags(base.interests) + '</div>' : '') +
+    '<div class="live-filter-title">Filter matches</div>' +
+    (base.interests.length ? renderFavoriteFilterTags(base.interests) : '') +
     (base.flavor ? renderFlavorFilterTag(base.flavor) : '');
 
   container.querySelectorAll('[data-favorite-filter]').forEach((button) => {
