@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokopia Match Finder</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #f2efe4;
+    --panel: #fffdf7;
+    --ink: #181410;
+    --muted: #5f584d;
+    --line: #181410;
+    --accent: #da6b2c;
+    --accent-2: #7fb069;
+    --accent-3: #f0c04a;
+    --shared: #d5efc9;
+    --shadow: 6px 6px 0 #181410;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: "IBM Plex Mono", monospace;
+    background:
+      linear-gradient(0deg, rgba(24, 20, 16, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(24, 20, 16, 0.04) 1px, transparent 1px),
+      linear-gradient(180deg, #f8f6ee 0%, var(--bg) 100%);
+    background-size: 18px 18px, 18px 18px, auto;
+  }
+
+  .page {
+    width: min(1120px, calc(100% - 28px));
+    margin: 22px auto 40px;
+  }
+
+  .hero,
+  .panel,
+  .result-card,
+  .empty,
+  .summary-card {
+    background: var(--panel);
+    border: 3px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .hero {
+    padding: 24px;
+    margin-bottom: 18px;
+  }
+
+  h1,
+  h2,
+  h3,
+  .pixel {
+    font-family: "Press Start 2P", monospace;
+    letter-spacing: 0.02em;
+  }
+
+  h1 {
+    margin: 0 0 14px;
+    font-size: clamp(20px, 3vw, 34px);
+    line-height: 1.35;
+  }
+
+  .intro {
+    margin: 0;
+    max-width: 760px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .stack {
+    display: grid;
+    gap: 18px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .panel h2 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .panel p {
+    margin: 0 0 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .field {
+    margin-bottom: 14px;
+  }
+
+  .field:last-child {
+    margin-bottom: 0;
+  }
+
+  .field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  select,
+  button {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 3px solid var(--line);
+    border-radius: 0;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+  }
+
+  select:focus,
+  button:focus,
+  input:focus {
+    outline: 3px solid var(--accent-3);
+    outline-offset: 2px;
+  }
+
+  button {
+    cursor: pointer;
+    font-weight: 600;
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 3px 3px 0 var(--line);
+  }
+
+  button.secondary {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--line);
+  }
+
+  button:disabled,
+  select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .specialty-toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .specialty-toolbar .count,
+  .status,
+  .muted {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .specialty-grid {
+    display: grid;
+    gap: 8px;
+    max-height: 380px;
+    overflow: auto;
+    padding-right: 4px;
+  }
+
+  .specialty-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border: 2px solid var(--line);
+    background: #fff;
+    font-size: 13px;
+  }
+
+  .specialty-option input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    flex: 0 0 auto;
+  }
+
+  .results-shell {
+    display: grid;
+    gap: 18px;
+  }
+
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: end;
+  }
+
+  .results-header h2 {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .summary-card {
+    padding: 16px;
+  }
+
+  .summary-card h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .meta-line {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 6px 10px;
+    border: 2px solid var(--line);
+    background: #fff;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .tag.shared {
+    background: var(--shared);
+  }
+
+  .result-list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .result-card {
+    padding: 16px;
+  }
+
+  .result-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 14px;
+  }
+
+  .result-name {
+    margin: 0 0 8px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .score {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 6px 10px;
+    border: 2px solid var(--line);
+    background: var(--accent-3);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .result-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .result-meta strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  .empty {
+    padding: 18px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .status code {
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  @media (max-width: 920px) {
+    .layout,
+    .summary,
+    .result-meta {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .page {
+      width: min(100% - 18px, 1120px);
+      margin: 12px auto 24px;
+    }
+
+    .hero,
+    .panel,
+    .result-card,
+    .empty,
+    .summary-card {
+      box-shadow: 4px 4px 0 var(--line);
+    }
+
+    .results-header,
+    .result-top,
+    .specialty-toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>POKOPIA MATCH FINDER</h1>
+      <p class="intro">Pick one Pokemon. Use specialty filters only to narrow the picker faster. Then scan the best compatibility matches ranked by shared favorites.</p>
+    </section>
+
+    <div class="layout">
+      <div class="stack">
+        <section class="panel">
+          <h2>FILTER BY SPECIALTY</h2>
+          <p>Optional helper filter for the Pokemon selector. Leave everything unchecked to browse the full dex.</p>
+          <div class="specialty-toolbar">
+            <div class="count" id="filterCount">No active filters.</div>
+            <button type="button" class="secondary" id="clearFiltersBtn">Clear filters</button>
+          </div>
+          <div class="specialty-grid" id="specialtiesBox"></div>
+        </section>
+
+        <section class="panel">
+          <h2>SELECT YOUR TARGET</h2>
+          <div class="field">
+            <label for="pokemonSelect">Pokemon</label>
+            <select id="pokemonSelect" disabled>
+              <option value="">Loading data...</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="matchScope">Compare against</label>
+            <select id="matchScope" disabled>
+              <option value="all" selected>All Pokemon</option>
+              <option value="filtered">Only filtered Pokemon</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="minShared">Minimum shared favorites</label>
+            <select id="minShared" disabled></select>
+          </div>
+          <div class="field">
+            <button type="button" id="searchBtn" disabled>Find matches</button>
+          </div>
+          <div class="status" id="loadStatus">Loading <code>dex.json</code>...</div>
+        </section>
+      </div>
+
+      <section class="results-shell">
+        <div class="results-header">
+          <h2>MATCH RESULTS</h2>
+          <div class="muted" id="resultsCount">No search yet.</div>
+        </div>
+        <div id="summary" class="empty">Choose a Pokemon, then run the search.</div>
+        <div id="results" class="result-list"></div>
+      </section>
+    </div>
+  </main>
+
+<script>
+let DATA = [];
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+function intersect(a, b) {
+  const setB = new Set(b);
+  return a.filter((item) => setB.has(item)).sort((x, y) => x.localeCompare(y));
+}
+
+function getAllSpecialties(data) {
+  return Array.from(new Set(data.flatMap((item) => item.specialties || [])))
+    .sort((a, b) => a.localeCompare(b));
+}
+
+function getSelectedSpecialties() {
+  return Array.from(document.querySelectorAll('input[name="specialty"]:checked')).map((el) => el.value);
+}
+
+function renderTags(items, sharedItems) {
+  const sharedSet = new Set(sharedItems || []);
+  return '<div class="tag-list">' + items.map((item) => {
+    const sharedClass = sharedSet.has(item) ? ' shared' : '';
+    return '<span class="tag' + sharedClass + '">' + escapeHtml(item) + '</span>';
+  }).join('') + '</div>';
+}
+
+function renderMinSharedOptions(maxFavorites) {
+  const select = document.getElementById('minShared');
+  const limit = Math.max(1, maxFavorites);
+  let html = '';
+
+  for (let i = 1; i <= limit; i++) {
+    const selected = i === Math.min(3, limit) ? ' selected' : '';
+    html += '<option value="' + i + '"' + selected + '>' + i + '</option>';
+  }
+
+  select.innerHTML = html;
+}
+
+function renderSpecialties() {
+  const specialties = getAllSpecialties(DATA);
+  const box = document.getElementById('specialtiesBox');
+
+  box.innerHTML = specialties.map((specialty) => {
+    const safe = escapeHtml(specialty);
+    return '<label class="specialty-option"><input type="checkbox" name="specialty" value="' + safe + '"> <span>' + safe + '</span></label>';
+  }).join('');
+
+  document.querySelectorAll('input[name="specialty"]').forEach((input) => {
+    input.addEventListener('change', () => {
+      updateFilterCount();
+      renderPokemonSelect();
+    });
+  });
+}
+
+function getFilteredPokemon() {
+  const selectedSpecialties = getSelectedSpecialties();
+  if (selectedSpecialties.length === 0) {
+    return DATA.slice().sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  return DATA
+    .filter((pokemon) => selectedSpecialties.every((specialty) => pokemon.specialties.includes(specialty)))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function renderPokemonSelect() {
+  const select = document.getElementById('pokemonSelect');
+  const filtered = getFilteredPokemon();
+  const currentValue = select.value;
+
+  let html = '<option value="">-- Select a Pokemon --</option>';
+  html += filtered.map((pokemon) => {
+    const safeName = escapeHtml(pokemon.name);
+    return '<option value="' + safeName + '">' + safeName + '</option>';
+  }).join('');
+
+  select.innerHTML = html;
+  select.disabled = DATA.length === 0;
+
+  if (filtered.some((pokemon) => pokemon.name === currentValue)) {
+    select.value = currentValue;
+  }
+
+  if (!select.value && filtered.length === 1) {
+    select.value = filtered[0].name;
+  }
+
+  document.getElementById('matchScope').disabled = filtered.length === 0;
+  document.getElementById('searchBtn').disabled = DATA.length === 0 || filtered.length === 0;
+}
+
+function updateFilterCount() {
+  const selected = getSelectedSpecialties();
+  const filtered = getFilteredPokemon();
+  const countEl = document.getElementById('filterCount');
+
+  if (selected.length === 0) {
+    countEl.textContent = 'No active filters. ' + DATA.length + ' Pokemon available.';
+    return;
+  }
+
+  countEl.textContent = selected.length + ' specialties selected. ' + filtered.length + ' Pokemon match the filter.';
+}
+
+function renderSummary(base, matches, scopeLabel) {
+  const summary = document.getElementById('summary');
+  summary.className = 'summary';
+
+  summary.innerHTML =
+    '<div class="summary-card">' +
+      '<h3>' + escapeHtml(base.name) + '</h3>' +
+      '<div class="muted">Selected Pokemon</div>' +
+      '<div class="meta-line"><strong>Specialties</strong></div>' +
+      renderTags(base.specialties) +
+      '<div class="meta-line"><strong>Favorites</strong></div>' +
+      renderTags(base.favorites) +
+    '</div>' +
+    '<div class="summary-card">' +
+      '<h3>' + matches.length + ' matches found</h3>' +
+      '<div class="muted">Comparison scope: ' + escapeHtml(scopeLabel) + '</div>' +
+      '<div class="meta-line"><strong>Top match</strong></div>' +
+      (matches[0]
+        ? '<div>' + escapeHtml(matches[0].other.name) + ' with ' + matches[0].sharedFavorites.length + ' shared favorites</div>'
+        : '<div>No Pokemon reached your current threshold.</div>') +
+      '<div class="meta-line"><strong>Minimum threshold</strong></div>' +
+      '<div>' + escapeHtml(document.getElementById('minShared').value) + ' shared favorites</div>' +
+    '</div>';
+}
+
+function searchCompatibility() {
+  const selectedName = document.getElementById('pokemonSelect').value;
+  const minShared = Number(document.getElementById('minShared').value);
+  const scope = document.getElementById('matchScope').value;
+  const results = document.getElementById('results');
+  const resultsCount = document.getElementById('resultsCount');
+  const summary = document.getElementById('summary');
+
+  if (!selectedName) {
+    summary.className = 'empty';
+    summary.textContent = 'Select a Pokemon first.';
+    results.innerHTML = '';
+    resultsCount.textContent = 'No search yet.';
+    return;
+  }
+
+  const base = DATA.find((pokemon) => pokemon.name === selectedName);
+  if (!base) {
+    summary.className = 'empty';
+    summary.textContent = 'That Pokemon was not found in the dataset.';
+    results.innerHTML = '';
+    resultsCount.textContent = 'No search yet.';
+    return;
+  }
+
+  const filteredPool = getFilteredPokemon();
+  const pool = scope === 'filtered' ? filteredPool : DATA;
+  const scopeLabel = scope === 'filtered' ? 'filtered Pokemon only' : 'entire dex';
+
+  const matches = pool
+    .filter((pokemon) => pokemon.name !== base.name)
+    .map((pokemon) => {
+      const sharedFavorites = intersect(base.favorites, pokemon.favorites);
+      const sharedSpecialties = intersect(base.specialties, pokemon.specialties);
+      return {
+        other: pokemon,
+        sharedFavorites,
+        sharedSpecialties
+      };
+    })
+    .filter((item) => item.sharedFavorites.length >= minShared)
+    .sort((a, b) => {
+      if (b.sharedFavorites.length !== a.sharedFavorites.length) {
+        return b.sharedFavorites.length - a.sharedFavorites.length;
+      }
+      if (b.sharedSpecialties.length !== a.sharedSpecialties.length) {
+        return b.sharedSpecialties.length - a.sharedSpecialties.length;
+      }
+      return a.other.name.localeCompare(b.other.name);
+    });
+
+  renderSummary(base, matches, scopeLabel);
+  resultsCount.textContent = matches.length + ' ranked results.';
+
+  if (matches.length === 0) {
+    results.innerHTML = '<div class="empty">No Pokemon reached the selected compatibility threshold.</div>';
+    return;
+  }
+
+  results.innerHTML = matches.map((item) => {
+    return '<article class="result-card">' +
+      '<div class="result-top">' +
+        '<div>' +
+          '<h3 class="result-name">' + escapeHtml(item.other.name) + '</h3>' +
+          '<div class="muted">' + item.sharedSpecialties.length + ' shared specialties</div>' +
+        '</div>' +
+        '<div class="score">' + item.sharedFavorites.length + ' shared favorites</div>' +
+      '</div>' +
+      '<div class="result-meta">' +
+        '<div>' +
+          '<strong>Specialties</strong>' +
+          renderTags(item.other.specialties, item.sharedSpecialties) +
+        '</div>' +
+        '<div>' +
+          '<strong>Shared favorites</strong>' +
+          (item.sharedFavorites.length ? renderTags(item.sharedFavorites, item.sharedFavorites) : '<div class="muted">None</div>') +
+        '</div>' +
+        '<div>' +
+          '<strong>All favorites</strong>' +
+          renderTags(item.other.favorites, item.sharedFavorites) +
+        '</div>' +
+        '<div>' +
+          '<strong>Shared base specialties</strong>' +
+          (item.sharedSpecialties.length ? renderTags(item.sharedSpecialties, item.sharedSpecialties) : '<div class="muted">None</div>') +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }).join('');
+}
+
+function clearFilters() {
+  document.querySelectorAll('input[name="specialty"]').forEach((input) => {
+    input.checked = false;
+  });
+  updateFilterCount();
+  renderPokemonSelect();
+}
+
+function enableUi() {
+  document.getElementById('pokemonSelect').disabled = false;
+  document.getElementById('matchScope').disabled = false;
+  document.getElementById('minShared').disabled = false;
+  document.getElementById('searchBtn').disabled = false;
+}
+
+async function loadData() {
+  const status = document.getElementById('loadStatus');
+
+  try {
+    const response = await fetch('./dex.json');
+    if (!response.ok) {
+      throw new Error('HTTP ' + response.status);
+    }
+
+    const rawData = await response.json();
+    DATA = rawData
+      .filter((item) => item && item.name && Array.isArray(item.specialties) && Array.isArray(item.favorites))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    renderSpecialties();
+    renderPokemonSelect();
+    renderMinSharedOptions(Math.max(...DATA.map((pokemon) => pokemon.favorites.length), 1));
+    updateFilterCount();
+    enableUi();
+
+    document.getElementById('matchScope').value = 'all';
+    status.textContent = 'Loaded ' + DATA.length + ' Pokemon from dex.json.';
+  } catch (error) {
+    status.innerHTML = 'Could not load <code>dex.json</code>. If you opened this page directly from the filesystem, try serving the folder with a local web server.';
+    document.getElementById('summary').className = 'empty';
+    document.getElementById('summary').textContent = 'Data loading failed, so matches are unavailable.';
+  }
+}
+
+document.getElementById('searchBtn').addEventListener('click', searchCompatibility);
+document.getElementById('clearFiltersBtn').addEventListener('click', clearFilters);
+document.getElementById('pokemonSelect').addEventListener('change', () => {
+  document.getElementById('resultsCount').textContent = 'Ready to search.';
+});
+
+loadData();
+</script>
+</body>
+</html>
