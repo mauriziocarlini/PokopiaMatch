@@ -328,6 +328,10 @@
     line-height: 1.5;
   }
 
+  .name-line .tag-list {
+    margin-top: 0;
+  }
+
   .meta-line {
     margin: 10px 0 0;
     font-size: 13px;
@@ -362,6 +366,13 @@
     opacity: 0.78;
   }
 
+  .tag.specialty {
+    background: var(--accent-3);
+    border-style: solid;
+    color: var(--ink);
+    opacity: 1;
+  }
+
   .result-list {
     display: grid;
     gap: 14px;
@@ -380,9 +391,16 @@
   }
 
   .result-name {
-    margin: 0 0 8px;
+    margin: 0;
     font-size: 16px;
     line-height: 1.5;
+  }
+
+  .name-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
   }
 
   .score {
@@ -399,7 +417,7 @@
 
   .result-meta {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 14px;
   }
 
@@ -456,13 +474,13 @@
   <main class="page">
     <section class="hero">
       <h1>POKOPIA MATCH FINDER</h1>
-      <p class="intro">Choose a starting Pokemon and discover which partners can share the same environment most happily and effectively. Specialty filters are only there to help you find that starting Pokemon faster.</p>
+      <p class="intro">Choose a starting Pokemon and find the best companions for the same habitat.</p>
     </section>
 
     <div class="layout">
       <section class="panel">
         <h2>STARTING POKEMON SETUP</h2>
-        <p>First pick the Pokemon you want to build around. Use specialty filters only to narrow the selector, then search for the best companions for a shared habitat.</p>
+        <p>Use specialty filters to find your starting Pokemon faster.</p>
 
         <div class="panel-section">
           <div class="field">
@@ -559,6 +577,24 @@ function renderTags(items, sharedItems) {
     const tagClass = sharedSet.has(item) ? ' shared' : ' faded';
     return '<span class="tag' + tagClass + '">' + escapeHtml(item) + '</span>';
   }).join('') + '</div>';
+}
+
+function renderSpecialtyTags(items) {
+  return '<div class="tag-list">' + items.map((item) => {
+    return '<span class="tag specialty">' + escapeHtml(item) + '</span>';
+  }).join('') + '</div>';
+}
+
+function getPokemonProfile(pokemon) {
+  const favorites = Array.isArray(pokemon.favorites) ? pokemon.favorites.slice() : [];
+  const flavor = favorites.length ? favorites[favorites.length - 1] : null;
+  const interests = favorites.slice(0, -1);
+
+  return {
+    ...pokemon,
+    interests,
+    flavor
+  };
 }
 
 function renderMinSharedOptions(maxFavorites) {
@@ -795,22 +831,29 @@ function updateFilterCount() {
 function renderSummary(base, matches, scopeLabel) {
   const summary = document.getElementById('summary');
   summary.className = 'summary';
+  const bestScore = matches.length ? matches[0].sharedFavorites.length : 0;
+  const bestNames = matches
+    .filter((item) => item.sharedFavorites.length === bestScore)
+    .map((item) => item.other.name);
 
   summary.innerHTML =
     '<div class="summary-card">' +
-      '<h3>' + escapeHtml(base.name) + '</h3>' +
+      '<div class="name-line">' +
+        '<h3>' + escapeHtml(base.name) + '</h3>' +
+        renderSpecialtyTags(base.specialties) +
+      '</div>' +
       '<div class="muted">Starting Pokemon</div>' +
-      '<div class="meta-line"><strong>Specialties</strong></div>' +
-      renderTags(base.specialties) +
       '<div class="meta-line"><strong>Favorites</strong></div>' +
-      renderTags(base.favorites) +
+      renderTags(base.interests, []) +
+      '<div class="meta-line"><strong>Favorite flavor</strong></div>' +
+      (base.flavor ? renderTags([base.flavor], [base.flavor]) : '<div class="muted">None</div>') +
     '</div>' +
     '<div class="summary-card">' +
       '<h3>' + matches.length + ' matches found</h3>' +
       '<div class="muted">Habitat scan scope: ' + escapeHtml(scopeLabel) + '</div>' +
-      '<div class="meta-line"><strong>Best companion</strong></div>' +
+      '<div class="meta-line"><strong>Best match</strong></div>' +
       (matches[0]
-        ? '<div>' + escapeHtml(matches[0].other.name) + ' with ' + matches[0].sharedFavorites.length + ' shared favorites</div>'
+        ? '<div>' + bestNames.map(escapeHtml).join(', ') + ' with ' + matches[0].sharedFavorites.length + ' shared favorites</div>'
         : '<div>No Pokemon reached your current threshold.</div>') +
       '<div class="meta-line"><strong>Minimum compatibility threshold</strong></div>' +
       '<div>' + escapeHtml(document.getElementById('minShared').value) + ' shared favorites</div>' +
@@ -842,6 +885,7 @@ function searchCompatibility() {
     return;
   }
 
+  const baseProfile = getPokemonProfile(base);
   const filteredPool = getFilteredPokemon();
   const pool = scope === 'filtered' ? filteredPool : DATA;
   const scopeLabel = scope === 'filtered' ? 'filtered Pokemon only' : 'entire dex';
@@ -849,9 +893,10 @@ function searchCompatibility() {
   const matches = pool
     .filter((pokemon) => pokemon.name !== base.name)
     .map((pokemon) => {
-      const sharedFavorites = intersect(base.favorites, pokemon.favorites);
+      const profile = getPokemonProfile(pokemon);
+      const sharedFavorites = intersect(baseProfile.interests, profile.interests);
       return {
-        other: pokemon,
+        other: profile,
         sharedFavorites
       };
     })
@@ -863,7 +908,7 @@ function searchCompatibility() {
       return a.other.name.localeCompare(b.other.name);
     });
 
-  renderSummary(base, matches, scopeLabel);
+  renderSummary(baseProfile, matches, scopeLabel);
   resultsCount.textContent = matches.length + ' ranked habitat matches.';
 
   if (matches.length === 0) {
@@ -875,18 +920,19 @@ function searchCompatibility() {
     return '<article class="result-card">' +
       '<div class="result-top">' +
         '<div>' +
-          '<h3 class="result-name">' + escapeHtml(item.other.name) + '</h3>' +
+          '<div class="name-line">' +
+            '<h3 class="result-name">' + escapeHtml(item.other.name) + '</h3>' +
+            renderSpecialtyTags(item.other.specialties) +
+          '</div>' +
         '</div>' +
         '<div class="score">' + item.sharedFavorites.length + ' shared favorites</div>' +
       '</div>' +
       '<div class="result-meta">' +
         '<div>' +
-          '<strong>Specialties</strong>' +
-          renderTags(item.other.specialties, []) +
-        '</div>' +
-        '<div>' +
           '<strong>Favorites</strong>' +
-          renderTags(item.other.favorites, item.sharedFavorites) +
+          renderTags(item.other.interests, item.sharedFavorites) +
+          '<div class="meta-line"><strong>Favorite flavor</strong></div>' +
+          (item.other.flavor ? renderTags([item.other.flavor], [item.other.flavor]) : '<div class="muted">None</div>') +
         '</div>' +
       '</div>' +
     '</article>';
