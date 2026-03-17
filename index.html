@@ -15,8 +15,10 @@
     --line: #181410;
     --accent: #da6b2c;
     --accent-2: #7fb069;
-    --accent-3: #f0c04a;
-    --shared: #d5efc9;
+    --accent-3: #f6d770;
+    --shared: #def3d4;
+    --flavor: #cfeaff;
+    --score: #d8cdfb;
     --shadow: 6px 6px 0 #181410;
   }
 
@@ -206,7 +208,7 @@
     min-height: 30px;
     padding: 5px 8px;
     border: 2px solid var(--line);
-    background: var(--shared);
+    background: var(--accent-3);
     font-size: 12px;
   }
 
@@ -373,6 +375,13 @@
     opacity: 1;
   }
 
+  .tag.flavor {
+    background: var(--flavor);
+    border-style: solid;
+    color: var(--ink);
+    opacity: 1;
+  }
+
   .result-list {
     display: grid;
     gap: 14px;
@@ -409,10 +418,21 @@
     min-height: 34px;
     padding: 6px 10px;
     border: 2px solid var(--line);
-    background: var(--accent-3);
+    background: var(--score);
     font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
+  }
+
+  .result-group {
+    display: grid;
+    gap: 12px;
+  }
+
+  .group-title {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.6;
   }
 
   .result-meta {
@@ -583,6 +603,10 @@ function renderSpecialtyTags(items) {
   return '<div class="tag-list">' + items.map((item) => {
     return '<span class="tag specialty">' + escapeHtml(item) + '</span>';
   }).join('') + '</div>';
+}
+
+function renderFlavorTag(flavor) {
+  return '<div class="tag-list"><span class="tag flavor">' + escapeHtml(flavor) + '</span></div>';
 }
 
 function getPokemonProfile(pokemon) {
@@ -846,7 +870,7 @@ function renderSummary(base, matches, scopeLabel) {
       '<div class="meta-line"><strong>Favorites</strong></div>' +
       renderTags(base.interests, []) +
       '<div class="meta-line"><strong>Favorite flavor</strong></div>' +
-      (base.flavor ? renderTags([base.flavor], [base.flavor]) : '<div class="muted">None</div>') +
+      (base.flavor ? renderFlavorTag(base.flavor) : '<div class="muted">None</div>') +
     '</div>' +
     '<div class="summary-card">' +
       '<h3>' + matches.length + ' matches found</h3>' +
@@ -916,8 +940,22 @@ function searchCompatibility() {
     return;
   }
 
-  results.innerHTML = matches.map((item) => {
-    return '<article class="result-card">' +
+  const groupedMatches = matches.reduce((acc, item) => {
+    const key = item.sharedFavorites.length;
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(item);
+    return acc;
+  }, {});
+
+  results.innerHTML = Object.keys(groupedMatches)
+    .map(Number)
+    .sort((a, b) => b - a)
+    .map((score) => {
+      const items = groupedMatches[score];
+      const title = score + ' shared favorites';
+
+      const cards = items.map((item) => {
+        return '<article class="result-card">' +
       '<div class="result-top">' +
         '<div>' +
           '<div class="name-line">' +
@@ -932,11 +970,17 @@ function searchCompatibility() {
           '<strong>Favorites</strong>' +
           renderTags(item.other.interests, item.sharedFavorites) +
           '<div class="meta-line"><strong>Favorite flavor</strong></div>' +
-          (item.other.flavor ? renderTags([item.other.flavor], [item.other.flavor]) : '<div class="muted">None</div>') +
+          (item.other.flavor ? renderFlavorTag(item.other.flavor) : '<div class="muted">None</div>') +
         '</div>' +
       '</div>' +
     '</article>';
-  }).join('');
+      }).join('');
+
+      return '<section class="result-group">' +
+        '<h3 class="group-title">' + escapeHtml(title) + '</h3>' +
+        cards +
+      '</section>';
+    }).join('');
 }
 
 function clearFilters() {
