@@ -190,7 +190,7 @@
   .specialty-input-wrap {
     border: 3px solid var(--line);
     background: #fff;
-    min-height: 50px;
+    min-height: 54px;
     padding: 8px;
   }
 
@@ -251,7 +251,7 @@
     left: 0;
     right: 0;
     z-index: 20;
-    max-height: 220px;
+    max-height: 320px;
     overflow: auto;
     border: 3px solid var(--line);
     background: var(--panel);
@@ -262,7 +262,7 @@
     width: 100%;
     min-width: 0;
     text-align: left;
-    padding: 10px 12px;
+    padding: 12px 12px;
     border: 0;
     border-bottom: 2px solid var(--line);
     background: #fff;
@@ -415,13 +415,14 @@
   .score {
     display: inline-flex;
     align-items: center;
-    min-height: 34px;
-    padding: 6px 10px;
+    min-height: 28px;
+    padding: 4px 8px;
     border: 2px solid var(--line);
     background: var(--score);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     white-space: nowrap;
+    opacity: 0.82;
   }
 
   .result-group {
@@ -435,8 +436,10 @@
 
   .group-title {
     margin: 0;
-    font-size: 12px;
-    line-height: 1.6;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--muted);
+    opacity: 0.85;
   }
 
   .result-meta {
@@ -503,7 +506,7 @@
 
     <div class="layout">
       <section class="panel">
-        <h2>STARTING POKEMON SETUP</h2>
+        <h2>CHOOSE POKEMON</h2>
         <p>Use specialty filters to find your starting Pokemon faster.</p>
 
         <div class="panel-section">
@@ -913,6 +916,7 @@ function renderSummary(base, matches, scopeLabel) {
   const bestNames = matches
     .filter((item) => item.sharedFavorites.length === bestScore)
     .map((item) => item.other.name);
+  const bestNamesHtml = bestNames.map((name) => '<strong>' + escapeHtml(name) + '</strong>').join(', ');
 
   summary.innerHTML =
     '<div class="summary-card">' +
@@ -931,7 +935,7 @@ function renderSummary(base, matches, scopeLabel) {
       '<div class="muted">Habitat scan scope: ' + escapeHtml(scopeLabel) + '</div>' +
       '<div class="meta-line"><strong>Best match</strong></div>' +
       (matches[0]
-        ? '<div>' + bestNames.map(escapeHtml).join(', ') + ' with ' + matches[0].sharedFavorites.length + ' shared favorites</div>'
+        ? '<div>' + bestNamesHtml + ' with ' + matches[0].sharedFavorites.length + ' shared favorites</div>'
         : '<div>No Pokemon reached your current threshold.</div>') +
       '<div class="meta-line"><strong>Minimum compatibility threshold</strong></div>' +
       '<div>' + escapeHtml(document.getElementById('minShared').value) + ' shared favorites</div>' +
