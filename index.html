@@ -14,7 +14,7 @@
     --muted: #5f584d;
     --line: #181410;
     --accent: #da6b2c;
-    --accent-soft: #e8b6c8;
+    --accent-soft: #c9b6f0;
     --accent-2: #7fb069;
     --accent-3: #fae9a6;
     --shared: #def3d4;
@@ -179,6 +179,11 @@
     color: #fff;
   }
 
+  .summary-card button {
+    width: auto;
+    min-width: 0;
+  }
+
   button:active {
     transform: translate(2px, 2px);
     box-shadow: 1px 1px 0 var(--line);
@@ -325,7 +330,15 @@
   }
 
   .live-filter-title {
-    margin: 0 8px 0 0;
+    margin: 0;
+    font-family: "Press Start 2P", monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .live-filter-subtitle {
+    margin: 0;
     font-size: 12px;
     line-height: 1.6;
     color: var(--muted);
@@ -608,7 +621,6 @@
     <div class="layout">
       <section class="panel">
         <h2>CHOOSE POKEMON</h2>
-        <p>Use specialty filters to find your starting Pokemon faster.</p>
 
         <div class="panel-section">
           <div class="count" id="filterCount" style="margin-bottom:8px;">No specialty filter active.</div>
@@ -1059,7 +1071,8 @@ function renderLiveFilters(base) {
 
   container.hidden = false;
   container.innerHTML =
-    '<div class="live-filter-title">Filter matches</div>' +
+    '<div class="live-filter-title">FILTER MATCHES</div>' +
+    '<div class="live-filter-subtitle">Toggle preferences to narrow the visible results live.</div>' +
     '<div class="live-filter-row">' +
       (base.interests.length ? renderFavoriteFilterTags(base.interests) : '') +
       (base.flavor ? renderFlavorFilterTag(base.flavor) : '') +
