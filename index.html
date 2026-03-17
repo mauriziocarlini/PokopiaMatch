@@ -373,10 +373,6 @@
     padding: 16px;
   }
 
-  .summary-card.starting-card {
-    box-shadow: var(--shadow-accent);
-  }
-
   .summary-card h3 {
     margin: 0 0 8px;
     font-size: 15px;
@@ -391,6 +387,18 @@
     margin: 10px 0 0;
     font-size: 13px;
     line-height: 1.6;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: start;
+    margin-top: 10px;
+  }
+
+  .meta-row .meta-line {
+    margin: 0;
   }
 
   .tag-list {
@@ -625,6 +633,7 @@ let activeSuggestionIndex = -1;
 let specialtyDropdownOpen = false;
 let latestSearchState = null;
 let activeResultFavoriteFilters = [];
+let activeResultFlavorFilter = false;
 
 function escapeHtml(value) {
   return String(value)
@@ -671,6 +680,11 @@ function renderFavoriteFilterTags(items) {
     const activeClass = activeResultFavoriteFilters.includes(item) ? ' active' : '';
     return '<button type="button" class="tag toggle-tag' + activeClass + '" data-favorite-filter="' + escapeHtml(item) + '">' + escapeHtml(item) + '</button>';
   }).join('') + '</div>';
+}
+
+function renderFlavorFilterTag(flavor) {
+  const activeClass = activeResultFlavorFilter ? ' active' : '';
+  return '<div class="tag-list"><button type="button" class="tag toggle-tag tag flavor' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button></div>';
 }
 
 function getPokemonProfile(pokemon) {
@@ -974,16 +988,11 @@ function renderSummary(base) {
   summary.className = 'summary';
 
   summary.innerHTML =
-    '<div class="summary-card starting-card">' +
+    '<div class="summary-card">' +
       '<div class="name-line">' +
         '<h3>' + escapeHtml(base.name) + '</h3>' +
         renderSpecialtyTags(base.specialties) +
       '</div>' +
-      '<div class="muted">Starting Pokemon</div>' +
-      '<div class="meta-line"><strong>Favorites</strong></div>' +
-      renderTags(base.interests, []) +
-      '<div class="meta-line"><strong>Favorite flavor</strong></div>' +
-      (base.flavor ? renderFlavorTag(base.flavor) : '<div class="muted">None</div>') +
     '</div>';
 }
 
@@ -991,15 +1000,18 @@ function renderLiveFilters(base) {
   const container = document.getElementById('liveFilters');
 
   if (!base || !base.interests.length) {
-    container.hidden = true;
-    container.innerHTML = '';
-    return;
+    if (!base || !base.flavor) {
+      container.hidden = true;
+      container.innerHTML = '';
+      return;
+    }
   }
 
   container.hidden = false;
   container.innerHTML =
-    '<div class="live-filter-title">Filter visible matches by starting Pokemon favorites</div>' +
-    renderFavoriteFilterTags(base.interests);
+    '<div class="live-filter-title">Filter visible matches by starting Pokemon preferences</div>' +
+    (base.interests.length ? renderFavoriteFilterTags(base.interests) : '') +
+    (base.flavor ? renderFlavorFilterTag(base.flavor) : '');
 
   container.querySelectorAll('[data-favorite-filter]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -1009,6 +1021,14 @@ function renderLiveFilters(base) {
       } else {
         activeResultFavoriteFilters = activeResultFavoriteFilters.concat(favorite).sort((a, b) => a.localeCompare(b));
       }
+      renderLiveFilters(base);
+      renderResultsFromState();
+    });
+  });
+
+  container.querySelectorAll('[data-flavor-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      activeResultFlavorFilter = !activeResultFlavorFilter;
       renderLiveFilters(base);
       renderResultsFromState();
     });
@@ -1027,7 +1047,8 @@ function renderResultsFromState() {
 
   const { matches } = latestSearchState;
   const visibleMatches = matches.filter((item) =>
-    activeResultFavoriteFilters.every((favorite) => item.sharedFavorites.includes(favorite))
+    activeResultFavoriteFilters.every((favorite) => item.sharedFavorites.includes(favorite)) &&
+    (!activeResultFlavorFilter || item.other.flavor === latestSearchState.base.flavor)
   );
 
   resultsCount.textContent = visibleMatches.length + ' ranked habitat matches.';
@@ -1093,6 +1114,7 @@ function searchCompatibility() {
     summary.textContent = 'Select your starting Pokemon first.';
     latestSearchState = null;
     activeResultFavoriteFilters = [];
+    activeResultFlavorFilter = false;
     document.getElementById('liveFilters').hidden = true;
     results.innerHTML = '';
     resultsCount.textContent = 'No search yet.';
@@ -1105,6 +1127,7 @@ function searchCompatibility() {
     summary.textContent = 'That Pokemon was not found in the dataset.';
     latestSearchState = null;
     activeResultFavoriteFilters = [];
+    activeResultFlavorFilter = false;
     document.getElementById('liveFilters').hidden = true;
     results.innerHTML = '';
     resultsCount.textContent = 'No search yet.';
@@ -1138,6 +1161,7 @@ function searchCompatibility() {
     matches
   };
   activeResultFavoriteFilters = [];
+  activeResultFlavorFilter = false;
   renderLiveFilters(baseProfile);
 
   if (matches.length === 0) {
