@@ -513,6 +513,7 @@ let DATA = [];
 let ALL_SPECIALTIES = [];
 let selectedSpecialties = [];
 let activeSuggestionIndex = -1;
+let specialtyDropdownOpen = false;
 
 function escapeHtml(value) {
   return String(value)
@@ -565,8 +566,14 @@ function renderSpecialties() {
 
 function getAvailableSpecialties(query) {
   const normalizedQuery = query.trim().toLowerCase();
+  const matchingPokemon = selectedSpecialties.length === 0
+    ? DATA
+    : DATA.filter((pokemon) => selectedSpecialties.every((specialty) => pokemon.specialties.includes(specialty)));
+  const compatibleSpecialties = Array.from(
+    new Set(matchingPokemon.flatMap((pokemon) => pokemon.specialties || []))
+  ).sort((a, b) => a.localeCompare(b));
 
-  return ALL_SPECIALTIES
+  return compatibleSpecialties
     .filter((specialty) => !selectedSpecialties.includes(specialty))
     .filter((specialty) => specialty.toLowerCase().includes(normalizedQuery));
 }
@@ -593,10 +600,15 @@ function renderSpecialtySuggestions() {
   const dropdown = document.getElementById('specialtyDropdown');
   const available = getAvailableSpecialties(input.value);
 
+  if (!specialtyDropdownOpen) {
+    dropdown.hidden = true;
+    return;
+  }
+
   if (available.length === 0) {
     activeSuggestionIndex = -1;
-    dropdown.innerHTML = '<div class="specialty-empty">No matching specialties.</div>';
-    dropdown.hidden = input.value.trim() === '' && selectedSpecialties.length === ALL_SPECIALTIES.length;
+    dropdown.innerHTML = '<div class="specialty-empty">No compatible specialties found.</div>';
+    dropdown.hidden = false;
     return;
   }
 
@@ -628,6 +640,7 @@ function addSpecialty(specialty) {
   const input = document.getElementById('specialtySearch');
   input.value = '';
   activeSuggestionIndex = -1;
+  specialtyDropdownOpen = true;
   renderSelectedSpecialtyChips();
   renderSpecialtySuggestions();
   updateFilterCount();
@@ -638,6 +651,7 @@ function addSpecialty(specialty) {
 function removeSpecialty(specialty) {
   selectedSpecialties = selectedSpecialties.filter((item) => item !== specialty);
   activeSuggestionIndex = -1;
+  specialtyDropdownOpen = true;
   renderSelectedSpecialtyChips();
   renderSpecialtySuggestions();
   updateFilterCount();
@@ -649,10 +663,12 @@ function setupSpecialtyAutocomplete() {
   const dropdown = document.getElementById('specialtyDropdown');
 
   input.addEventListener('focus', () => {
+    specialtyDropdownOpen = true;
     renderSpecialtySuggestions();
   });
 
   input.addEventListener('input', () => {
+    specialtyDropdownOpen = true;
     activeSuggestionIndex = -1;
     renderSpecialtySuggestions();
   });
@@ -690,13 +706,21 @@ function setupSpecialtyAutocomplete() {
     }
 
     if (event.key === 'Escape') {
+      specialtyDropdownOpen = false;
       dropdown.hidden = true;
     }
+  });
+
+  document.getElementById('specialtyCombobox').addEventListener('click', () => {
+    specialtyDropdownOpen = true;
+    renderSpecialtySuggestions();
+    input.focus();
   });
 
   document.addEventListener('click', (event) => {
     const combobox = document.getElementById('specialtyCombobox');
     if (!combobox.contains(event.target) && !dropdown.contains(event.target)) {
+      specialtyDropdownOpen = false;
       dropdown.hidden = true;
     }
   });
@@ -871,6 +895,7 @@ function clearFilters() {
   selectedSpecialties = [];
   document.getElementById('specialtySearch').value = '';
   activeSuggestionIndex = -1;
+  specialtyDropdownOpen = true;
   renderSelectedSpecialtyChips();
   renderSpecialtySuggestions();
   updateFilterCount();
