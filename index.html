@@ -14,6 +14,7 @@
     --muted: #5f584d;
     --line: #181410;
     --accent: #da6b2c;
+    --accent-soft: #e8b6c8;
     --accent-2: #7fb069;
     --accent-3: #fae9a6;
     --shared: #def3d4;
@@ -22,7 +23,6 @@
     --flavor: #cfeaff;
     --flavor-hover: #b4ddfb;
     --score: #cbe8be;
-    --starting: #f6d4df;
     --shadow: 6px 6px 0 #181410;
     --shadow-accent: 6px 6px 0 #da6b2c;
   }
@@ -169,6 +169,16 @@
     color: var(--ink);
   }
 
+  button.primary {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+
+  button.danger {
+    background: var(--accent);
+    color: #fff;
+  }
+
   button:active {
     transform: translate(2px, 2px);
     box-shadow: 1px 1px 0 var(--line);
@@ -178,14 +188,6 @@
   select:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-  }
-
-  .specialty-toolbar {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 10px;
   }
 
   .specialty-picker {
@@ -300,7 +302,7 @@
     background: #fff;
   }
 
-  .specialty-toolbar .count,
+  .count,
   .status,
   .muted {
     color: var(--muted);
@@ -404,6 +406,12 @@
   .summary-card .result-top {
     align-items: center;
     margin-bottom: 0;
+  }
+
+  .summary-card .result-top > div:first-child {
+    min-width: 0;
+    display: flex;
+    align-items: center;
   }
 
   .summary-card h3 {
@@ -520,10 +528,6 @@
     white-space: nowrap;
   }
 
-  .score.starting {
-    background: var(--starting);
-  }
-
   .result-group {
     display: grid;
     gap: 12px;
@@ -607,9 +611,6 @@
         <p>Use specialty filters to find your starting Pokemon faster.</p>
 
         <div class="panel-section">
-          <div class="specialty-toolbar">
-            <button type="button" class="secondary" id="clearFiltersBtn">Clear</button>
-          </div>
           <div class="count" id="filterCount" style="margin-bottom:8px;">No specialty filter active.</div>
           <div class="specialty-picker">
             <div class="specialty-input-wrap" id="specialtyCombobox">
@@ -646,7 +647,7 @@
             <select id="minShared" disabled></select>
           </div>
           <div class="field">
-            <button type="button" id="searchBtn" disabled>Find matches</button>
+            <button type="button" class="primary" id="searchBtn" disabled>Find matches</button>
           </div>
           <div class="status" id="loadStatus">Loading <code>dex.json</code>...</div>
         </div>
@@ -1038,9 +1039,11 @@ function renderSummary(base) {
             renderSpecialtyTags(base.specialties) +
           '</div>' +
         '</div>' +
-        '<div class="score starting">Looking for roommates</div>' +
+        '<button type="button" class="danger" id="resetSearchBtn">Reset search</button>' +
       '</div>' +
     '</div>';
+
+  document.getElementById('resetSearchBtn').addEventListener('click', resetSearch);
 }
 
 function renderLiveFilters(base) {
@@ -1150,6 +1153,21 @@ function renderResultsFromState() {
     }).join('');
 }
 
+function resetSearch() {
+  latestSearchState = null;
+  activeResultFavoriteFilters = [];
+  activeResultFlavorFilter = false;
+  document.getElementById('pokemonSelect').value = '';
+  document.getElementById('matchScope').value = 'all';
+  syncMinSharedOptions();
+  document.getElementById('summary').className = 'empty';
+  document.getElementById('summary').textContent = 'Choose a starting Pokemon, then run the search to find the best habitat matches.';
+  document.getElementById('liveFilters').hidden = true;
+  document.getElementById('liveFilters').innerHTML = '';
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('resultsCount').textContent = 'No search yet.';
+}
+
 function searchCompatibility() {
   const selectedName = document.getElementById('pokemonSelect').value;
   const minShared = Number(document.getElementById('minShared').value);
@@ -1222,17 +1240,6 @@ function searchCompatibility() {
   renderResultsFromState();
 }
 
-function clearFilters() {
-  selectedSpecialties = [];
-  document.getElementById('specialtySearch').value = '';
-  activeSuggestionIndex = -1;
-  specialtyDropdownOpen = true;
-  renderSelectedSpecialtyChips();
-  renderSpecialtySuggestions();
-  updateFilterCount();
-  renderPokemonSelect();
-}
-
 function enableUi() {
   document.getElementById('pokemonSelect').disabled = false;
   document.getElementById('matchScope').disabled = false;
@@ -1269,7 +1276,6 @@ async function loadData() {
 }
 
 document.getElementById('searchBtn').addEventListener('click', searchCompatibility);
-document.getElementById('clearFiltersBtn').addEventListener('click', clearFilters);
 document.getElementById('pokemonSelect').addEventListener('change', () => {
   syncMinSharedOptions();
   document.getElementById('resultsCount').textContent = 'Ready to search.';
