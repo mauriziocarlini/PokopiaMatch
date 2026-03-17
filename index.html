@@ -84,11 +84,6 @@
     align-items: start;
   }
 
-  .stack {
-    display: grid;
-    gap: 18px;
-  }
-
   .panel {
     padding: 18px;
   }
@@ -112,6 +107,18 @@
 
   .field:last-child {
     margin-bottom: 0;
+  }
+
+  .panel-section {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 2px solid var(--line);
+  }
+
+  .panel-section:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
   }
 
   .field label {
@@ -349,6 +356,12 @@
     background: var(--shared);
   }
 
+  .tag.faded {
+    border-style: dashed;
+    color: var(--muted);
+    opacity: 0.78;
+  }
+
   .result-list {
     display: grid;
     gap: 14px;
@@ -443,17 +456,21 @@
   <main class="page">
     <section class="hero">
       <h1>POKOPIA MATCH FINDER</h1>
-      <p class="intro">Pick one Pokemon. Use specialty filters only to narrow the picker faster. Then scan the best compatibility matches ranked by shared favorites.</p>
+      <p class="intro">Choose a starting Pokemon and discover which partners can share the same environment most happily and effectively. Specialty filters are only there to help you find that starting Pokemon faster.</p>
     </section>
 
     <div class="layout">
-      <div class="stack">
-        <section class="panel">
-          <h2>FILTER BY SPECIALTY</h2>
-          <p>Optional helper filter for the Pokemon selector. Leave everything unchecked to browse the full dex.</p>
+      <section class="panel">
+        <h2>STARTING POKEMON SETUP</h2>
+        <p>First pick the Pokemon you want to build around. Use specialty filters only to narrow the selector, then search for the best companions for a shared habitat.</p>
+
+        <div class="panel-section">
+          <div class="field">
+            <label for="specialtySearch">Specialty filter</label>
+          </div>
           <div class="specialty-toolbar">
-            <div class="count" id="filterCount">No active filters.</div>
-            <button type="button" class="secondary" id="clearFiltersBtn">Clear filters</button>
+            <div class="count" id="filterCount">No specialty filter active.</div>
+            <button type="button" class="secondary" id="clearFiltersBtn">Clear</button>
           </div>
           <div class="specialty-picker">
             <div class="specialty-input-wrap" id="specialtyCombobox">
@@ -469,10 +486,9 @@
             </div>
             <div class="specialty-dropdown" id="specialtyDropdown" hidden></div>
           </div>
-        </section>
+        </div>
 
-        <section class="panel">
-          <h2>SELECT YOUR TARGET</h2>
+        <div class="panel-section">
           <div class="field">
             <label for="pokemonSelect">Pokemon</label>
             <select id="pokemonSelect" disabled>
@@ -494,15 +510,15 @@
             <button type="button" id="searchBtn" disabled>Find matches</button>
           </div>
           <div class="status" id="loadStatus">Loading <code>dex.json</code>...</div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       <section class="results-shell">
         <div class="results-header">
           <h2>MATCH RESULTS</h2>
           <div class="muted" id="resultsCount">No search yet.</div>
         </div>
-        <div id="summary" class="empty">Choose a Pokemon, then run the search.</div>
+        <div id="summary" class="empty">Choose a starting Pokemon, then run the search to find the best habitat matches.</div>
         <div id="results" class="result-list"></div>
       </section>
     </div>
@@ -540,8 +556,8 @@ function getSelectedSpecialties() {
 function renderTags(items, sharedItems) {
   const sharedSet = new Set(sharedItems || []);
   return '<div class="tag-list">' + items.map((item) => {
-    const sharedClass = sharedSet.has(item) ? ' shared' : '';
-    return '<span class="tag' + sharedClass + '">' + escapeHtml(item) + '</span>';
+    const tagClass = sharedSet.has(item) ? ' shared' : ' faded';
+    return '<span class="tag' + tagClass + '">' + escapeHtml(item) + '</span>';
   }).join('') + '</div>';
 }
 
@@ -769,11 +785,11 @@ function updateFilterCount() {
   const countEl = document.getElementById('filterCount');
 
   if (selected.length === 0) {
-    countEl.textContent = 'No active filters. ' + DATA.length + ' Pokemon available.';
+    countEl.textContent = 'No specialty filter active. ' + DATA.length + ' Pokemon available.';
     return;
   }
 
-  countEl.textContent = selected.length + ' specialties selected. ' + filtered.length + ' Pokemon match the filter.';
+  countEl.textContent = selected.length + ' specialty filters active. ' + filtered.length + ' Pokemon match this filter.';
 }
 
 function renderSummary(base, matches, scopeLabel) {
@@ -783,7 +799,7 @@ function renderSummary(base, matches, scopeLabel) {
   summary.innerHTML =
     '<div class="summary-card">' +
       '<h3>' + escapeHtml(base.name) + '</h3>' +
-      '<div class="muted">Selected Pokemon</div>' +
+      '<div class="muted">Starting Pokemon</div>' +
       '<div class="meta-line"><strong>Specialties</strong></div>' +
       renderTags(base.specialties) +
       '<div class="meta-line"><strong>Favorites</strong></div>' +
@@ -791,12 +807,12 @@ function renderSummary(base, matches, scopeLabel) {
     '</div>' +
     '<div class="summary-card">' +
       '<h3>' + matches.length + ' matches found</h3>' +
-      '<div class="muted">Comparison scope: ' + escapeHtml(scopeLabel) + '</div>' +
-      '<div class="meta-line"><strong>Top match</strong></div>' +
+      '<div class="muted">Habitat scan scope: ' + escapeHtml(scopeLabel) + '</div>' +
+      '<div class="meta-line"><strong>Best companion</strong></div>' +
       (matches[0]
         ? '<div>' + escapeHtml(matches[0].other.name) + ' with ' + matches[0].sharedFavorites.length + ' shared favorites</div>'
         : '<div>No Pokemon reached your current threshold.</div>') +
-      '<div class="meta-line"><strong>Minimum threshold</strong></div>' +
+      '<div class="meta-line"><strong>Minimum compatibility threshold</strong></div>' +
       '<div>' + escapeHtml(document.getElementById('minShared').value) + ' shared favorites</div>' +
     '</div>';
 }
@@ -811,7 +827,7 @@ function searchCompatibility() {
 
   if (!selectedName) {
     summary.className = 'empty';
-    summary.textContent = 'Select a Pokemon first.';
+    summary.textContent = 'Select your starting Pokemon first.';
     results.innerHTML = '';
     resultsCount.textContent = 'No search yet.';
     return;
@@ -834,11 +850,9 @@ function searchCompatibility() {
     .filter((pokemon) => pokemon.name !== base.name)
     .map((pokemon) => {
       const sharedFavorites = intersect(base.favorites, pokemon.favorites);
-      const sharedSpecialties = intersect(base.specialties, pokemon.specialties);
       return {
         other: pokemon,
-        sharedFavorites,
-        sharedSpecialties
+        sharedFavorites
       };
     })
     .filter((item) => item.sharedFavorites.length >= minShared)
@@ -846,17 +860,14 @@ function searchCompatibility() {
       if (b.sharedFavorites.length !== a.sharedFavorites.length) {
         return b.sharedFavorites.length - a.sharedFavorites.length;
       }
-      if (b.sharedSpecialties.length !== a.sharedSpecialties.length) {
-        return b.sharedSpecialties.length - a.sharedSpecialties.length;
-      }
       return a.other.name.localeCompare(b.other.name);
     });
 
   renderSummary(base, matches, scopeLabel);
-  resultsCount.textContent = matches.length + ' ranked results.';
+  resultsCount.textContent = matches.length + ' ranked habitat matches.';
 
   if (matches.length === 0) {
-    results.innerHTML = '<div class="empty">No Pokemon reached the selected compatibility threshold.</div>';
+    results.innerHTML = '<div class="empty">No Pokemon reached the selected compatibility threshold for this starting Pokemon.</div>';
     return;
   }
 
@@ -865,26 +876,17 @@ function searchCompatibility() {
       '<div class="result-top">' +
         '<div>' +
           '<h3 class="result-name">' + escapeHtml(item.other.name) + '</h3>' +
-          '<div class="muted">' + item.sharedSpecialties.length + ' shared specialties</div>' +
         '</div>' +
         '<div class="score">' + item.sharedFavorites.length + ' shared favorites</div>' +
       '</div>' +
       '<div class="result-meta">' +
         '<div>' +
           '<strong>Specialties</strong>' +
-          renderTags(item.other.specialties, item.sharedSpecialties) +
+          renderTags(item.other.specialties, []) +
         '</div>' +
         '<div>' +
-          '<strong>Shared favorites</strong>' +
-          (item.sharedFavorites.length ? renderTags(item.sharedFavorites, item.sharedFavorites) : '<div class="muted">None</div>') +
-        '</div>' +
-        '<div>' +
-          '<strong>All favorites</strong>' +
+          '<strong>Favorites</strong>' +
           renderTags(item.other.favorites, item.sharedFavorites) +
-        '</div>' +
-        '<div>' +
-          '<strong>Shared base specialties</strong>' +
-          (item.sharedSpecialties.length ? renderTags(item.sharedSpecialties, item.sharedSpecialties) : '<div class="muted">None</div>') +
         '</div>' +
       '</div>' +
     '</article>';
@@ -931,9 +933,9 @@ async function loadData() {
     enableUi();
 
     document.getElementById('matchScope').value = 'all';
-    status.textContent = 'Loaded ' + DATA.length + ' Pokemon from dex.json.';
+    status.textContent = 'Loaded ' + DATA.length + ' Pokemon';
   } catch (error) {
-    status.innerHTML = 'Could not load <code>dex.json</code>. If you opened this page directly from the filesystem, try serving the folder with a local web server.';
+    status.innerHTML = 'Could not load Pokemon.';
     document.getElementById('summary').className = 'empty';
     document.getElementById('summary').textContent = 'Data loading failed, so matches are unavailable.';
   }
