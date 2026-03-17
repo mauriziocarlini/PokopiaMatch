@@ -20,6 +20,7 @@
     --shared-soft: #edf8e7;
     --flavor: #cfeaff;
     --score: #cbe8be;
+    --starting: #f6d4df;
     --shadow: 6px 6px 0 #181410;
     --shadow-accent: 6px 6px 0 #da6b2c;
   }
@@ -344,6 +345,17 @@
     outline: 0;
   }
 
+  .toggle-tag.flavor-filter.active {
+    background: var(--flavor);
+    color: var(--ink);
+  }
+
+  .toggle-tag.flavor-filter:hover,
+  .toggle-tag.flavor-filter:focus {
+    background: #e8f5ff;
+    color: var(--ink);
+  }
+
   .results-header {
     display: flex;
     justify-content: space-between;
@@ -483,6 +495,10 @@
     font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
+  }
+
+  .score.starting {
+    background: var(--starting);
   }
 
   .result-group {
@@ -684,7 +700,7 @@ function renderFavoriteFilterTags(items) {
 
 function renderFlavorFilterTag(flavor) {
   const activeClass = activeResultFlavorFilter ? ' active' : '';
-  return '<div class="tag-list"><button type="button" class="tag toggle-tag tag flavor' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button></div>';
+  return '<div><div class="live-filter-title">Favorite flavor</div><div class="tag-list"><button type="button" class="tag toggle-tag flavor-filter' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button></div></div>';
 }
 
 function getPokemonProfile(pokemon) {
@@ -989,9 +1005,14 @@ function renderSummary(base) {
 
   summary.innerHTML =
     '<div class="summary-card">' +
-      '<div class="name-line">' +
-        '<h3>' + escapeHtml(base.name) + '</h3>' +
-        renderSpecialtyTags(base.specialties) +
+      '<div class="result-top">' +
+        '<div>' +
+          '<div class="name-line">' +
+            '<h3 class="result-name">' + escapeHtml(base.name) + '</h3>' +
+            renderSpecialtyTags(base.specialties) +
+          '</div>' +
+        '</div>' +
+        '<div class="score starting">Starting Pokemon</div>' +
       '</div>' +
     '</div>';
 }
@@ -1010,7 +1031,7 @@ function renderLiveFilters(base) {
   container.hidden = false;
   container.innerHTML =
     '<div class="live-filter-title">Filter visible matches by starting Pokemon preferences</div>' +
-    (base.interests.length ? renderFavoriteFilterTags(base.interests) : '') +
+    (base.interests.length ? '<div><div class="live-filter-title">Favorites</div>' + renderFavoriteFilterTags(base.interests) + '</div>' : '') +
     (base.flavor ? renderFlavorFilterTag(base.flavor) : '');
 
   container.querySelectorAll('[data-favorite-filter]').forEach((button) => {
