@@ -301,6 +301,32 @@
     gap: 18px;
   }
 
+  .live-filters {
+    display: grid;
+    gap: 8px;
+  }
+
+  .live-filters[hidden] {
+    display: none;
+  }
+
+  .live-filter-title {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .toggle-tag {
+    cursor: pointer;
+    transition: background-color 0.12s ease, color 0.12s ease;
+  }
+
+  .toggle-tag.active {
+    background: var(--shared);
+    color: var(--ink);
+  }
+
   .results-header {
     display: flex;
     justify-content: space-between;
@@ -415,14 +441,13 @@
   .score {
     display: inline-flex;
     align-items: center;
-    min-height: 28px;
-    padding: 4px 8px;
+    min-height: 34px;
+    padding: 6px 10px;
     border: 2px solid var(--line);
     background: var(--score);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
-    opacity: 0.82;
   }
 
   .result-group {
@@ -436,10 +461,9 @@
 
   .group-title {
     margin: 0;
-    font-size: 11px;
-    line-height: 1.4;
+    font-size: 12px;
+    line-height: 1.6;
     color: var(--muted);
-    opacity: 0.85;
   }
 
   .result-meta {
@@ -561,6 +585,7 @@
           <div class="muted" id="resultsCount">No search yet.</div>
         </div>
         <div id="summary" class="empty">Choose a starting Pokemon, then run the search to find the best habitat matches.</div>
+        <div id="liveFilters" class="live-filters" hidden></div>
         <div id="results" class="result-list"></div>
       </section>
     </div>
@@ -572,6 +597,8 @@ let ALL_SPECIALTIES = [];
 let selectedSpecialties = [];
 let activeSuggestionIndex = -1;
 let specialtyDropdownOpen = false;
+let latestSearchState = null;
+let activeResultFavoriteFilters = [];
 
 function escapeHtml(value) {
   return String(value)
@@ -611,6 +638,13 @@ function renderSpecialtyTags(items) {
 
 function renderFlavorTag(flavor) {
   return '<div class="tag-list"><span class="tag flavor">' + escapeHtml(flavor) + '</span></div>';
+}
+
+function renderFavoriteFilterTags(items) {
+  return '<div class="tag-list">' + items.map((item) => {
+    const activeClass = activeResultFavoriteFilters.includes(item) ? ' active' : '';
+    return '<button type="button" class="tag toggle-tag' + activeClass + '" data-favorite-filter="' + escapeHtml(item) + '">' + escapeHtml(item) + '</button>';
+  }).join('') + '</div>';
 }
 
 function getPokemonProfile(pokemon) {
@@ -933,72 +967,66 @@ function renderSummary(base, matches, scopeLabel) {
     '<div class="summary-card">' +
       '<h3>' + matches.length + ' matches found</h3>' +
       '<div class="muted">Habitat scan scope: ' + escapeHtml(scopeLabel) + '</div>' +
-      '<div class="meta-line"><strong>Best match</strong></div>' +
+      '<div class="meta-line"><strong>Best match' + (matches[0] ? ' (' + matches[0].sharedFavorites.length + ' shared favorites)' : '') + '</strong></div>' +
       (matches[0]
-        ? '<div>' + bestNamesHtml + ' with ' + matches[0].sharedFavorites.length + ' shared favorites</div>'
+        ? '<div>' + bestNamesHtml + '</div>'
         : '<div>No Pokemon reached your current threshold.</div>') +
       '<div class="meta-line"><strong>Minimum compatibility threshold</strong></div>' +
       '<div>' + escapeHtml(document.getElementById('minShared').value) + ' shared favorites</div>' +
     '</div>';
 }
 
-function searchCompatibility() {
-  const selectedName = document.getElementById('pokemonSelect').value;
-  const minShared = Number(document.getElementById('minShared').value);
-  const scope = document.getElementById('matchScope').value;
+function renderLiveFilters(base) {
+  const container = document.getElementById('liveFilters');
+
+  if (!base || !base.interests.length) {
+    container.hidden = true;
+    container.innerHTML = '';
+    return;
+  }
+
+  container.hidden = false;
+  container.innerHTML =
+    '<div class="live-filter-title">Filter visible matches by starting Pokemon favorites</div>' +
+    renderFavoriteFilterTags(base.interests);
+
+  container.querySelectorAll('[data-favorite-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const favorite = button.getAttribute('data-favorite-filter');
+      if (activeResultFavoriteFilters.includes(favorite)) {
+        activeResultFavoriteFilters = activeResultFavoriteFilters.filter((item) => item !== favorite);
+      } else {
+        activeResultFavoriteFilters = activeResultFavoriteFilters.concat(favorite).sort((a, b) => a.localeCompare(b));
+      }
+      renderLiveFilters(base);
+      renderResultsFromState();
+    });
+  });
+}
+
+function renderResultsFromState() {
   const results = document.getElementById('results');
   const resultsCount = document.getElementById('resultsCount');
-  const summary = document.getElementById('summary');
 
-  if (!selectedName) {
-    summary.className = 'empty';
-    summary.textContent = 'Select your starting Pokemon first.';
+  if (!latestSearchState) {
     results.innerHTML = '';
     resultsCount.textContent = 'No search yet.';
     return;
   }
 
-  const base = DATA.find((pokemon) => pokemon.name === selectedName);
-  if (!base) {
-    summary.className = 'empty';
-    summary.textContent = 'That Pokemon was not found in the dataset.';
-    results.innerHTML = '';
-    resultsCount.textContent = 'No search yet.';
+  const { matches } = latestSearchState;
+  const visibleMatches = matches.filter((item) =>
+    activeResultFavoriteFilters.every((favorite) => item.sharedFavorites.includes(favorite))
+  );
+
+  resultsCount.textContent = visibleMatches.length + ' ranked habitat matches.';
+
+  if (visibleMatches.length === 0) {
+    results.innerHTML = '<div class="empty">No visible match includes all selected favorite filters.</div>';
     return;
   }
 
-  const baseProfile = getPokemonProfile(base);
-  const filteredPool = getFilteredPokemon();
-  const pool = scope === 'filtered' ? filteredPool : DATA;
-  const scopeLabel = scope === 'filtered' ? 'filtered Pokemon only' : 'entire dex';
-
-  const matches = pool
-    .filter((pokemon) => pokemon.name !== base.name)
-    .map((pokemon) => {
-      const profile = getPokemonProfile(pokemon);
-      const sharedFavorites = intersect(baseProfile.interests, profile.interests);
-      return {
-        other: profile,
-        sharedFavorites
-      };
-    })
-    .filter((item) => item.sharedFavorites.length >= minShared)
-    .sort((a, b) => {
-      if (b.sharedFavorites.length !== a.sharedFavorites.length) {
-        return b.sharedFavorites.length - a.sharedFavorites.length;
-      }
-      return a.other.name.localeCompare(b.other.name);
-    });
-
-  renderSummary(baseProfile, matches, scopeLabel);
-  resultsCount.textContent = matches.length + ' ranked habitat matches.';
-
-  if (matches.length === 0) {
-    results.innerHTML = '<div class="empty">No Pokemon reached the selected compatibility threshold for this starting Pokemon.</div>';
-    return;
-  }
-
-  const groupedMatches = matches.reduce((acc, item) => {
+  const groupedMatches = visibleMatches.reduce((acc, item) => {
     const key = item.sharedFavorites.length;
     if (!acc[key]) acc[key] = [];
     acc[key].push(item);
@@ -1039,6 +1067,78 @@ function searchCompatibility() {
         cards +
       '</section>';
     }).join('');
+}
+
+function searchCompatibility() {
+  const selectedName = document.getElementById('pokemonSelect').value;
+  const minShared = Number(document.getElementById('minShared').value);
+  const scope = document.getElementById('matchScope').value;
+  const results = document.getElementById('results');
+  const resultsCount = document.getElementById('resultsCount');
+  const summary = document.getElementById('summary');
+
+  if (!selectedName) {
+    summary.className = 'empty';
+    summary.textContent = 'Select your starting Pokemon first.';
+    latestSearchState = null;
+    activeResultFavoriteFilters = [];
+    document.getElementById('liveFilters').hidden = true;
+    results.innerHTML = '';
+    resultsCount.textContent = 'No search yet.';
+    return;
+  }
+
+  const base = DATA.find((pokemon) => pokemon.name === selectedName);
+  if (!base) {
+    summary.className = 'empty';
+    summary.textContent = 'That Pokemon was not found in the dataset.';
+    latestSearchState = null;
+    activeResultFavoriteFilters = [];
+    document.getElementById('liveFilters').hidden = true;
+    results.innerHTML = '';
+    resultsCount.textContent = 'No search yet.';
+    return;
+  }
+
+  const baseProfile = getPokemonProfile(base);
+  const filteredPool = getFilteredPokemon();
+  const pool = scope === 'filtered' ? filteredPool : DATA;
+  const scopeLabel = scope === 'filtered' ? 'filtered Pokemon only' : 'entire dex';
+
+  const matches = pool
+    .filter((pokemon) => pokemon.name !== base.name)
+    .map((pokemon) => {
+      const profile = getPokemonProfile(pokemon);
+      const sharedFavorites = intersect(baseProfile.interests, profile.interests);
+      return {
+        other: profile,
+        sharedFavorites
+      };
+    })
+    .filter((item) => item.sharedFavorites.length >= minShared)
+    .sort((a, b) => {
+      if (b.sharedFavorites.length !== a.sharedFavorites.length) {
+        return b.sharedFavorites.length - a.sharedFavorites.length;
+      }
+      return a.other.name.localeCompare(b.other.name);
+    });
+
+  renderSummary(baseProfile, matches, scopeLabel);
+  latestSearchState = {
+    base: baseProfile,
+    matches,
+    scopeLabel
+  };
+  activeResultFavoriteFilters = [];
+  renderLiveFilters(baseProfile);
+
+  if (matches.length === 0) {
+    document.getElementById('liveFilters').hidden = true;
+    resultsCount.textContent = '0 ranked habitat matches.';
+    results.innerHTML = '<div class="empty">No Pokemon reached the selected compatibility threshold for this starting Pokemon.</div>';
+    return;
+  }
+  renderResultsFromState();
 }
 
 function clearFilters() {
