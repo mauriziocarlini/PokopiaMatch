@@ -17,9 +17,11 @@
     --accent-2: #7fb069;
     --accent-3: #f6d770;
     --shared: #def3d4;
+    --shared-soft: #edf8e7;
     --flavor: #cfeaff;
     --score: #cbe8be;
     --shadow: 6px 6px 0 #181410;
+    --shadow-accent: 6px 6px 0 #da6b2c;
   }
 
   * {
@@ -337,7 +339,7 @@
 
   .toggle-tag:hover,
   .toggle-tag:focus {
-    background: #f6f2e8;
+    background: var(--shared-soft);
     color: var(--ink);
     outline: 0;
   }
@@ -355,14 +357,24 @@
     line-height: 1.5;
   }
 
+  .results-count {
+    color: var(--ink);
+    font-family: "Press Start 2P", monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: right;
+  }
+
   .summary {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
+    display: block;
   }
 
   .summary-card {
     padding: 16px;
+  }
+
+  .summary-card.starting-card {
+    box-shadow: var(--shadow-accent);
   }
 
   .summary-card h3 {
@@ -507,7 +519,6 @@
 
   @media (max-width: 920px) {
     .layout,
-    .summary,
     .result-meta {
       grid-template-columns: 1fr;
     }
@@ -597,7 +608,7 @@
       <section class="results-shell">
         <div class="results-header">
           <h2>MATCH RESULTS</h2>
-          <div class="muted" id="resultsCount">No search yet.</div>
+          <div class="results-count" id="resultsCount">No search yet.</div>
         </div>
         <div id="summary" class="empty">Choose a starting Pokemon, then run the search to find the best habitat matches.</div>
         <div id="liveFilters" class="live-filters" hidden></div>
@@ -958,17 +969,12 @@ function updateFilterCount() {
   countEl.textContent = selected.length + ' specialty filters active. ' + filtered.length + ' Pokemon match this filter.';
 }
 
-function renderSummary(base, matches, scopeLabel) {
+function renderSummary(base) {
   const summary = document.getElementById('summary');
   summary.className = 'summary';
-  const bestScore = matches.length ? matches[0].sharedFavorites.length : 0;
-  const bestNames = matches
-    .filter((item) => item.sharedFavorites.length === bestScore)
-    .map((item) => item.other.name);
-  const bestNamesHtml = bestNames.map((name) => '<strong>' + escapeHtml(name) + '</strong>').join(', ');
 
   summary.innerHTML =
-    '<div class="summary-card">' +
+    '<div class="summary-card starting-card">' +
       '<div class="name-line">' +
         '<h3>' + escapeHtml(base.name) + '</h3>' +
         renderSpecialtyTags(base.specialties) +
@@ -978,16 +984,6 @@ function renderSummary(base, matches, scopeLabel) {
       renderTags(base.interests, []) +
       '<div class="meta-line"><strong>Favorite flavor</strong></div>' +
       (base.flavor ? renderFlavorTag(base.flavor) : '<div class="muted">None</div>') +
-    '</div>' +
-    '<div class="summary-card">' +
-      '<h3>' + matches.length + ' matches found</h3>' +
-      '<div class="muted">Habitat scan scope: ' + escapeHtml(scopeLabel) + '</div>' +
-      '<div class="meta-line"><strong>Best match' + (matches[0] ? ' (' + matches[0].sharedFavorites.length + ' shared favorites)' : '') + '</strong></div>' +
-      (matches[0]
-        ? '<div>' + bestNamesHtml + '</div>'
-        : '<div>No Pokemon reached your current threshold.</div>') +
-      '<div class="meta-line"><strong>Minimum compatibility threshold</strong></div>' +
-      '<div>' + escapeHtml(document.getElementById('minShared').value) + ' shared favorites</div>' +
     '</div>';
 }
 
@@ -1118,8 +1114,6 @@ function searchCompatibility() {
   const baseProfile = getPokemonProfile(base);
   const filteredPool = getFilteredPokemon();
   const pool = scope === 'filtered' ? filteredPool : DATA;
-  const scopeLabel = scope === 'filtered' ? 'filtered Pokemon only' : 'entire dex';
-
   const matches = pool
     .filter((pokemon) => pokemon.name !== base.name)
     .map((pokemon) => {
@@ -1138,11 +1132,10 @@ function searchCompatibility() {
       return a.other.name.localeCompare(b.other.name);
     });
 
-  renderSummary(baseProfile, matches, scopeLabel);
+  renderSummary(baseProfile);
   latestSearchState = {
     base: baseProfile,
-    matches,
-    scopeLabel
+    matches
   };
   activeResultFavoriteFilters = [];
   renderLiveFilters(baseProfile);
