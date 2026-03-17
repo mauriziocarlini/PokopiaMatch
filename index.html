@@ -15,7 +15,7 @@
     --line: #181410;
     --accent: #da6b2c;
     --accent-2: #7fb069;
-    --accent-3: #f6d770;
+    --accent-3: #fae9a6;
     --shared: #def3d4;
     --shared-soft: #edf8e7;
     --flavor: #cfeaff;
@@ -322,6 +322,10 @@
     color: var(--muted);
   }
 
+  .live-filters .tag-list {
+    margin-top: 0;
+  }
+
   .toggle-tag {
     width: auto;
     min-width: 0;
@@ -399,6 +403,8 @@
   }
 
   .name-line .tag-list {
+    display: inline-flex;
+    align-items: center;
     margin-top: 0;
   }
 
@@ -707,7 +713,7 @@ function renderFavoriteFilterTags(items) {
 
 function renderFlavorFilterTag(flavor) {
   const activeClass = activeResultFlavorFilter ? ' active' : '';
-  return '<button type="button" class="tag toggle-tag flavor-filter' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button>';
+  return '<div class="tag-list"><button type="button" class="tag toggle-tag flavor-filter' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button></div>';
 }
 
 function getPokemonProfile(pokemon) {
@@ -1019,7 +1025,7 @@ function renderSummary(base) {
             renderSpecialtyTags(base.specialties) +
           '</div>' +
         '</div>' +
-        '<div class="score starting">Find matches for</div>' +
+        '<div class="score starting">Looking for matches <3</div>' +
       '</div>' +
     '</div>';
 }
