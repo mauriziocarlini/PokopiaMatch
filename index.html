@@ -197,10 +197,17 @@
     padding: 8px;
   }
 
+  .specialty-input-wrap.has-chips {
+    padding-top: 8px;
+  }
+
   .specialty-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+  }
+
+  .specialty-chips:not(:empty) {
     margin-bottom: 8px;
   }
 
@@ -320,8 +327,11 @@
     color: var(--muted);
   }
 
-  .live-filters .tag-list {
-    margin-top: 0;
+  .live-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
   }
 
   .toggle-tag {
@@ -703,15 +713,15 @@ function renderFlavorTag(flavor) {
 }
 
 function renderFavoriteFilterTags(items) {
-  return '<div class="tag-list">' + items.map((item) => {
+  return items.map((item) => {
     const activeClass = activeResultFavoriteFilters.includes(item) ? ' active' : '';
     return '<button type="button" class="tag toggle-tag' + activeClass + '" data-favorite-filter="' + escapeHtml(item) + '">' + escapeHtml(item) + '</button>';
-  }).join('') + '</div>';
+  }).join('');
 }
 
 function renderFlavorFilterTag(flavor) {
   const activeClass = activeResultFlavorFilter ? ' active' : '';
-  return '<div class="tag-list"><button type="button" class="tag toggle-tag flavor-filter' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button></div>';
+  return '<button type="button" class="tag toggle-tag flavor-filter' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button>';
 }
 
 function getPokemonProfile(pokemon) {
@@ -814,6 +824,7 @@ function getAvailableSpecialties(query) {
 
 function renderSelectedSpecialtyChips() {
   const chips = document.getElementById('selectedSpecialties');
+  const wrap = document.getElementById('specialtyCombobox');
 
   chips.innerHTML = selectedSpecialties.map((specialty) => {
     return '<span class="chip">' +
@@ -821,6 +832,8 @@ function renderSelectedSpecialtyChips() {
       '<button type="button" data-remove-specialty="' + escapeHtml(specialty) + '" aria-label="Remove ' + escapeHtml(specialty) + '">x</button>' +
     '</span>';
   }).join('');
+
+  wrap.classList.toggle('has-chips', selectedSpecialties.length > 0);
 
   chips.querySelectorAll('[data-remove-specialty]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -1023,7 +1036,7 @@ function renderSummary(base) {
             renderSpecialtyTags(base.specialties) +
           '</div>' +
         '</div>' +
-        '<div class="score starting">Looking for matches <3</div>' +
+        '<div class="score starting">Looking for roommates</div>' +
       '</div>' +
     '</div>';
 }
@@ -1041,9 +1054,11 @@ function renderLiveFilters(base) {
 
   container.hidden = false;
   container.innerHTML =
-    '<div class="live-filter-title">Filter matches</div><br>' +
-    (base.interests.length ? renderFavoriteFilterTags(base.interests) : '') +
-    (base.flavor ? renderFlavorFilterTag(base.flavor) : '');
+    '<div class="live-filter-title">Filter matches</div>' +
+    '<div class="live-filter-row">' +
+      (base.interests.length ? renderFavoriteFilterTags(base.interests) : '') +
+      (base.flavor ? renderFlavorFilterTag(base.flavor) : '') +
+    '</div>';
 
   container.querySelectorAll('[data-favorite-filter]').forEach((button) => {
     button.addEventListener('click', () => {
