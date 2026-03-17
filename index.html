@@ -18,7 +18,7 @@
     --accent-3: #f6d770;
     --shared: #def3d4;
     --flavor: #cfeaff;
-    --score: #d8cdfb;
+    --score: #cbe8be;
     --shadow: 6px 6px 0 #181410;
   }
 
@@ -177,10 +177,10 @@
 
   .specialty-toolbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 12px;
     align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
 
   .specialty-picker {
@@ -429,6 +429,10 @@
     gap: 12px;
   }
 
+  .result-group + .result-group {
+    margin-top: 8px;
+  }
+
   .group-title {
     margin: 0;
     font-size: 12px;
@@ -503,13 +507,10 @@
         <p>Use specialty filters to find your starting Pokemon faster.</p>
 
         <div class="panel-section">
-          <div class="field">
-            <label for="specialtySearch">Specialty filter</label>
-          </div>
           <div class="specialty-toolbar">
-            <div class="count" id="filterCount">No specialty filter active.</div>
             <button type="button" class="secondary" id="clearFiltersBtn">Clear</button>
           </div>
+          <div class="count" id="filterCount" style="margin-bottom:8px;">No specialty filter active.</div>
           <div class="specialty-picker">
             <div class="specialty-input-wrap" id="specialtyCombobox">
               <div class="specialty-chips" id="selectedSpecialties"></div>
@@ -517,7 +518,7 @@
                 id="specialtySearch"
                 class="specialty-search"
                 type="text"
-                placeholder="Type to filter specialties..."
+                placeholder="Filter by specialty..."
                 autocomplete="off"
                 aria-label="Search specialties"
               >
@@ -632,6 +633,59 @@ function renderMinSharedOptions(maxFavorites) {
   }
 
   select.innerHTML = html;
+}
+
+function getMatchPool() {
+  const scope = document.getElementById('matchScope').value;
+  return scope === 'filtered' ? getFilteredPokemon() : DATA;
+}
+
+function syncMinSharedOptions() {
+  const select = document.getElementById('minShared');
+  const searchBtn = document.getElementById('searchBtn');
+  const selectedName = document.getElementById('pokemonSelect').value;
+
+  if (!DATA.length || !selectedName) {
+    select.innerHTML = '<option value="">Select a Pokemon first</option>';
+    select.disabled = true;
+    searchBtn.disabled = true;
+    return;
+  }
+
+  const base = DATA.find((pokemon) => pokemon.name === selectedName);
+  if (!base) {
+    select.innerHTML = '<option value="">Select a Pokemon first</option>';
+    select.disabled = true;
+    searchBtn.disabled = true;
+    return;
+  }
+
+  const baseProfile = getPokemonProfile(base);
+  const pool = getMatchPool();
+  const maxShared = pool
+    .filter((pokemon) => pokemon.name !== base.name)
+    .reduce((best, pokemon) => {
+      const profile = getPokemonProfile(pokemon);
+      const sharedCount = intersect(baseProfile.interests, profile.interests).length;
+      return Math.max(best, sharedCount);
+    }, 0);
+
+  if (maxShared <= 0) {
+    select.innerHTML = '<option value="0">No shared favorites</option>';
+    select.value = '0';
+    select.disabled = true;
+    searchBtn.disabled = true;
+    return;
+  }
+
+  const previousValue = Number(select.value);
+  renderMinSharedOptions(maxShared);
+  select.disabled = false;
+  searchBtn.disabled = false;
+
+  if (previousValue >= 1 && previousValue <= maxShared) {
+    select.value = String(previousValue);
+  }
 }
 
 function renderSpecialties() {
@@ -836,7 +890,7 @@ function renderPokemonSelect() {
   }
 
   document.getElementById('matchScope').disabled = filtered.length === 0;
-  document.getElementById('searchBtn').disabled = DATA.length === 0 || filtered.length === 0;
+  syncMinSharedOptions();
 }
 
 function updateFilterCount() {
@@ -997,8 +1051,7 @@ function clearFilters() {
 function enableUi() {
   document.getElementById('pokemonSelect').disabled = false;
   document.getElementById('matchScope').disabled = false;
-  document.getElementById('minShared').disabled = false;
-  document.getElementById('searchBtn').disabled = false;
+  syncMinSharedOptions();
 }
 
 async function loadData() {
@@ -1018,7 +1071,6 @@ async function loadData() {
     renderSpecialties();
     setupSpecialtyAutocomplete();
     renderPokemonSelect();
-    renderMinSharedOptions(Math.max(...DATA.map((pokemon) => pokemon.favorites.length), 1));
     updateFilterCount();
     enableUi();
 
@@ -1034,7 +1086,11 @@ async function loadData() {
 document.getElementById('searchBtn').addEventListener('click', searchCompatibility);
 document.getElementById('clearFiltersBtn').addEventListener('click', clearFilters);
 document.getElementById('pokemonSelect').addEventListener('change', () => {
+  syncMinSharedOptions();
   document.getElementById('resultsCount').textContent = 'Ready to search.';
+});
+document.getElementById('matchScope').addEventListener('change', () => {
+  syncMinSharedOptions();
 });
 
 loadData();
