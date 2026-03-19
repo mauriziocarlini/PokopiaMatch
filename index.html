@@ -673,10 +673,21 @@
 
         <div class="panel-section">
           <div class="field">
-            <label for="pokemonSelect">Pokemon</label>
-            <select id="pokemonSelect" disabled>
-              <option value="">Loading data...</option>
-            </select>
+            <label for="pokemonSearch">Pokemon</label>
+            <div class="specialty-picker">
+              <div class="specialty-input-wrap" id="pokemonCombobox">
+                <input
+                  id="pokemonSearch"
+                  class="specialty-search"
+                  type="text"
+                  placeholder="Search Pokemon..."
+                  autocomplete="off"
+                  aria-label="Search Pokemon"
+                  disabled
+                >
+              </div>
+              <div class="specialty-dropdown" id="pokemonDropdown" hidden></div>
+            </div>
           </div>
           <div class="field">
             <label for="matchScope">Compare against</label>
@@ -714,6 +725,9 @@ let ALL_SPECIALTIES = [];
 let selectedSpecialties = [];
 let activeSuggestionIndex = -1;
 let specialtyDropdownOpen = false;
+let selectedPokemonName = '';
+let activePokemonSuggestionIndex = -1;
+let pokemonDropdownOpen = false;
 let latestSearchState = null;
 let activeResultFavoriteFilters = [];
 let activeResultFlavorFilter = false;
@@ -800,10 +814,25 @@ function getMatchPool() {
   return scope === 'filtered' ? getFilteredPokemon() : DATA;
 }
 
+function getResolvedSelectedPokemonName() {
+  const typedValue = document.getElementById('pokemonSearch').value.trim();
+  if (selectedPokemonName) {
+    return selectedPokemonName;
+  }
+
+  const exactMatch = getFilteredPokemon().find((pokemon) => pokemon.name.toLowerCase() === typedValue.toLowerCase());
+  if (exactMatch) {
+    selectedPokemonName = exactMatch.name;
+    return exactMatch.name;
+  }
+
+  return '';
+}
+
 function syncMinSharedOptions() {
   const select = document.getElementById('minShared');
   const searchBtn = document.getElementById('searchBtn');
-  const selectedName = document.getElementById('pokemonSelect').value;
+  const selectedName = getResolvedSelectedPokemonName();
 
   if (!DATA.length || !selectedName) {
     select.innerHTML = '<option value="">Select a Pokemon first</option>';
@@ -1030,30 +1059,140 @@ function getFilteredPokemon() {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
+function getAvailablePokemon(query) {
+  const normalizedQuery = query.trim().toLowerCase();
+  return getFilteredPokemon().filter((pokemon) => pokemon.name.toLowerCase().includes(normalizedQuery));
+}
+
 function renderPokemonSelect() {
-  const select = document.getElementById('pokemonSelect');
+  const input = document.getElementById('pokemonSearch');
   const filtered = getFilteredPokemon();
-  const currentValue = select.value;
+  const selectionStillVisible = filtered.some((pokemon) => pokemon.name === selectedPokemonName);
 
-  let html = '<option value="">-- Select a Pokemon --</option>';
-  html += filtered.map((pokemon) => {
-    const safeName = escapeHtml(pokemon.name);
-    return '<option value="' + safeName + '">' + safeName + '</option>';
-  }).join('');
+  input.disabled = DATA.length === 0;
 
-  select.innerHTML = html;
-  select.disabled = DATA.length === 0;
-
-  if (filtered.some((pokemon) => pokemon.name === currentValue)) {
-    select.value = currentValue;
-  }
-
-  if (!select.value && filtered.length === 1) {
-    select.value = filtered[0].name;
+  if (!selectionStillVisible) {
+    if (input.value === selectedPokemonName) {
+      input.value = '';
+    }
+    selectedPokemonName = '';
   }
 
   document.getElementById('matchScope').disabled = filtered.length === 0;
+  renderPokemonSuggestions();
   syncMinSharedOptions();
+}
+
+function renderPokemonSuggestions() {
+  const input = document.getElementById('pokemonSearch');
+  const dropdown = document.getElementById('pokemonDropdown');
+  const available = getAvailablePokemon(input.value);
+
+  if (!pokemonDropdownOpen) {
+    dropdown.hidden = true;
+    return;
+  }
+
+  if (available.length === 0) {
+    activePokemonSuggestionIndex = -1;
+    dropdown.innerHTML = '<div class="specialty-empty">No matching Pokemon found.</div>';
+    dropdown.hidden = false;
+    return;
+  }
+
+  if (activePokemonSuggestionIndex >= available.length) {
+    activePokemonSuggestionIndex = 0;
+  }
+
+  dropdown.innerHTML = available.map((pokemon, index) => {
+    const activeClass = index === activePokemonSuggestionIndex ? ' active' : '';
+    return '<button type="button" class="specialty-suggestion' + activeClass + '" data-pokemon-name="' + escapeHtml(pokemon.name) + '">' + escapeHtml(pokemon.name) + '</button>';
+  }).join('');
+
+  dropdown.hidden = false;
+
+  dropdown.querySelectorAll('[data-pokemon-name]').forEach((button) => {
+    button.addEventListener('click', () => {
+      selectPokemon(button.getAttribute('data-pokemon-name'));
+    });
+  });
+}
+
+function selectPokemon(name) {
+  selectedPokemonName = name;
+  document.getElementById('pokemonSearch').value = name;
+  pokemonDropdownOpen = false;
+  activePokemonSuggestionIndex = -1;
+  renderPokemonSuggestions();
+  syncMinSharedOptions();
+  document.getElementById('resultsCount').textContent = 'Ready to search.';
+}
+
+function setupPokemonAutocomplete() {
+  const input = document.getElementById('pokemonSearch');
+  const dropdown = document.getElementById('pokemonDropdown');
+
+  input.addEventListener('focus', () => {
+    pokemonDropdownOpen = true;
+    renderPokemonSuggestions();
+  });
+
+  input.addEventListener('input', () => {
+    if (input.value !== selectedPokemonName) {
+      selectedPokemonName = '';
+    }
+    pokemonDropdownOpen = true;
+    activePokemonSuggestionIndex = -1;
+    renderPokemonSuggestions();
+    syncMinSharedOptions();
+  });
+
+  input.addEventListener('keydown', (event) => {
+    const available = getAvailablePokemon(input.value);
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (!available.length) return;
+      activePokemonSuggestionIndex = (activePokemonSuggestionIndex + 1) % available.length;
+      renderPokemonSuggestions();
+      return;
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (!available.length) return;
+      activePokemonSuggestionIndex = activePokemonSuggestionIndex <= 0 ? available.length - 1 : activePokemonSuggestionIndex - 1;
+      renderPokemonSuggestions();
+      return;
+    }
+
+    if (event.key === 'Enter') {
+      if (!available.length) return;
+      event.preventDefault();
+      const index = activePokemonSuggestionIndex >= 0 ? activePokemonSuggestionIndex : 0;
+      selectPokemon(available[index].name);
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      pokemonDropdownOpen = false;
+      dropdown.hidden = true;
+    }
+  });
+
+  document.getElementById('pokemonCombobox').addEventListener('click', () => {
+    pokemonDropdownOpen = true;
+    renderPokemonSuggestions();
+    input.focus();
+  });
+
+  document.addEventListener('click', (event) => {
+    const combobox = document.getElementById('pokemonCombobox');
+    if (!combobox.contains(event.target) && !dropdown.contains(event.target)) {
+      pokemonDropdownOpen = false;
+      dropdown.hidden = true;
+    }
+  });
 }
 
 function updateFilterCount() {
@@ -1199,7 +1338,10 @@ function resetSearch() {
   latestSearchState = null;
   activeResultFavoriteFilters = [];
   activeResultFlavorFilter = false;
-  document.getElementById('pokemonSelect').value = '';
+  selectedPokemonName = '';
+  pokemonDropdownOpen = false;
+  activePokemonSuggestionIndex = -1;
+  document.getElementById('pokemonSearch').value = '';
   document.getElementById('matchScope').value = 'all';
   syncMinSharedOptions();
   document.getElementById('summary').className = 'empty';
@@ -1211,7 +1353,7 @@ function resetSearch() {
 }
 
 function searchCompatibility() {
-  const selectedName = document.getElementById('pokemonSelect').value;
+  const selectedName = getResolvedSelectedPokemonName();
   const minShared = Number(document.getElementById('minShared').value);
   const scope = document.getElementById('matchScope').value;
   const results = document.getElementById('results');
@@ -1283,7 +1425,7 @@ function searchCompatibility() {
 }
 
 function enableUi() {
-  document.getElementById('pokemonSelect').disabled = false;
+  document.getElementById('pokemonSearch').disabled = false;
   document.getElementById('matchScope').disabled = false;
   syncMinSharedOptions();
 }
@@ -1304,6 +1446,7 @@ async function loadData() {
 
     renderSpecialties();
     setupSpecialtyAutocomplete();
+    setupPokemonAutocomplete();
     renderPokemonSelect();
     updateFilterCount();
     enableUi();
@@ -1318,10 +1461,6 @@ async function loadData() {
 }
 
 document.getElementById('searchBtn').addEventListener('click', searchCompatibility);
-document.getElementById('pokemonSelect').addEventListener('change', () => {
-  syncMinSharedOptions();
-  document.getElementById('resultsCount').textContent = 'Ready to search.';
-});
 document.getElementById('matchScope').addEventListener('change', () => {
   syncMinSharedOptions();
 });
