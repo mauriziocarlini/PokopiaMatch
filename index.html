@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pokopia Match Finder</title>
+<title>Pokopia Habitat Planner</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;600&display=swap');
 
@@ -67,6 +67,28 @@
   .hero {
     padding: 24px;
     margin-bottom: 18px;
+  }
+
+  .tabs {
+    display: inline-flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    width: auto;
+    min-width: 0;
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .tab-button.active {
+    background: var(--accent-soft);
+  }
+
+  .view[hidden] {
+    display: none;
   }
 
   h1,
@@ -438,6 +460,18 @@
     line-height: 1.5;
   }
 
+  .summary-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .summary-actions button {
+    width: auto;
+    min-width: 0;
+  }
+
   .name-line .tag-list {
     display: inline-flex;
     align-items: center;
@@ -575,6 +609,401 @@
     text-transform: uppercase;
   }
 
+  .card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 14px;
+  }
+
+  .card-actions button {
+    width: auto;
+    min-width: 0;
+  }
+
+  .habitat-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: 18px;
+    align-items: start;
+  }
+
+  .habitat-selected {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .habitat-selected .chip {
+    background: #f6d4df;
+  }
+
+  .habitat-selected:not(:empty) {
+    margin-bottom: 0;
+  }
+
+  .habitat-selected-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .habitat-selected-bar[hidden] {
+    display: none;
+  }
+
+  .habitat-selected-bar .habitat-selected {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .habitat-selected-bar button {
+    width: auto;
+    min-width: 0;
+    flex: 0 0 auto;
+    align-self: flex-start;
+  }
+
+  .habitat-note {
+    width: 100%;
+    min-height: 130px;
+    padding: 12px 14px;
+    border: 3px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    resize: vertical;
+  }
+
+  .habitat-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .habitat-actions button {
+    width: auto;
+    min-width: 0;
+  }
+
+  .habitat-score {
+    font-family: "Press Start 2P", monospace;
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+
+  .habitat-report {
+    display: grid;
+    gap: 10px;
+  }
+
+  .report-block {
+    border: 2px solid var(--line);
+    background: #fff;
+    padding: 12px;
+  }
+
+  .report-block strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  .report-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    margin-left: 8px;
+    padding: 0 4px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.55);
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  .habitat-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .habitat-item {
+    border: 3px solid var(--line);
+    background: var(--panel);
+    box-shadow: var(--shadow);
+    padding: 14px;
+  }
+
+  .habitat-item-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: start;
+    margin-bottom: 10px;
+  }
+
+  .habitat-item h3 {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .habitat-item-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .habitat-item-buttons button {
+    width: auto;
+    min-width: 0;
+  }
+
+  .habitat-pokemon-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 10px 0;
+  }
+
+  .habitat-pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1 1 auto;
+  }
+
+  .habitat-mini-score {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 6px 10px;
+    border: 2px solid var(--line);
+    background: var(--score);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .tag.pokemon {
+    background: #f6d4df;
+    border-style: solid;
+    color: var(--ink);
+    opacity: 1;
+  }
+
+  .tooltip {
+    position: fixed;
+    z-index: 60;
+    pointer-events: none;
+    max-width: 260px;
+    padding: 8px 10px;
+    border: 2px solid var(--line);
+    background: var(--panel);
+    box-shadow: 3px 3px 0 var(--line);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .tooltip[hidden] {
+    display: none;
+  }
+
+  .habitat-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    z-index: 65;
+    width: min(560px, calc(100% - 24px));
+    padding: 14px;
+    border: 3px solid var(--line);
+    background: var(--panel);
+    box-shadow: var(--shadow);
+    transform: translate(-50%, calc(100% + 32px));
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+  }
+
+  .habitat-toast.visible {
+    transform: translate(-50%, 0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .habitat-toast[hidden] {
+    display: block;
+  }
+
+  .habitat-toast-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .habitat-toast-title {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .habitat-toast-status {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: right;
+  }
+
+  .habitat-toast-body {
+    display: grid;
+    gap: 10px;
+  }
+
+  .habitat-toast-score {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    min-height: 30px;
+    padding: 6px 10px;
+    border: 2px solid var(--line);
+    background: var(--score);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .habitat-toast-close {
+    width: auto;
+    min-width: 0;
+    min-height: 30px;
+    padding: 4px 8px;
+    border: 2px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    box-shadow: none;
+    font-size: 12px;
+  }
+
+  .habitat-toast .chip {
+    background: #f6d4df;
+  }
+
+  .habitat-toast .chip button {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .habitat-feedback-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 184px;
+    z-index: 66;
+    width: min(420px, calc(100% - 32px));
+    padding: 10px 12px;
+    border: 2px solid var(--line);
+    background: #fff;
+    box-shadow: 3px 3px 0 var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+    transform: translate(-50%, 12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.16s ease, opacity 0.16s ease;
+  }
+
+  .habitat-feedback-toast.visible {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  .habitat-feedback-toast[hidden] {
+    display: block;
+  }
+
+  .habitat-preview-trigger {
+    position: fixed;
+    right: 18px;
+    bottom: 20px;
+    z-index: 64;
+    width: auto;
+    min-width: 0;
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 3px solid var(--line);
+    background: #f6d4df;
+    color: var(--ink);
+    box-shadow: 3px 3px 0 var(--line);
+  }
+
+  .habitat-preview-trigger[hidden] {
+    display: none;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(24, 20, 16, 0.28);
+  }
+
+  .modal-backdrop[hidden] {
+    display: none;
+  }
+
+  .modal {
+    width: min(520px, 100%);
+    border: 3px solid var(--line);
+    background: var(--panel);
+    box-shadow: var(--shadow);
+    padding: 16px;
+  }
+
+  .modal h3 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .modal p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .modal-actions button {
+    width: auto;
+    min-width: 0;
+  }
+
   .empty {
     padding: 18px;
     font-size: 14px;
@@ -588,6 +1017,7 @@
 
   @media (max-width: 920px) {
     .layout,
+    .habitat-layout,
     .result-meta {
       grid-template-columns: 1fr;
     }
@@ -639,16 +1069,45 @@
     .summary-card button {
       width: 100%;
     }
+
+    .habitat-selected-bar,
+    .habitat-pokemon-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .habitat-toast-top {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .habitat-toast-status {
+      text-align: left;
+    }
+
+    .habitat-preview-trigger {
+      right: 12px;
+      bottom: 12px;
+    }
+
+    .habitat-feedback-toast {
+      bottom: 176px;
+    }
   }
 </style>
 </head>
 <body>
   <main class="page">
     <section class="hero">
-      <h1>POKOPIA MATCH FINDER</h1>
-      <p class="intro">Choose a starting Pokemon and find the best companions for the same habitat.</p>
+      <h1>POKOPIA HABITAT PLANNER</h1>
+      <p class="intro">Find strong Pokemon matches, build draft habitats, and keep track of the groups you want to live together.</p>
+      <div class="tabs">
+        <button type="button" class="tab-button active" data-tab="search">Match Finder</button>
+        <button type="button" class="tab-button" data-tab="habitats">Habitats</button>
+      </div>
     </section>
 
+    <div id="viewSearch" class="view">
     <div class="layout">
       <section class="panel">
         <h2>CHOOSE POKEMON</h2>
@@ -717,7 +1176,88 @@
         <div id="results" class="result-list"></div>
       </section>
     </div>
+    </div>
+
+    <div id="viewHabitats" class="view" hidden>
+      <div class="habitat-layout">
+        <section class="panel">
+          <h2>CREATE HABITAT</h2>
+          <div class="field">
+            <label for="habitatPokemonSearch">Add Pokemon</label>
+            <div class="specialty-picker">
+              <div class="specialty-input-wrap" id="habitatPokemonCombobox">
+                <div class="habitat-selected-bar" id="habitatSelectedBar" hidden>
+                  <div class="habitat-selected" id="habitatSelectedPokemon"></div>
+                  <button type="button" class="secondary small" id="clearHabitatPokemonBtn">Clear</button>
+                </div>
+                <input
+                  id="habitatPokemonSearch"
+                  class="specialty-search"
+                  type="text"
+                  placeholder="Search Pokemon to add..."
+                  autocomplete="off"
+                  aria-label="Search Pokemon for habitat"
+                  disabled
+                >
+              </div>
+              <div class="specialty-dropdown" id="habitatPokemonDropdown" hidden></div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="habitatName">Habitat name</label>
+            <div class="specialty-input-wrap">
+              <input id="habitatName" class="specialty-search" type="text" placeholder="Example: Good vibes birds">
+            </div>
+          </div>
+          <div class="field">
+            <label for="habitatNotes">Notes</label>
+            <textarea id="habitatNotes" class="habitat-note" placeholder="Write anything you want to remember about this habitat..."></textarea>
+          </div>
+          <div class="habitat-actions">
+            <button type="button" class="primary" id="saveHabitatBtn" disabled>Save habitat</button>
+            <button type="button" class="secondary" id="newHabitatBtn">New habitat</button>
+          </div>
+          <div class="panel-section">
+            <h2>SAVED HABITATS</h2>
+            <div id="habitatList" class="habitat-list">
+              <div class="empty">No habitats saved yet.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>HABITAT REPORT</h2>
+          <div id="habitatScore" class="habitat-score"></div>
+          <div id="habitatReport" class="habitat-report">
+            <div class="report-block">
+              <strong>Status</strong>
+              Add at least 2 Pokemon to score coexistence.
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
   </main>
+  <div id="tooltip" class="tooltip" hidden></div>
+  <div id="modalBackdrop" class="modal-backdrop" hidden>
+    <div class="modal">
+      <h3 id="modalTitle">Confirm</h3>
+      <p id="modalBody"></p>
+      <div id="modalActions" class="modal-actions"></div>
+    </div>
+  </div>
+  <div id="habitatToast" class="habitat-toast" hidden>
+    <div class="habitat-toast-top">
+      <h3 id="habitatToastTitle" class="habitat-toast-title pixel">Current Habitat</h3>
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <div id="habitatToastStatus" class="habitat-toast-status"></div>
+        <button type="button" id="habitatToastClose" class="habitat-toast-close">Close</button>
+      </div>
+    </div>
+    <div id="habitatToastBody" class="habitat-toast-body"></div>
+  </div>
+  <div id="habitatFeedbackToast" class="habitat-feedback-toast" hidden></div>
+  <button type="button" id="habitatPreviewTrigger" class="habitat-preview-trigger" hidden>Current Habitat</button>
 
 <script>
 let DATA = [];
@@ -731,6 +1271,16 @@ let pokemonDropdownOpen = false;
 let latestSearchState = null;
 let activeResultFavoriteFilters = [];
 let activeResultFlavorFilter = false;
+let activeTab = 'search';
+let habitatPokemonNames = [];
+let habitatPokemonDropdownOpen = false;
+let activeHabitatPokemonSuggestionIndex = -1;
+let editingHabitatId = null;
+const HABITATS_STORAGE_KEY = 'pokopia-habitats-v1';
+let modalResolve = null;
+let habitatToastTimer = null;
+let habitatPreviewPinned = false;
+let habitatFeedbackTimer = null;
 
 function escapeHtml(value) {
   return String(value)
@@ -794,6 +1344,709 @@ function getPokemonProfile(pokemon) {
     interests,
     flavor
   };
+}
+
+function getPokemonByName(name) {
+  return DATA.find((pokemon) => pokemon.name === name) || null;
+}
+
+function getHabitatScoreData(names) {
+  const profiles = names
+    .map((name) => getPokemonByName(name))
+    .filter(Boolean)
+    .map(getPokemonProfile);
+
+  if (profiles.length < 2) {
+    return {
+      score: null,
+      pairReports: [],
+      allSharedFavorites: [],
+      overlappingFavorites: [],
+      specialtyCounts: [],
+      repeatedFlavor: null,
+      profiles
+    };
+  }
+
+  const pairReports = [];
+  const favoriteFrequency = {};
+  const flavorFrequency = {};
+  const specialtyOwners = {};
+  const favoriteOwners = {};
+  let totalPoints = 0;
+  let pairCount = 0;
+
+  profiles.forEach((profile) => {
+    profile.specialties.forEach((specialty) => {
+      if (!specialtyOwners[specialty]) specialtyOwners[specialty] = [];
+      specialtyOwners[specialty].push(profile.name);
+    });
+
+    profile.interests.forEach((favorite) => {
+      if (!favoriteOwners[favorite]) favoriteOwners[favorite] = [];
+      favoriteOwners[favorite].push(profile.name);
+    });
+  });
+
+  for (let i = 0; i < profiles.length; i++) {
+    for (let j = i + 1; j < profiles.length; j++) {
+      const a = profiles[i];
+      const b = profiles[j];
+      const sharedFavorites = intersect(a.interests, b.interests);
+      const sameFlavor = a.flavor && b.flavor && a.flavor === b.flavor;
+      const pairPoints = sharedFavorites.length + (sameFlavor ? 1 : 0);
+      totalPoints += pairPoints;
+      pairCount += 1;
+
+      sharedFavorites.forEach((favorite) => {
+        favoriteFrequency[favorite] = (favoriteFrequency[favorite] || 0) + 1;
+      });
+
+      if (sameFlavor) {
+        flavorFrequency[a.flavor] = (flavorFrequency[a.flavor] || 0) + 1;
+      }
+
+      pairReports.push({
+        names: [a.name, b.name],
+        sharedFavorites,
+        sameFlavor,
+        pairPoints
+      });
+    }
+  }
+
+  const allSharedFavorites = profiles
+    .map((profile) => profile.interests)
+    .reduce((acc, current, index) => index === 0 ? current.slice() : intersect(acc, current), []);
+
+  const overlappingFavorites = Object.entries(favoriteOwners)
+    .filter(([, owners]) => owners.length >= 2)
+    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
+    .map(([name, owners]) => ({ name, owners }));
+
+  const specialtyCounts = Object.entries(specialtyOwners)
+    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
+    .map(([name, owners]) => ({ name, owners }));
+
+  const repeatedFlavor = Object.entries(flavorFrequency)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]?.[0] || null;
+
+  const averagePoints = totalPoints / pairCount;
+  const score = Math.round((averagePoints / 6) * 100);
+
+  return {
+    score,
+    pairReports: pairReports.sort((a, b) => b.pairPoints - a.pairPoints || a.names.join(', ').localeCompare(b.names.join(', '))),
+    allSharedFavorites,
+    overlappingFavorites,
+    specialtyCounts,
+    repeatedFlavor
+  };
+}
+
+function readHabitats() {
+  try {
+    const raw = localStorage.getItem(HABITATS_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeHabitats(habitats) {
+  localStorage.setItem(HABITATS_STORAGE_KEY, JSON.stringify(habitats));
+}
+
+function showTooltip(text, x, y) {
+  const tooltip = document.getElementById('tooltip');
+  tooltip.textContent = text;
+  tooltip.hidden = false;
+  tooltip.style.left = (x + 14) + 'px';
+  tooltip.style.top = (y + 14) + 'px';
+}
+
+function hideTooltip() {
+  document.getElementById('tooltip').hidden = true;
+}
+
+function attachTooltipHandlers(root) {
+  root.querySelectorAll('[data-tooltip]').forEach((el) => {
+    el.addEventListener('mousemove', (event) => {
+      showTooltip(el.getAttribute('data-tooltip'), event.clientX, event.clientY);
+    });
+    el.addEventListener('mouseenter', (event) => {
+      showTooltip(el.getAttribute('data-tooltip'), event.clientX, event.clientY);
+    });
+    el.addEventListener('mouseleave', hideTooltip);
+  });
+}
+
+function openModal(config) {
+  const backdrop = document.getElementById('modalBackdrop');
+  const title = document.getElementById('modalTitle');
+  const body = document.getElementById('modalBody');
+  const actions = document.getElementById('modalActions');
+
+  title.textContent = config.title;
+  body.textContent = config.body;
+  actions.innerHTML = config.actions.map((action, index) => {
+    const extraClass = action.kind ? ' ' + action.kind : '';
+    return '<button type="button" class="' + (action.className || 'secondary') + extraClass + '" data-modal-action="' + index + '">' + escapeHtml(action.label) + '</button>';
+  }).join('');
+
+  backdrop.hidden = false;
+
+  return new Promise((resolve) => {
+    modalResolve = resolve;
+    actions.querySelectorAll('[data-modal-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const action = config.actions[Number(button.getAttribute('data-modal-action'))];
+        closeModal(action.value);
+      });
+    });
+  });
+}
+
+function closeModal(value) {
+  document.getElementById('modalBackdrop').hidden = true;
+  if (modalResolve) {
+    modalResolve(value);
+    modalResolve = null;
+  }
+}
+
+function getCurrentHabitatDraft() {
+  return {
+    id: editingHabitatId,
+    name: document.getElementById('habitatName').value.trim(),
+    notes: document.getElementById('habitatNotes').value.trim(),
+    pokemon: habitatPokemonNames.slice()
+  };
+}
+
+function getAvailableHabitatPokemon(query) {
+  const normalizedQuery = query.trim().toLowerCase();
+  return DATA
+    .filter((pokemon) => !habitatPokemonNames.includes(pokemon.name))
+    .filter((pokemon) => pokemon.name.toLowerCase().includes(normalizedQuery))
+    .slice(0, 50);
+}
+
+function renderHabitatSelectedPokemon() {
+  const wrap = document.getElementById('habitatPokemonCombobox');
+  const bar = document.getElementById('habitatSelectedBar');
+  const container = document.getElementById('habitatSelectedPokemon');
+
+  container.innerHTML = habitatPokemonNames.map((name) => {
+    return '<span class="chip">' +
+      '<span>' + escapeHtml(name) + '</span>' +
+      '<button type="button" data-remove-habitat-pokemon="' + escapeHtml(name) + '" aria-label="Remove ' + escapeHtml(name) + '">x</button>' +
+    '</span>';
+  }).join('');
+
+  wrap.classList.toggle('has-chips', habitatPokemonNames.length > 0);
+  bar.hidden = habitatPokemonNames.length === 0;
+
+  container.querySelectorAll('[data-remove-habitat-pokemon]').forEach((button) => {
+    button.addEventListener('click', () => {
+      habitatPokemonNames = habitatPokemonNames.filter((item) => item !== button.getAttribute('data-remove-habitat-pokemon'));
+      renderHabitatSelectedPokemon();
+      renderHabitatPokemonSuggestions();
+      syncHabitatActions();
+      renderHabitatReport();
+      renderHabitatToast('');
+    });
+  });
+}
+
+function renderHabitatPokemonSuggestions() {
+  const input = document.getElementById('habitatPokemonSearch');
+  const dropdown = document.getElementById('habitatPokemonDropdown');
+  const available = getAvailableHabitatPokemon(input.value);
+
+  if (!habitatPokemonDropdownOpen) {
+    dropdown.hidden = true;
+    return;
+  }
+
+  if (available.length === 0) {
+    activeHabitatPokemonSuggestionIndex = -1;
+    dropdown.innerHTML = '<div class="specialty-empty">No matching Pokemon found.</div>';
+    dropdown.hidden = false;
+    return;
+  }
+
+  if (activeHabitatPokemonSuggestionIndex >= available.length) {
+    activeHabitatPokemonSuggestionIndex = 0;
+  }
+
+  dropdown.innerHTML = available.map((pokemon, index) => {
+    const activeClass = index === activeHabitatPokemonSuggestionIndex ? ' active' : '';
+    return '<button type="button" class="specialty-suggestion' + activeClass + '" data-habitat-pokemon-name="' + escapeHtml(pokemon.name) + '">' + escapeHtml(pokemon.name) + '</button>';
+  }).join('');
+
+  dropdown.hidden = false;
+
+  dropdown.querySelectorAll('[data-habitat-pokemon-name]').forEach((button) => {
+    button.addEventListener('click', () => {
+      addHabitatPokemon(button.getAttribute('data-habitat-pokemon-name'));
+    });
+  });
+}
+
+function addHabitatPokemon(name) {
+  if (!name || habitatPokemonNames.includes(name) || habitatPokemonNames.length >= 4) {
+    return;
+  }
+
+  habitatPokemonNames.push(name);
+  document.getElementById('habitatPokemonSearch').value = '';
+  activeHabitatPokemonSuggestionIndex = -1;
+  habitatPokemonDropdownOpen = true;
+  renderHabitatSelectedPokemon();
+  renderHabitatPokemonSuggestions();
+  syncHabitatActions();
+  renderHabitatReport();
+  document.getElementById('habitatPokemonSearch').focus();
+}
+
+function getHabitatToastPayload(message) {
+  const scoreData = getHabitatScoreData(habitatPokemonNames);
+  const habitatName = document.getElementById('habitatName').value.trim();
+  return {
+    title: habitatName || 'Current Habitat',
+    status: '',
+    score: scoreData.score === null ? 'Need 2 Pokemon to score coexistence' : scoreData.score + '/100 coexistence',
+    pokemon: habitatPokemonNames.slice()
+  };
+}
+
+function renderHabitatPreviewTrigger() {
+  const trigger = document.getElementById('habitatPreviewTrigger');
+  const count = habitatPokemonNames.length;
+
+  trigger.textContent = count ? 'Current Habitat (' + count + ')' : 'Current Habitat';
+  trigger.hidden = activeTab !== 'search';
+}
+
+function renderHabitatToast(message) {
+  const toast = document.getElementById('habitatToast');
+  const titleEl = document.getElementById('habitatToastTitle');
+  const statusEl = document.getElementById('habitatToastStatus');
+  const bodyEl = document.getElementById('habitatToastBody');
+  const payload = getHabitatToastPayload(message);
+
+  titleEl.textContent = payload.title;
+  statusEl.textContent = payload.status;
+  bodyEl.innerHTML =
+    '<div class="habitat-toast-score">' + escapeHtml(payload.score) + '</div>' +
+    '<div class="tag-list">' + (payload.pokemon.length
+      ? payload.pokemon.map((name) => {
+        return '<span class="chip">' +
+          '<span>' + escapeHtml(name) + '</span>' +
+          '<button type="button" data-remove-toast-pokemon="' + escapeHtml(name) + '" aria-label="Remove ' + escapeHtml(name) + '">x</button>' +
+        '</span>';
+      }).join('')
+      : '<span class="muted">No Pokemon in the current habitat yet.</span>') + '</div>';
+
+  bodyEl.querySelectorAll('[data-remove-toast-pokemon]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const name = button.getAttribute('data-remove-toast-pokemon');
+      habitatPokemonNames = habitatPokemonNames.filter((item) => item !== name);
+      renderHabitatSelectedPokemon();
+      renderHabitatPokemonSuggestions();
+      syncHabitatActions();
+      renderHabitatReport();
+      renderHabitatToast('');
+      showHabitatFeedback(name + ' removed from the current habitat.');
+    });
+  });
+
+  renderHabitatPreviewTrigger();
+}
+
+function showHabitatFeedback(message) {
+  const feedback = document.getElementById('habitatFeedbackToast');
+
+  if (!message) {
+    feedback.classList.remove('visible');
+    feedback.hidden = true;
+    if (habitatFeedbackTimer) {
+      clearTimeout(habitatFeedbackTimer);
+      habitatFeedbackTimer = null;
+    }
+    return;
+  }
+
+  feedback.textContent = message;
+  feedback.hidden = false;
+  requestAnimationFrame(() => {
+    feedback.classList.add('visible');
+  });
+
+  if (habitatFeedbackTimer) {
+    clearTimeout(habitatFeedbackTimer);
+  }
+
+  habitatFeedbackTimer = setTimeout(() => {
+    feedback.classList.remove('visible');
+    setTimeout(() => {
+      if (!feedback.classList.contains('visible')) {
+        feedback.hidden = true;
+      }
+    }, 160);
+  }, 2200);
+}
+
+function hideHabitatToast() {
+  const toast = document.getElementById('habitatToast');
+
+  if (habitatToastTimer) {
+    clearTimeout(habitatToastTimer);
+    habitatToastTimer = null;
+  }
+
+  toast.classList.remove('visible');
+  setTimeout(() => {
+    if (!toast.classList.contains('visible')) {
+      toast.hidden = true;
+    }
+  }, 180);
+
+  showHabitatFeedback('');
+}
+
+function showHabitatToast(message, persist) {
+  const toast = document.getElementById('habitatToast');
+
+  renderHabitatToast(message);
+  showHabitatFeedback(message);
+
+  toast.hidden = false;
+  requestAnimationFrame(() => {
+    toast.classList.add('visible');
+  });
+
+  if (habitatToastTimer) {
+    clearTimeout(habitatToastTimer);
+  }
+
+  if (persist) {
+    return;
+  }
+
+  habitatToastTimer = setTimeout(() => {
+    if (!habitatPreviewPinned) {
+      hideHabitatToast();
+    }
+  }, 3200);
+}
+
+function sendPokemonToCurrentHabitat(name) {
+  if (!name) return;
+
+  if (habitatPokemonNames.includes(name)) {
+    showHabitatToast(name + ' is already in the current habitat.');
+    return;
+  }
+
+  if (habitatPokemonNames.length >= 4) {
+    showHabitatToast('Current habitat is full. Remove one Pokemon to add ' + name + '.');
+    return;
+  }
+
+  addHabitatPokemon(name);
+  showHabitatToast('Added ' + name + ' to the current habitat.');
+}
+
+function setupHabitatPokemonAutocomplete() {
+  const input = document.getElementById('habitatPokemonSearch');
+  const dropdown = document.getElementById('habitatPokemonDropdown');
+
+  input.addEventListener('focus', () => {
+    habitatPokemonDropdownOpen = true;
+    renderHabitatPokemonSuggestions();
+  });
+
+  input.addEventListener('input', () => {
+    habitatPokemonDropdownOpen = true;
+    activeHabitatPokemonSuggestionIndex = -1;
+    renderHabitatPokemonSuggestions();
+  });
+
+  input.addEventListener('keydown', (event) => {
+    const available = getAvailableHabitatPokemon(input.value);
+
+    if (event.key === 'Backspace' && input.value === '' && habitatPokemonNames.length) {
+      habitatPokemonNames = habitatPokemonNames.slice(0, -1);
+      renderHabitatSelectedPokemon();
+      renderHabitatPokemonSuggestions();
+      syncHabitatActions();
+      renderHabitatReport();
+      renderHabitatToast('');
+      return;
+    }
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (!available.length) return;
+      activeHabitatPokemonSuggestionIndex = (activeHabitatPokemonSuggestionIndex + 1) % available.length;
+      renderHabitatPokemonSuggestions();
+      return;
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (!available.length) return;
+      activeHabitatPokemonSuggestionIndex = activeHabitatPokemonSuggestionIndex <= 0 ? available.length - 1 : activeHabitatPokemonSuggestionIndex - 1;
+      renderHabitatPokemonSuggestions();
+      return;
+    }
+
+    if (event.key === 'Enter') {
+      if (!available.length) return;
+      event.preventDefault();
+      const index = activeHabitatPokemonSuggestionIndex >= 0 ? activeHabitatPokemonSuggestionIndex : 0;
+      addHabitatPokemon(available[index].name);
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      habitatPokemonDropdownOpen = false;
+      dropdown.hidden = true;
+    }
+  });
+
+  document.getElementById('habitatPokemonCombobox').addEventListener('click', () => {
+    habitatPokemonDropdownOpen = true;
+    renderHabitatPokemonSuggestions();
+    input.focus();
+  });
+
+  document.addEventListener('click', (event) => {
+    const combobox = document.getElementById('habitatPokemonCombobox');
+    if (!combobox.contains(event.target) && !dropdown.contains(event.target)) {
+      habitatPokemonDropdownOpen = false;
+      dropdown.hidden = true;
+    }
+  });
+}
+
+function syncHabitatActions() {
+  document.getElementById('saveHabitatBtn').disabled = habitatPokemonNames.length === 0;
+  document.getElementById('habitatPokemonSearch').disabled = DATA.length === 0 || habitatPokemonNames.length >= 4;
+}
+
+function renderCountedTags(items, variant) {
+  if (!items.length) {
+    return '<div class="muted">None</div>';
+  }
+
+  return '<div class="report-tags">' + items.map((item) => {
+    const countBadge = item.owners.length > 1 ? '<span class="tag-count">' + item.owners.length + '</span>' : '';
+    const title = escapeHtml(item.owners.join(', '));
+    return '<span class="tag ' + variant + '" data-tooltip="' + title + '">' + escapeHtml(item.name) + countBadge + '</span>';
+  }).join('') + '</div>';
+}
+
+function renderHabitatReport() {
+  const scoreEl = document.getElementById('habitatScore');
+  const reportEl = document.getElementById('habitatReport');
+  const data = getHabitatScoreData(habitatPokemonNames);
+
+  if (habitatPokemonNames.length < 2 || data.score === null) {
+    scoreEl.textContent = '';
+    reportEl.innerHTML =
+      '<div class="report-block"><strong>Status</strong>Add at least 2 Pokemon to score coexistence.</div>';
+    return;
+  }
+
+  scoreEl.textContent = data.score + '/100 coexistence score';
+
+  const allSharedFavoriteItems = data.allSharedFavorites.map((favorite) => ({
+    name: favorite,
+    owners: habitatPokemonNames.slice()
+  }));
+
+  const highlights = [
+    '<div class="report-block"><strong>Favorites shared by all</strong>' + renderCountedTags(allSharedFavoriteItems, 'shared') + '</div>',
+    '<div class="report-block"><strong>Overlapping favorites</strong>' + renderCountedTags(data.overlappingFavorites, 'shared') + '</div>',
+    '<div class="report-block"><strong>Habitat specialties</strong>' + renderCountedTags(data.specialtyCounts, 'specialty') + '</div>'
+  ];
+
+  reportEl.innerHTML = highlights.join('');
+  attachTooltipHandlers(reportEl);
+}
+
+function clearHabitatDraft() {
+  editingHabitatId = null;
+  habitatPokemonNames = [];
+  habitatPokemonDropdownOpen = false;
+  activeHabitatPokemonSuggestionIndex = -1;
+  document.getElementById('habitatName').value = '';
+  document.getElementById('habitatNotes').value = '';
+  document.getElementById('habitatPokemonSearch').value = '';
+  renderHabitatSelectedPokemon();
+  renderHabitatPokemonSuggestions();
+  syncHabitatActions();
+  renderHabitatReport();
+  renderHabitatToast('');
+}
+
+async function handleNewHabitat() {
+  const hasDraft = habitatPokemonNames.length >= 2 || document.getElementById('habitatName').value.trim() || document.getElementById('habitatNotes').value.trim();
+
+  if (!hasDraft) {
+    clearHabitatDraft();
+    return;
+  }
+
+  const decision = await openModal({
+    title: 'Current habitat',
+    body: 'Do you want to keep the current habitat before creating a new one?',
+    actions: [
+      { label: 'Cancel', value: 'cancel', className: 'secondary small' },
+      { label: 'Save and create new', value: 'save', className: 'primary small' },
+      { label: 'Discard and create new', value: 'discard', className: 'danger small' }
+    ]
+  });
+
+  if (decision === 'cancel') {
+    return;
+  }
+
+  if (decision === 'save') {
+    const saved = await saveHabitat();
+    if (!saved) {
+      return;
+    }
+  }
+
+  if (decision === 'save' || decision === 'discard') {
+    clearHabitatDraft();
+  }
+}
+
+function renderHabitatList() {
+  const container = document.getElementById('habitatList');
+  const habitats = readHabitats();
+
+  if (!habitats.length) {
+    container.innerHTML = '<div class="empty">No habitats saved yet.</div>';
+    return;
+  }
+
+  container.innerHTML = habitats.map((habitat) => {
+    const scoreData = getHabitatScoreData(habitat.pokemon || []);
+    const title = habitat.name || 'Untitled habitat';
+    return '<article class="habitat-item">' +
+      '<div class="habitat-item-top">' +
+        '<div>' +
+          '<h3>' + escapeHtml(title) + '</h3>' +
+          '<div class="muted">' + (habitat.notes ? escapeHtml(habitat.notes) : 'No notes') + '</div>' +
+        '</div>' +
+        '<div class="habitat-item-buttons">' +
+          '<button type="button" class="secondary small" data-edit-habitat="' + habitat.id + '">View</button>' +
+          '<button type="button" class="danger small" data-delete-habitat="' + habitat.id + '">Delete</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="habitat-pokemon-row">' +
+        '<div class="habitat-pokemon-list">' + habitat.pokemon.map((name) => '<span class="tag pokemon">' + escapeHtml(name) + '</span>').join('') + '</div>' +
+        '<div class="habitat-mini-score">' + (scoreData.score === null ? 'Need 2 Pokemon' : scoreData.score + '/100 coexistence') + '</div>' +
+      '</div>' +
+    '</article>';
+  }).join('');
+
+  container.querySelectorAll('[data-edit-habitat]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const habitat = readHabitats().find((item) => item.id === button.getAttribute('data-edit-habitat'));
+      if (!habitat) return;
+      editingHabitatId = habitat.id;
+      habitatPokemonNames = (habitat.pokemon || []).slice();
+      document.getElementById('habitatName').value = habitat.name || '';
+      document.getElementById('habitatNotes').value = habitat.notes || '';
+      document.getElementById('habitatPokemonSearch').value = '';
+      renderHabitatSelectedPokemon();
+      renderHabitatPokemonSuggestions();
+      syncHabitatActions();
+      renderHabitatReport();
+      showTab('habitats');
+    });
+  });
+
+  container.querySelectorAll('[data-delete-habitat]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const nextHabitats = readHabitats().filter((item) => item.id !== button.getAttribute('data-delete-habitat'));
+      writeHabitats(nextHabitats);
+      if (editingHabitatId === button.getAttribute('data-delete-habitat')) {
+        clearHabitatDraft();
+      }
+      renderHabitatList();
+    });
+  });
+}
+
+async function saveHabitat() {
+  const draft = getCurrentHabitatDraft();
+  if (!draft.pokemon.length) return false;
+
+  const habitats = readHabitats();
+  const duplicateByName = draft.name
+    ? habitats.find((item) => item.name.trim().toLowerCase() === draft.name.trim().toLowerCase() && item.id !== draft.id)
+    : null;
+
+  if (duplicateByName) {
+    const decision = await openModal({
+      title: 'Overwrite habitat?',
+      body: 'A saved habitat already uses this name. Do you want to overwrite it?',
+      actions: [
+        { label: 'Cancel', value: 'cancel', className: 'secondary small' },
+        { label: 'Overwrite', value: 'overwrite', className: 'danger small' }
+      ]
+    });
+
+    if (decision !== 'overwrite') {
+      return false;
+    }
+
+    editingHabitatId = duplicateByName.id;
+  }
+
+  const payload = {
+    id: editingHabitatId || draft.id || String(Date.now()),
+    name: draft.name,
+    notes: draft.notes,
+    pokemon: draft.pokemon
+  };
+
+  const existingIndex = habitats.findIndex((item) => item.id === payload.id);
+  if (existingIndex >= 0) {
+    habitats[existingIndex] = payload;
+  } else {
+    habitats.unshift(payload);
+  }
+
+  writeHabitats(habitats);
+  renderHabitatList();
+  clearHabitatDraft();
+  return true;
+}
+
+function showTab(tab) {
+  activeTab = tab;
+  document.getElementById('viewSearch').hidden = tab !== 'search';
+  document.getElementById('viewHabitats').hidden = tab !== 'habitats';
+  document.querySelectorAll('[data-tab]').forEach((button) => {
+    button.classList.toggle('active', button.getAttribute('data-tab') === tab);
+  });
+  renderHabitatPreviewTrigger();
+
+  if (tab !== 'search') {
+    hideHabitatToast();
+  } else if (habitatPreviewPinned) {
+    showHabitatToast('', true);
+  }
 }
 
 function renderMinSharedOptions(maxFavorites) {
@@ -1221,11 +2474,17 @@ function renderSummary(base) {
             renderSpecialtyTags(base.specialties) +
           '</div>' +
         '</div>' +
-        '<button type="button" class="danger small" id="resetSearchBtn">Reset search</button>' +
+        '<div class="summary-actions">' +
+          '<button type="button" class="danger small" id="resetSearchBtn">Reset search</button>' +
+          '<button type="button" class="secondary small" id="sendSummaryToHabitatBtn">Send to current Habitat</button>' +
+        '</div>' +
       '</div>' +
     '</div>';
 
   document.getElementById('resetSearchBtn').addEventListener('click', resetSearch);
+  document.getElementById('sendSummaryToHabitatBtn').addEventListener('click', () => {
+    sendPokemonToCurrentHabitat(base.name);
+  });
 }
 
 function renderLiveFilters(base) {
@@ -1324,6 +2583,9 @@ function renderResultsFromState() {
           (item.other.flavor ? renderFlavorTag(item.other.flavor) : '<div class="muted">None</div>') +
         '</div>' +
       '</div>' +
+      '<div class="card-actions">' +
+        '<button type="button" class="secondary small" data-send-to-habitat="' + escapeHtml(item.other.name) + '">Send to current Habitat</button>' +
+      '</div>' +
     '</article>';
       }).join('');
 
@@ -1332,6 +2594,12 @@ function renderResultsFromState() {
         cards +
       '</section>';
     }).join('');
+
+  results.querySelectorAll('[data-send-to-habitat]').forEach((button) => {
+    button.addEventListener('click', () => {
+      sendPokemonToCurrentHabitat(button.getAttribute('data-send-to-habitat'));
+    });
+  });
 }
 
 function resetSearch() {
@@ -1427,7 +2695,9 @@ function searchCompatibility() {
 function enableUi() {
   document.getElementById('pokemonSearch').disabled = false;
   document.getElementById('matchScope').disabled = false;
+  document.getElementById('habitatPokemonSearch').disabled = false;
   syncMinSharedOptions();
+  syncHabitatActions();
 }
 
 async function loadData() {
@@ -1447,9 +2717,12 @@ async function loadData() {
     renderSpecialties();
     setupSpecialtyAutocomplete();
     setupPokemonAutocomplete();
+    setupHabitatPokemonAutocomplete();
     renderPokemonSelect();
     updateFilterCount();
     enableUi();
+    renderHabitatList();
+    renderHabitatReport();
 
     document.getElementById('matchScope').value = 'all';
     status.textContent = 'Loaded ' + DATA.length + ' Pokemon';
@@ -1463,6 +2736,35 @@ async function loadData() {
 document.getElementById('searchBtn').addEventListener('click', searchCompatibility);
 document.getElementById('matchScope').addEventListener('change', () => {
   syncMinSharedOptions();
+});
+document.getElementById('saveHabitatBtn').addEventListener('click', saveHabitat);
+document.getElementById('newHabitatBtn').addEventListener('click', handleNewHabitat);
+document.getElementById('clearHabitatPokemonBtn').addEventListener('click', () => {
+  habitatPokemonNames = [];
+  document.getElementById('habitatPokemonSearch').value = '';
+  renderHabitatSelectedPokemon();
+  renderHabitatPokemonSuggestions();
+  syncHabitatActions();
+  renderHabitatReport();
+  renderHabitatToast('');
+});
+document.getElementById('habitatPreviewTrigger').addEventListener('click', () => {
+  habitatPreviewPinned = true;
+  showHabitatToast('', true);
+});
+document.getElementById('habitatToastClose').addEventListener('click', () => {
+  habitatPreviewPinned = false;
+  hideHabitatToast();
+});
+document.querySelectorAll('[data-tab]').forEach((button) => {
+  button.addEventListener('click', () => {
+    showTab(button.getAttribute('data-tab'));
+  });
+});
+document.getElementById('modalBackdrop').addEventListener('click', (event) => {
+  if (event.target.id === 'modalBackdrop') {
+    closeModal('cancel');
+  }
 });
 
 loadData();
