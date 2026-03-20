@@ -255,6 +255,22 @@
     margin-bottom: 8px;
   }
 
+  .specialty-chip-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .specialty-chip-row[hidden] {
+    display: none;
+  }
+
+  .specialty-chip-row .specialty-chips {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
   .chip {
     display: inline-flex;
     align-items: center;
@@ -297,6 +313,29 @@
 
   .specialty-search::placeholder {
     color: var(--muted);
+  }
+
+  .combobox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .combobox-close {
+    width: auto;
+    min-width: 0;
+    min-height: 30px;
+    padding: 4px 8px;
+    border: 2px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    box-shadow: none;
+    font-size: 12px;
+    flex: 0 0 auto;
+  }
+
+  .combobox-close[hidden] {
+    display: none;
   }
 
   .specialty-dropdown {
@@ -518,6 +557,10 @@
     background: var(--shared);
   }
 
+  .tag.unique {
+    background: #fff;
+  }
+
   .tag.faded {
     border-style: dashed;
     color: var(--muted);
@@ -689,7 +732,51 @@
   }
 
   .habitat-score {
+    margin: 0 0 12px;
+  }
+
+  .habitat-rating {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 7px 12px;
+    border: 2px solid var(--line);
     font-family: "Press Start 2P", monospace;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .habitat-rating.perfect {
+    background: #bff7b9;
+    box-shadow: 0 0 0 3px rgba(127, 176, 105, 0.18);
+  }
+
+  .habitat-rating.ultra {
+    background: #d9f4c8;
+  }
+
+  .habitat-rating.great {
+    background: #e8f4ae;
+  }
+
+  .habitat-rating.good {
+    background: #faefab;
+  }
+
+  .habitat-rating.mixed {
+    background: #f6d19c;
+  }
+
+  .habitat-rating.rough {
+    background: #efb1a8;
+  }
+
+  .habitat-rating.pending {
+    background: #fff;
+    color: var(--muted);
+  }
+
+  .habitat-score .habitat-rating {
     font-size: 20px;
     line-height: 1.6;
     margin: 0 0 12px;
@@ -799,6 +886,11 @@
     flex: 0 0 auto;
   }
 
+  .habitat-mini-score.habitat-rating {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
   .tag.pokemon {
     background: #f6d4df;
     border-style: solid;
@@ -886,6 +978,11 @@
     background: var(--score);
     font-size: 12px;
     font-weight: 600;
+  }
+
+  .habitat-toast-score.habitat-rating {
+    font-family: "Press Start 2P", monospace;
+    font-weight: 400;
   }
 
   .habitat-toast-close {
@@ -1113,20 +1210,28 @@
         <h2>CHOOSE POKEMON</h2>
 
         <div class="panel-section">
-          <div class="count" id="filterCount" style="margin-bottom:8px;">No specialty filter active.</div>
-          <div class="specialty-picker">
-            <div class="specialty-input-wrap" id="specialtyCombobox">
-              <div class="specialty-chips" id="selectedSpecialties"></div>
-              <input
-                id="specialtySearch"
-                class="specialty-search"
-                type="text"
-                placeholder="Filter by specialty..."
-                autocomplete="off"
-                aria-label="Search specialties"
-              >
+          <div class="field">
+            <label for="specialtySearch">Specialties</label>
+            <div class="specialty-picker">
+              <div class="specialty-input-wrap" id="specialtyCombobox">
+                <div class="specialty-chip-row" id="specialtyChipRow" hidden>
+                  <div class="specialty-chips" id="selectedSpecialties"></div>
+                  <button type="button" class="combobox-close" id="closeSpecialtyDropdownBtn" aria-label="Close specialties" hidden>X</button>
+                </div>
+                <div class="combobox-row">
+                  <input
+                    id="specialtySearch"
+                    class="specialty-search"
+                    type="text"
+                    placeholder="Any"
+                    autocomplete="off"
+                    aria-label="Search specialties"
+                  >
+                </div>
+              </div>
+              <div class="specialty-dropdown" id="specialtyDropdown" hidden></div>
             </div>
-            <div class="specialty-dropdown" id="specialtyDropdown" hidden></div>
+            <div class="count" id="filterCount" style="margin-top:8px;">Any specialties. 0 Pokemon available.</div>
           </div>
         </div>
 
@@ -1135,15 +1240,18 @@
             <label for="pokemonSearch">Pokemon</label>
             <div class="specialty-picker">
               <div class="specialty-input-wrap" id="pokemonCombobox">
-                <input
-                  id="pokemonSearch"
-                  class="specialty-search"
-                  type="text"
-                  placeholder="Search Pokemon..."
-                  autocomplete="off"
-                  aria-label="Search Pokemon"
-                  disabled
-                >
+                <div class="combobox-row">
+                  <input
+                    id="pokemonSearch"
+                    class="specialty-search"
+                    type="text"
+                    placeholder="Search Pokemon..."
+                    autocomplete="off"
+                    aria-label="Search Pokemon"
+                    disabled
+                  >
+                  <button type="button" class="combobox-close" id="closePokemonDropdownBtn" aria-label="Close Pokemon search" hidden>X</button>
+                </div>
               </div>
               <div class="specialty-dropdown" id="pokemonDropdown" hidden></div>
             </div>
@@ -1190,15 +1298,18 @@
                   <div class="habitat-selected" id="habitatSelectedPokemon"></div>
                   <button type="button" class="secondary small" id="clearHabitatPokemonBtn">Clear</button>
                 </div>
-                <input
-                  id="habitatPokemonSearch"
-                  class="specialty-search"
-                  type="text"
-                  placeholder="Search Pokemon to add..."
-                  autocomplete="off"
-                  aria-label="Search Pokemon for habitat"
-                  disabled
-                >
+                <div class="combobox-row">
+                  <input
+                    id="habitatPokemonSearch"
+                    class="specialty-search"
+                    type="text"
+                    placeholder="Search Pokemon to add..."
+                    autocomplete="off"
+                    aria-label="Search Pokemon for habitat"
+                    disabled
+                  >
+                  <button type="button" class="combobox-close" id="closeHabitatDropdownBtn" aria-label="Close habitat Pokemon search" hidden>X</button>
+                </div>
               </div>
               <div class="specialty-dropdown" id="habitatPokemonDropdown" hidden></div>
             </div>
@@ -1295,6 +1406,12 @@ function intersect(a, b) {
   return a.filter((item) => setB.has(item)).sort((x, y) => x.localeCompare(y));
 }
 
+function syncComboboxCloseButtons() {
+  document.getElementById('closeSpecialtyDropdownBtn').hidden = !specialtyDropdownOpen;
+  document.getElementById('closePokemonDropdownBtn').hidden = !pokemonDropdownOpen;
+  document.getElementById('closeHabitatDropdownBtn').hidden = !habitatPokemonDropdownOpen;
+}
+
 function getAllSpecialties(data) {
   return Array.from(new Set(data.flatMap((item) => item.specialties || [])))
     .sort((a, b) => a.localeCompare(b));
@@ -1361,19 +1478,18 @@ function getHabitatScoreData(names) {
       score: null,
       pairReports: [],
       allSharedFavorites: [],
-      overlappingFavorites: [],
+      uniqueFavorites: [],
       specialtyCounts: [],
-      repeatedFlavor: null,
+      flavorCounts: [],
       profiles
     };
   }
 
   const pairReports = [];
-  const favoriteFrequency = {};
-  const flavorFrequency = {};
   const specialtyOwners = {};
   const favoriteOwners = {};
-  let totalPoints = 0;
+  const flavorOwners = {};
+  let totalPairStrength = 0;
   let pairCount = 0;
 
   profiles.forEach((profile) => {
@@ -1386,6 +1502,11 @@ function getHabitatScoreData(names) {
       if (!favoriteOwners[favorite]) favoriteOwners[favorite] = [];
       favoriteOwners[favorite].push(profile.name);
     });
+
+    if (profile.flavor) {
+      if (!flavorOwners[profile.flavor]) flavorOwners[profile.flavor] = [];
+      flavorOwners[profile.flavor].push(profile.name);
+    }
   });
 
   for (let i = 0; i < profiles.length; i++) {
@@ -1393,23 +1514,13 @@ function getHabitatScoreData(names) {
       const a = profiles[i];
       const b = profiles[j];
       const sharedFavorites = intersect(a.interests, b.interests);
-      const sameFlavor = a.flavor && b.flavor && a.flavor === b.flavor;
-      const pairPoints = sharedFavorites.length + (sameFlavor ? 1 : 0);
-      totalPoints += pairPoints;
+      const pairPoints = sharedFavorites.length;
+      totalPairStrength += Math.min(pairPoints, 3);
       pairCount += 1;
-
-      sharedFavorites.forEach((favorite) => {
-        favoriteFrequency[favorite] = (favoriteFrequency[favorite] || 0) + 1;
-      });
-
-      if (sameFlavor) {
-        flavorFrequency[a.flavor] = (flavorFrequency[a.flavor] || 0) + 1;
-      }
 
       pairReports.push({
         names: [a.name, b.name],
         sharedFavorites,
-        sameFlavor,
         pairPoints
       });
     }
@@ -1419,8 +1530,8 @@ function getHabitatScoreData(names) {
     .map((profile) => profile.interests)
     .reduce((acc, current, index) => index === 0 ? current.slice() : intersect(acc, current), []);
 
-  const overlappingFavorites = Object.entries(favoriteOwners)
-    .filter(([, owners]) => owners.length >= 2)
+  const uniqueFavorites = Object.entries(favoriteOwners)
+    .filter(([, owners]) => owners.length === 1)
     .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
     .map(([name, owners]) => ({ name, owners }));
 
@@ -1428,20 +1539,86 @@ function getHabitatScoreData(names) {
     .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
     .map(([name, owners]) => ({ name, owners }));
 
-  const repeatedFlavor = Object.entries(flavorFrequency)
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]?.[0] || null;
+  const flavorCounts = Object.entries(flavorOwners)
+    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
+    .map(([name, owners]) => ({ name, owners }));
 
-  const averagePoints = totalPoints / pairCount;
-  const score = Math.round((averagePoints / 6) * 100);
+  const averagePairStrength = totalPairStrength / pairCount;
+  const baseScore = averagePairStrength / 3;
+  const groupCohesion = profiles.length <= 2
+    ? 1
+    : 0.8 + (Math.min(allSharedFavorites.length, 3) / 3) * 0.2;
+  const score = Math.round(baseScore * groupCohesion * 100);
 
   return {
     score,
     pairReports: pairReports.sort((a, b) => b.pairPoints - a.pairPoints || a.names.join(', ').localeCompare(b.names.join(', '))),
     allSharedFavorites,
-    overlappingFavorites,
+    uniqueFavorites,
     specialtyCounts,
-    repeatedFlavor
+    flavorCounts
   };
+}
+
+function getHabitatRating(data) {
+  if (!data || data.score === null) {
+    return {
+      label: 'Needs 2 Pokemon',
+      className: 'pending'
+    };
+  }
+
+  const pairReports = data.pairReports || [];
+  const allPerfectPairs = pairReports.length > 0 && pairReports.every((pair) => pair.pairPoints >= 5);
+  const fullyAlignedGroup = (data.allSharedFavorites || []).length >= 5;
+
+  if (allPerfectPairs && fullyAlignedGroup) {
+    return {
+      label: 'Perfect',
+      className: 'perfect'
+    };
+  }
+
+  if (data.score >= 88) {
+    return {
+      label: 'Ultra',
+      className: 'ultra'
+    };
+  }
+
+  if (data.score >= 72) {
+    return {
+      label: 'Great',
+      className: 'great'
+    };
+  }
+
+  if (data.score >= 56) {
+    return {
+      label: 'Good',
+      className: 'good'
+    };
+  }
+
+  if (data.score >= 36) {
+    return {
+      label: 'Mixed',
+      className: 'mixed'
+    };
+  }
+
+  return {
+    label: 'Rough',
+    className: 'rough'
+  };
+}
+
+function renderHabitatRating(rating, extraClass) {
+  const classes = ['habitat-rating', rating.className];
+  if (extraClass) {
+    classes.push(extraClass);
+  }
+  return '<div class="' + classes.join(' ') + '">' + escapeHtml(rating.label) + '</div>';
 }
 
 function readHabitats() {
@@ -1564,6 +1741,7 @@ function renderHabitatPokemonSuggestions() {
   const input = document.getElementById('habitatPokemonSearch');
   const dropdown = document.getElementById('habitatPokemonDropdown');
   const available = getAvailableHabitatPokemon(input.value);
+  syncComboboxCloseButtons();
 
   if (!habitatPokemonDropdownOpen) {
     dropdown.hidden = true;
@@ -1614,10 +1792,11 @@ function addHabitatPokemon(name) {
 function getHabitatToastPayload(message) {
   const scoreData = getHabitatScoreData(habitatPokemonNames);
   const habitatName = document.getElementById('habitatName').value.trim();
+  const rating = getHabitatRating(scoreData);
   return {
     title: habitatName || 'Current Habitat',
     status: '',
-    score: scoreData.score === null ? 'Need 2 Pokemon to score coexistence' : scoreData.score + '/100 coexistence',
+    rating,
     pokemon: habitatPokemonNames.slice()
   };
 }
@@ -1640,7 +1819,7 @@ function renderHabitatToast(message) {
   titleEl.textContent = payload.title;
   statusEl.textContent = payload.status;
   bodyEl.innerHTML =
-    '<div class="habitat-toast-score">' + escapeHtml(payload.score) + '</div>' +
+    renderHabitatRating(payload.rating, 'habitat-toast-score') +
     '<div class="tag-list">' + (payload.pokemon.length
       ? payload.pokemon.map((name) => {
         return '<span class="chip">' +
@@ -1856,13 +2035,13 @@ function renderHabitatReport() {
   const data = getHabitatScoreData(habitatPokemonNames);
 
   if (habitatPokemonNames.length < 2 || data.score === null) {
-    scoreEl.textContent = '';
+    scoreEl.innerHTML = '';
     reportEl.innerHTML =
       '<div class="report-block"><strong>Status</strong>Add at least 2 Pokemon to score coexistence.</div>';
     return;
   }
 
-  scoreEl.textContent = data.score + '/100 coexistence score';
+  scoreEl.innerHTML = renderHabitatRating(getHabitatRating(data));
 
   const allSharedFavoriteItems = data.allSharedFavorites.map((favorite) => ({
     name: favorite,
@@ -1871,7 +2050,8 @@ function renderHabitatReport() {
 
   const highlights = [
     '<div class="report-block"><strong>Favorites shared by all</strong>' + renderCountedTags(allSharedFavoriteItems, 'shared') + '</div>',
-    '<div class="report-block"><strong>Overlapping favorites</strong>' + renderCountedTags(data.overlappingFavorites, 'shared') + '</div>',
+    '<div class="report-block"><strong>Unique favorites</strong>' + renderCountedTags(data.uniqueFavorites, 'unique') + '</div>',
+    '<div class="report-block"><strong>Favorite flavors</strong>' + renderCountedTags(data.flavorCounts, 'flavor') + '</div>',
     '<div class="report-block"><strong>Habitat specialties</strong>' + renderCountedTags(data.specialtyCounts, 'specialty') + '</div>'
   ];
 
@@ -1892,6 +2072,7 @@ function clearHabitatDraft() {
   syncHabitatActions();
   renderHabitatReport();
   renderHabitatToast('');
+  syncComboboxCloseButtons();
 }
 
 async function handleNewHabitat() {
@@ -1939,6 +2120,7 @@ function renderHabitatList() {
 
   container.innerHTML = habitats.map((habitat) => {
     const scoreData = getHabitatScoreData(habitat.pokemon || []);
+    const rating = getHabitatRating(scoreData);
     const title = habitat.name || 'Untitled habitat';
     return '<article class="habitat-item">' +
       '<div class="habitat-item-top">' +
@@ -1953,7 +2135,7 @@ function renderHabitatList() {
       '</div>' +
       '<div class="habitat-pokemon-row">' +
         '<div class="habitat-pokemon-list">' + habitat.pokemon.map((name) => '<span class="tag pokemon">' + escapeHtml(name) + '</span>').join('') + '</div>' +
-        '<div class="habitat-mini-score">' + (scoreData.score === null ? 'Need 2 Pokemon' : scoreData.score + '/100 coexistence') + '</div>' +
+        renderHabitatRating(rating, 'habitat-mini-score') +
       '</div>' +
     '</article>';
   }).join('');
@@ -2153,6 +2335,7 @@ function getAvailableSpecialties(query) {
 function renderSelectedSpecialtyChips() {
   const chips = document.getElementById('selectedSpecialties');
   const wrap = document.getElementById('specialtyCombobox');
+  const row = document.getElementById('specialtyChipRow');
 
   chips.innerHTML = selectedSpecialties.map((specialty) => {
     return '<span class="chip">' +
@@ -2162,6 +2345,7 @@ function renderSelectedSpecialtyChips() {
   }).join('');
 
   wrap.classList.toggle('has-chips', selectedSpecialties.length > 0);
+  row.hidden = selectedSpecialties.length === 0;
 
   chips.querySelectorAll('[data-remove-specialty]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -2174,6 +2358,7 @@ function renderSpecialtySuggestions() {
   const input = document.getElementById('specialtySearch');
   const dropdown = document.getElementById('specialtyDropdown');
   const available = getAvailableSpecialties(input.value);
+  syncComboboxCloseButtons();
 
   if (!specialtyDropdownOpen) {
     dropdown.hidden = true;
@@ -2340,6 +2525,7 @@ function renderPokemonSuggestions() {
   const input = document.getElementById('pokemonSearch');
   const dropdown = document.getElementById('pokemonDropdown');
   const available = getAvailablePokemon(input.value);
+  syncComboboxCloseButtons();
 
   if (!pokemonDropdownOpen) {
     dropdown.hidden = true;
@@ -2454,7 +2640,7 @@ function updateFilterCount() {
   const countEl = document.getElementById('filterCount');
 
   if (selected.length === 0) {
-    countEl.textContent = 'No specialty filter active. ' + DATA.length + ' Pokemon available.';
+    countEl.textContent = 'Any specialties. ' + DATA.length + ' Pokemon available.';
     return;
   }
 
@@ -2618,6 +2804,7 @@ function resetSearch() {
   document.getElementById('liveFilters').innerHTML = '';
   document.getElementById('results').innerHTML = '';
   document.getElementById('resultsCount').textContent = 'No search yet.';
+  syncComboboxCloseButtons();
 }
 
 function searchCompatibility() {
@@ -2723,6 +2910,8 @@ async function loadData() {
     enableUi();
     renderHabitatList();
     renderHabitatReport();
+    renderHabitatPreviewTrigger();
+    syncComboboxCloseButtons();
 
     document.getElementById('matchScope').value = 'all';
     status.textContent = 'Loaded ' + DATA.length + ' Pokemon';
@@ -2737,8 +2926,23 @@ document.getElementById('searchBtn').addEventListener('click', searchCompatibili
 document.getElementById('matchScope').addEventListener('change', () => {
   syncMinSharedOptions();
 });
+document.getElementById('closeSpecialtyDropdownBtn').addEventListener('click', (event) => {
+  event.stopPropagation();
+  specialtyDropdownOpen = false;
+  document.getElementById('specialtyDropdown').hidden = true;
+});
+document.getElementById('closePokemonDropdownBtn').addEventListener('click', (event) => {
+  event.stopPropagation();
+  pokemonDropdownOpen = false;
+  document.getElementById('pokemonDropdown').hidden = true;
+});
 document.getElementById('saveHabitatBtn').addEventListener('click', saveHabitat);
 document.getElementById('newHabitatBtn').addEventListener('click', handleNewHabitat);
+document.getElementById('closeHabitatDropdownBtn').addEventListener('click', (event) => {
+  event.stopPropagation();
+  habitatPokemonDropdownOpen = false;
+  document.getElementById('habitatPokemonDropdown').hidden = true;
+});
 document.getElementById('clearHabitatPokemonBtn').addEventListener('click', () => {
   habitatPokemonNames = [];
   document.getElementById('habitatPokemonSearch').value = '';
