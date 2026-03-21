@@ -315,10 +315,28 @@
     color: var(--muted);
   }
 
+  .specialty-search:disabled {
+    color: rgba(24, 20, 16, 0.45);
+  }
+
   .combobox-row {
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .dropdown-caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid var(--ink);
+    flex: 0 0 auto;
+    opacity: 0.8;
+  }
+
+  .dropdown-caret[hidden] {
+    display: none;
   }
 
   .combobox-close {
@@ -329,8 +347,8 @@
     border: 2px solid var(--line);
     background: #fff;
     color: var(--ink);
-    box-shadow: none;
     font-size: 12px;
+    font-weight: 600;
     flex: 0 0 auto;
   }
 
@@ -417,6 +435,18 @@
     gap: 8px;
   }
 
+  .live-filter-group {
+    display: grid;
+    gap: 6px;
+  }
+
+  .live-filter-group-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
   .toggle-tag {
     width: auto;
     min-width: 0;
@@ -450,6 +480,17 @@
   .toggle-tag.flavor-filter:hover,
   .toggle-tag.flavor-filter:focus {
     background: var(--flavor-hover);
+    color: var(--ink);
+  }
+
+  .toggle-tag.ideal-habitat-filter.active {
+    background: #d7bf9d;
+    color: var(--ink);
+  }
+
+  .toggle-tag.ideal-habitat-filter:hover,
+  .toggle-tag.ideal-habitat-filter:focus {
+    background: #c9af89;
     color: var(--ink);
   }
 
@@ -581,6 +622,13 @@
     opacity: 1;
   }
 
+  .tag.ideal-habitat {
+    background: #d7bf9d;
+    border-style: solid;
+    color: var(--ink);
+    opacity: 1;
+  }
+
   .result-list {
     display: grid;
     gap: 14px;
@@ -663,6 +711,36 @@
     min-width: 0;
   }
 
+  .advanced-toggle {
+    width: auto;
+    min-width: 0;
+  }
+
+  .advanced-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .advanced-toggle-row label {
+    margin-bottom: 0;
+  }
+
+  .advanced-filters {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .advanced-filters[hidden] {
+    display: none;
+  }
+
+  .advanced-filters .field {
+    margin-bottom: 0;
+  }
+
   .habitat-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
@@ -738,17 +816,17 @@
   .habitat-rating {
     display: inline-flex;
     align-items: center;
+    gap: 8px;
     min-height: 34px;
     padding: 7px 12px;
     border: 2px solid var(--line);
-    font-family: "Press Start 2P", monospace;
     font-size: 12px;
-    line-height: 1.4;
+    font-weight: 600;
+    line-height: 1.3;
   }
 
   .habitat-rating.perfect {
     background: #bff7b9;
-    box-shadow: 0 0 0 3px rgba(127, 176, 105, 0.18);
   }
 
   .habitat-rating.ultra {
@@ -777,8 +855,6 @@
   }
 
   .habitat-score .habitat-rating {
-    font-size: 20px;
-    line-height: 1.6;
     margin: 0 0 12px;
   }
 
@@ -968,6 +1044,32 @@
     gap: 10px;
   }
 
+  .habitat-toast-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .habitat-toast-bottom .tag-list {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-top: 0;
+  }
+
+  .habitat-toast-go {
+    width: auto;
+    min-width: 0;
+    min-height: 30px;
+    padding: 4px 8px;
+    border: 2px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 600;
+    flex: 0 0 auto;
+  }
+
   .habitat-toast-score {
     display: inline-flex;
     align-items: center;
@@ -981,8 +1083,60 @@
   }
 
   .habitat-toast-score.habitat-rating {
-    font-family: "Press Start 2P", monospace;
-    font-weight: 400;
+    font-weight: 600;
+  }
+
+  .rank-bars {
+    display: inline-flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 1px;
+    height: 11px;
+    flex: 0 0 auto;
+  }
+
+  .rank-bars span {
+    width: 10px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(24, 20, 16, 0.14);
+    opacity: 0.32;
+  }
+
+  .rank-bars span.on {
+    opacity: 1;
+    background: currentColor;
+  }
+
+  .rank-label {
+    white-space: nowrap;
+  }
+
+  .rank-icon {
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+    transform: translateY(-1px);
+  }
+
+  .rank-icon .sparkle-main,
+  .rank-icon .sparkle-small {
+    position: absolute;
+    line-height: 1;
+  }
+
+  .rank-icon .sparkle-main {
+    top: -2px;
+    left: 0;
+    font-size: 15px;
+  }
+
+  .rank-icon .sparkle-small {
+    right: 2px;
+    bottom: 0;
+    font-size: 9px;
   }
 
   .habitat-toast-close {
@@ -993,8 +1147,8 @@
     border: 2px solid var(--line);
     background: #fff;
     color: var(--ink);
-    box-shadow: none;
     font-size: 12px;
+    font-weight: 600;
   }
 
   .habitat-toast .chip {
@@ -1211,27 +1365,56 @@
 
         <div class="panel-section">
           <div class="field">
-            <label for="specialtySearch">Specialties</label>
-            <div class="specialty-picker">
-              <div class="specialty-input-wrap" id="specialtyCombobox">
-                <div class="specialty-chip-row" id="specialtyChipRow" hidden>
-                  <div class="specialty-chips" id="selectedSpecialties"></div>
-                  <button type="button" class="combobox-close" id="closeSpecialtyDropdownBtn" aria-label="Close specialties" hidden>X</button>
-                </div>
-                <div class="combobox-row">
-                  <input
-                    id="specialtySearch"
-                    class="specialty-search"
-                    type="text"
-                    placeholder="Any"
-                    autocomplete="off"
-                    aria-label="Search specialties"
-                  >
+            <div class="advanced-toggle-row">
+              <label>Advanced filters</label>
+              <button type="button" class="secondary small advanced-toggle" id="advancedFiltersToggle">Off</button>
+            </div>
+            <div class="advanced-filters" id="advancedFilters" hidden>
+              <div class="field">
+                <label for="specialtySearch">Specialties</label>
+                <div class="specialty-picker">
+                  <div class="specialty-input-wrap" id="specialtyCombobox">
+                    <div class="specialty-chip-row" id="specialtyChipRow" hidden>
+                      <div class="specialty-chips" id="selectedSpecialties"></div>
+                    </div>
+                    <div class="combobox-row">
+                      <input
+                        id="specialtySearch"
+                        class="specialty-search"
+                        type="text"
+                        placeholder="Any"
+                        autocomplete="off"
+                        aria-label="Search specialties"
+                      >
+                      <span class="dropdown-caret" id="specialtyCaret" aria-hidden="true"></span>
+                      <button type="button" class="combobox-close" id="closeSpecialtyDropdownBtn" aria-label="Close specialties" hidden>X</button>
+                    </div>
+                  </div>
+                  <div class="specialty-dropdown" id="specialtyDropdown" hidden></div>
                 </div>
               </div>
-              <div class="specialty-dropdown" id="specialtyDropdown" hidden></div>
+              <div class="field">
+                <label for="idealHabitatSearch">Ideal habitat</label>
+                <div class="specialty-picker">
+                  <div class="specialty-input-wrap" id="idealHabitatCombobox">
+                    <div class="combobox-row">
+                      <input
+                        id="idealHabitatSearch"
+                        class="specialty-search"
+                        type="text"
+                        placeholder="Any"
+                        autocomplete="off"
+                        aria-label="Search ideal habitat"
+                        disabled
+                      >
+                      <span class="dropdown-caret" id="idealHabitatCaret" aria-hidden="true"></span>
+                      <button type="button" class="combobox-close" id="closeIdealHabitatDropdownBtn" aria-label="Close ideal habitat search" hidden>X</button>
+                    </div>
+                  </div>
+                  <div class="specialty-dropdown" id="idealHabitatDropdown" hidden></div>
+                </div>
+              </div>
             </div>
-            <div class="count" id="filterCount" style="margin-top:8px;">Any specialties. 0 Pokemon available.</div>
           </div>
         </div>
 
@@ -1250,6 +1433,7 @@
                     aria-label="Search Pokemon"
                     disabled
                   >
+                  <span class="dropdown-caret" id="pokemonCaret" aria-hidden="true"></span>
                   <button type="button" class="combobox-close" id="closePokemonDropdownBtn" aria-label="Close Pokemon search" hidden>X</button>
                 </div>
               </div>
@@ -1258,14 +1442,50 @@
           </div>
           <div class="field">
             <label for="matchScope">Compare against</label>
-            <select id="matchScope" disabled>
+            <div class="specialty-picker">
+              <div class="specialty-input-wrap" id="matchScopeCombobox">
+                <div class="combobox-row">
+                  <input
+                    id="matchScopeDisplay"
+                    class="specialty-search"
+                    type="text"
+                    value="All Pokemon"
+                    readonly
+                    aria-label="Compare against"
+                    disabled
+                  >
+                  <span class="dropdown-caret" id="matchScopeCaret" aria-hidden="true"></span>
+                  <button type="button" class="combobox-close" id="closeMatchScopeDropdownBtn" aria-label="Close compare against" hidden>X</button>
+                </div>
+              </div>
+              <div class="specialty-dropdown" id="matchScopeDropdown" hidden></div>
+            </div>
+            <select id="matchScope" disabled hidden>
               <option value="all" selected>All Pokemon</option>
               <option value="filtered">Only filtered Pokemon</option>
             </select>
           </div>
           <div class="field">
             <label for="minShared">Minimum shared favorites</label>
-            <select id="minShared" disabled></select>
+            <div class="specialty-picker">
+              <div class="specialty-input-wrap" id="minSharedCombobox">
+                <div class="combobox-row">
+                  <input
+                    id="minSharedDisplay"
+                    class="specialty-search"
+                    type="text"
+                    value=""
+                    readonly
+                    aria-label="Minimum shared favorites"
+                    disabled
+                  >
+                  <span class="dropdown-caret" id="minSharedCaret" aria-hidden="true"></span>
+                  <button type="button" class="combobox-close" id="closeMinSharedDropdownBtn" aria-label="Close minimum shared favorites" hidden>X</button>
+                </div>
+              </div>
+              <div class="specialty-dropdown" id="minSharedDropdown" hidden></div>
+            </div>
+            <select id="minShared" disabled hidden></select>
           </div>
           <div class="field">
             <button type="button" class="primary" id="searchBtn" disabled>Find matches</button>
@@ -1373,16 +1593,24 @@
 <script>
 let DATA = [];
 let ALL_SPECIALTIES = [];
+let ALL_IDEAL_HABITATS = [];
 let selectedSpecialties = [];
+let selectedIdealHabitat = '';
 let activeSuggestionIndex = -1;
 let specialtyDropdownOpen = false;
+let activeIdealHabitatSuggestionIndex = -1;
+let idealHabitatDropdownOpen = false;
+let matchScopeDropdownOpen = false;
+let minSharedDropdownOpen = false;
 let selectedPokemonName = '';
 let activePokemonSuggestionIndex = -1;
 let pokemonDropdownOpen = false;
 let latestSearchState = null;
 let activeResultFavoriteFilters = [];
 let activeResultFlavorFilter = false;
+let activeResultIdealHabitatFilter = false;
 let activeTab = 'search';
+let advancedFiltersOpen = false;
 let habitatPokemonNames = [];
 let habitatPokemonDropdownOpen = false;
 let activeHabitatPokemonSuggestionIndex = -1;
@@ -1407,14 +1635,45 @@ function intersect(a, b) {
 }
 
 function syncComboboxCloseButtons() {
-  document.getElementById('closeSpecialtyDropdownBtn').hidden = !specialtyDropdownOpen;
+  document.getElementById('closeSpecialtyDropdownBtn').hidden =
+    !specialtyDropdownOpen || document.activeElement !== document.getElementById('specialtySearch');
+  document.getElementById('specialtyCaret').hidden = !document.getElementById('closeSpecialtyDropdownBtn').hidden;
+  document.getElementById('closeIdealHabitatDropdownBtn').hidden = !idealHabitatDropdownOpen;
+  document.getElementById('closeMatchScopeDropdownBtn').hidden = !matchScopeDropdownOpen;
+  document.getElementById('closeMinSharedDropdownBtn').hidden = !minSharedDropdownOpen;
   document.getElementById('closePokemonDropdownBtn').hidden = !pokemonDropdownOpen;
+  document.getElementById('pokemonCaret').hidden = !document.getElementById('closePokemonDropdownBtn').hidden;
   document.getElementById('closeHabitatDropdownBtn').hidden = !habitatPokemonDropdownOpen;
+  document.getElementById('idealHabitatCaret').hidden = !document.getElementById('closeIdealHabitatDropdownBtn').hidden;
+  document.getElementById('matchScopeCaret').hidden = !document.getElementById('closeMatchScopeDropdownBtn').hidden;
+  document.getElementById('minSharedCaret').hidden = !document.getElementById('closeMinSharedDropdownBtn').hidden;
+}
+
+function syncReadonlyDropdownDisplays() {
+  const matchScope = document.getElementById('matchScope');
+  const minShared = document.getElementById('minShared');
+  const matchScopeDisplay = document.getElementById('matchScopeDisplay');
+  const minSharedDisplay = document.getElementById('minSharedDisplay');
+
+  matchScopeDisplay.value = matchScope.options[matchScope.selectedIndex]?.textContent || '';
+  minSharedDisplay.value = minShared.options[minShared.selectedIndex]?.textContent || '';
 }
 
 function getAllSpecialties(data) {
-  return Array.from(new Set(data.flatMap((item) => item.specialties || [])))
+  return Array.from(new Set(
+    data
+      .flatMap((item) => item.specialties || [])
+      .filter((item) => item && item !== '???')
+  ))
     .sort((a, b) => a.localeCompare(b));
+}
+
+function getAllIdealHabitats(data) {
+  return Array.from(new Set(
+    data
+      .map((item) => typeof item.ideal_habitat === 'string' ? item.ideal_habitat.trim() : '')
+      .filter((item) => item && item !== '???')
+  )).sort((a, b) => a.localeCompare(b));
 }
 
 function getSelectedSpecialties() {
@@ -1435,6 +1694,11 @@ function renderSpecialtyTags(items) {
   }).join('') + '</div>';
 }
 
+function renderIdealHabitatTag(idealHabitat) {
+  if (!idealHabitat) return '';
+  return '<div class="tag-list"><span class="tag ideal-habitat">' + escapeHtml(idealHabitat) + '</span></div>';
+}
+
 function renderFlavorTag(flavor) {
   return '<div class="tag-list"><span class="tag flavor">' + escapeHtml(flavor) + '</span></div>';
 }
@@ -1442,24 +1706,159 @@ function renderFlavorTag(flavor) {
 function renderFavoriteFilterTags(items) {
   return items.map((item) => {
     const activeClass = activeResultFavoriteFilters.includes(item) ? ' active' : '';
-    return '<button type="button" class="tag toggle-tag' + activeClass + '" data-favorite-filter="' + escapeHtml(item) + '">' + escapeHtml(item) + '</button>';
+    const check = activeClass ? ' ✓' : '';
+    return '<button type="button" class="tag toggle-tag' + activeClass + '" data-favorite-filter="' + escapeHtml(item) + '">' + escapeHtml(item) + check + '</button>';
   }).join('');
 }
 
 function renderFlavorFilterTag(flavor) {
   const activeClass = activeResultFlavorFilter ? ' active' : '';
-  return '<button type="button" class="tag toggle-tag flavor-filter' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + '</button>';
+  const check = activeClass ? ' ✓' : '';
+  return '<button type="button" class="tag toggle-tag flavor-filter' + activeClass + '" data-flavor-filter="' + escapeHtml(flavor) + '">' + escapeHtml(flavor) + check + '</button>';
+}
+
+function getAvailableIdealHabitats(query) {
+  const normalizedQuery = query.trim().toLowerCase() === selectedIdealHabitat.trim().toLowerCase()
+    ? ''
+    : query.trim().toLowerCase();
+  return ALL_IDEAL_HABITATS.filter((habitat) => habitat.toLowerCase().includes(normalizedQuery));
+}
+
+function renderIdealHabitatOptions() {
+  const input = document.getElementById('idealHabitatSearch');
+  input.value = selectedIdealHabitat || '';
+  renderIdealHabitatSuggestions();
+}
+
+function renderMatchScopeSuggestions() {
+  const dropdown = document.getElementById('matchScopeDropdown');
+  const select = document.getElementById('matchScope');
+
+  syncReadonlyDropdownDisplays();
+  syncComboboxCloseButtons();
+
+  if (!matchScopeDropdownOpen) {
+    dropdown.hidden = true;
+    return;
+  }
+
+  dropdown.innerHTML = Array.from(select.options).map((option) => {
+    const activeClass = option.selected ? ' active' : '';
+    return '<button type="button" class="specialty-suggestion' + activeClass + '" data-match-scope="' + escapeHtml(option.value) + '">' + escapeHtml(option.textContent) + '</button>';
+  }).join('');
+
+  dropdown.hidden = false;
+
+  dropdown.querySelectorAll('[data-match-scope]').forEach((button) => {
+    button.addEventListener('click', () => {
+      selectMatchScope(button.getAttribute('data-match-scope'));
+    });
+  });
+}
+
+function selectMatchScope(value) {
+  const select = document.getElementById('matchScope');
+  select.value = value;
+  matchScopeDropdownOpen = false;
+  renderMatchScopeSuggestions();
+  syncMinSharedOptions();
+}
+
+function renderMinSharedSuggestions() {
+  const dropdown = document.getElementById('minSharedDropdown');
+  const select = document.getElementById('minShared');
+
+  syncReadonlyDropdownDisplays();
+  syncComboboxCloseButtons();
+
+  if (!minSharedDropdownOpen) {
+    dropdown.hidden = true;
+    return;
+  }
+
+  dropdown.innerHTML = Array.from(select.options).map((option) => {
+    const activeClass = option.selected ? ' active' : '';
+    return '<button type="button" class="specialty-suggestion' + activeClass + '" data-min-shared="' + escapeHtml(option.value) + '">' + escapeHtml(option.textContent) + '</button>';
+  }).join('');
+
+  dropdown.hidden = false;
+
+  dropdown.querySelectorAll('[data-min-shared]').forEach((button) => {
+    button.addEventListener('click', () => {
+      selectMinShared(button.getAttribute('data-min-shared'));
+    });
+  });
+}
+
+function selectMinShared(value) {
+  const select = document.getElementById('minShared');
+  select.value = value;
+  minSharedDropdownOpen = false;
+  renderMinSharedSuggestions();
+}
+
+function renderIdealHabitatSuggestions() {
+  const input = document.getElementById('idealHabitatSearch');
+  const dropdown = document.getElementById('idealHabitatDropdown');
+  const available = getAvailableIdealHabitats(input.value);
+  syncComboboxCloseButtons();
+
+  if (!idealHabitatDropdownOpen) {
+    dropdown.hidden = true;
+    return;
+  }
+
+  const options = ['Any'].concat(available);
+
+  if (activeIdealHabitatSuggestionIndex >= options.length) {
+    activeIdealHabitatSuggestionIndex = 0;
+  }
+
+  dropdown.innerHTML = options.map((habitat, index) => {
+    const activeClass = index === activeIdealHabitatSuggestionIndex ? ' active' : '';
+    const value = habitat === 'Any' ? '' : habitat;
+    return '<button type="button" class="specialty-suggestion' + activeClass + '" data-ideal-habitat="' + escapeHtml(value) + '">' + escapeHtml(habitat) + '</button>';
+  }).join('');
+
+  dropdown.hidden = false;
+
+  dropdown.querySelectorAll('[data-ideal-habitat]').forEach((button) => {
+    button.addEventListener('click', () => {
+      selectIdealHabitat(button.getAttribute('data-ideal-habitat'));
+    });
+  });
+}
+
+function selectIdealHabitat(value) {
+  selectedIdealHabitat = value || '';
+  document.getElementById('idealHabitatSearch').value = selectedIdealHabitat;
+  idealHabitatDropdownOpen = false;
+  activeIdealHabitatSuggestionIndex = -1;
+  renderIdealHabitatSuggestions();
+  renderSpecialtySuggestions();
+  renderPokemonSelect();
+}
+
+function syncAdvancedFiltersUi() {
+  const panel = document.getElementById('advancedFilters');
+  const button = document.getElementById('advancedFiltersToggle');
+  panel.hidden = !advancedFiltersOpen;
+  button.textContent = advancedFiltersOpen ? 'On' : 'Off';
 }
 
 function getPokemonProfile(pokemon) {
   const favorites = Array.isArray(pokemon.favorites) ? pokemon.favorites.slice() : [];
-  const flavor = favorites.length ? favorites[favorites.length - 1] : null;
-  const interests = favorites.slice(0, -1);
+  const hasSeparateFlavor = typeof pokemon.favorite_flavor === 'string' && pokemon.favorite_flavor.trim() !== '';
+  const flavor = hasSeparateFlavor
+    ? pokemon.favorite_flavor
+    : (favorites.length ? favorites[favorites.length - 1] : null);
+  const interests = hasSeparateFlavor ? favorites : favorites.slice(0, -1);
 
   return {
     ...pokemon,
     interests,
-    flavor
+    flavor,
+    idealHabitat: typeof pokemon.ideal_habitat === 'string' && pokemon.ideal_habitat.trim() !== '' ? pokemon.ideal_habitat : null
   };
 }
 
@@ -1479,6 +1878,7 @@ function getHabitatScoreData(names) {
       pairReports: [],
       allSharedFavorites: [],
       uniqueFavorites: [],
+      idealHabitatCounts: [],
       specialtyCounts: [],
       flavorCounts: [],
       profiles
@@ -1489,7 +1889,9 @@ function getHabitatScoreData(names) {
   const specialtyOwners = {};
   const favoriteOwners = {};
   const flavorOwners = {};
+  const idealHabitatOwners = {};
   let totalPairStrength = 0;
+  let totalIdealHabitatStrength = 0;
   let pairCount = 0;
 
   profiles.forEach((profile) => {
@@ -1507,6 +1909,11 @@ function getHabitatScoreData(names) {
       if (!flavorOwners[profile.flavor]) flavorOwners[profile.flavor] = [];
       flavorOwners[profile.flavor].push(profile.name);
     }
+
+    if (profile.idealHabitat) {
+      if (!idealHabitatOwners[profile.idealHabitat]) idealHabitatOwners[profile.idealHabitat] = [];
+      idealHabitatOwners[profile.idealHabitat].push(profile.name);
+    }
   });
 
   for (let i = 0; i < profiles.length; i++) {
@@ -1514,13 +1921,16 @@ function getHabitatScoreData(names) {
       const a = profiles[i];
       const b = profiles[j];
       const sharedFavorites = intersect(a.interests, b.interests);
+      const sameIdealHabitat = a.idealHabitat && b.idealHabitat && a.idealHabitat === b.idealHabitat;
       const pairPoints = sharedFavorites.length;
       totalPairStrength += Math.min(pairPoints, 3);
+      totalIdealHabitatStrength += sameIdealHabitat ? 1 : 0;
       pairCount += 1;
 
       pairReports.push({
         names: [a.name, b.name],
         sharedFavorites,
+        sameIdealHabitat,
         pairPoints
       });
     }
@@ -1543,18 +1953,25 @@ function getHabitatScoreData(names) {
     .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
     .map(([name, owners]) => ({ name, owners }));
 
+  const idealHabitatCounts = Object.entries(idealHabitatOwners)
+    .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]))
+    .map(([name, owners]) => ({ name, owners }));
+
   const averagePairStrength = totalPairStrength / pairCount;
-  const baseScore = averagePairStrength / 3;
-  const groupCohesion = profiles.length <= 2
+  const favoriteScore = Math.round(((averagePairStrength / 3) * (profiles.length <= 2
     ? 1
-    : 0.8 + (Math.min(allSharedFavorites.length, 3) / 3) * 0.2;
-  const score = Math.round(baseScore * groupCohesion * 100);
+    : 0.8 + (Math.min(allSharedFavorites.length, 3) / 3) * 0.2)) * 100);
+  const idealHabitatScore = Math.round((totalIdealHabitatStrength / pairCount) * 100);
+  const score = Math.round((favoriteScore * 0.5) + (idealHabitatScore * 0.5));
 
   return {
     score,
+    favoriteScore,
+    idealHabitatScore,
     pairReports: pairReports.sort((a, b) => b.pairPoints - a.pairPoints || a.names.join(', ').localeCompare(b.names.join(', '))),
     allSharedFavorites,
     uniqueFavorites,
+    idealHabitatCounts,
     specialtyCounts,
     flavorCounts
   };
@@ -1564,52 +1981,61 @@ function getHabitatRating(data) {
   if (!data || data.score === null) {
     return {
       label: 'Needs 2 Pokemon',
-      className: 'pending'
+      className: 'pending',
+      level: 0
     };
   }
 
   const pairReports = data.pairReports || [];
   const allPerfectPairs = pairReports.length > 0 && pairReports.every((pair) => pair.pairPoints >= 5);
   const fullyAlignedGroup = (data.allSharedFavorites || []).length >= 5;
+  const allSameIdealHabitat = (data.idealHabitatCounts || []).length === 1;
 
-  if (allPerfectPairs && fullyAlignedGroup) {
+  if (allPerfectPairs && fullyAlignedGroup && allSameIdealHabitat) {
     return {
-      label: 'Perfect',
-      className: 'perfect'
+      label: 'Master',
+      className: 'perfect',
+      level: 4,
+      icon: 'autoawesome'
     };
   }
 
   if (data.score >= 88) {
     return {
       label: 'Ultra',
-      className: 'ultra'
+      className: 'ultra',
+      level: 4
     };
   }
 
   if (data.score >= 72) {
     return {
       label: 'Great',
-      className: 'great'
+      className: 'great',
+      level: 3
     };
   }
 
   if (data.score >= 56) {
     return {
       label: 'Good',
-      className: 'good'
+      className: 'good',
+      level: 2
     };
   }
 
   if (data.score >= 36) {
     return {
-      label: 'Mixed',
-      className: 'mixed'
+      label: 'Poor',
+      className: 'mixed',
+      level: 1
     };
   }
 
   return {
-    label: 'Rough',
-    className: 'rough'
+    label: 'Bad',
+    className: 'rough',
+    level: 0
   };
 }
 
@@ -1618,7 +2044,16 @@ function renderHabitatRating(rating, extraClass) {
   if (extraClass) {
     classes.push(extraClass);
   }
-  return '<div class="' + classes.join(' ') + '">' + escapeHtml(rating.label) + '</div>';
+  const marker = rating.icon === 'autoawesome'
+    ? '<span class="rank-icon" aria-hidden="true"><span class="sparkle-main">✦</span><span class="sparkle-small">✦</span></span>'
+    : '<span class="rank-bars" aria-hidden="true">' + Array.from({ length: 4 }, (_, index) => {
+      const activeClass = index < rating.level ? ' on' : '';
+      return '<span class="' + activeClass.trim() + '"></span>';
+    }).join('') + '</span>';
+  return '<div class="' + classes.join(' ') + '">' +
+    marker +
+    '<span class="rank-label">' + escapeHtml(rating.label) + '</span>' +
+  '</div>';
 }
 
 function readHabitats() {
@@ -1820,14 +2255,17 @@ function renderHabitatToast(message) {
   statusEl.textContent = payload.status;
   bodyEl.innerHTML =
     renderHabitatRating(payload.rating, 'habitat-toast-score') +
-    '<div class="tag-list">' + (payload.pokemon.length
-      ? payload.pokemon.map((name) => {
-        return '<span class="chip">' +
-          '<span>' + escapeHtml(name) + '</span>' +
-          '<button type="button" data-remove-toast-pokemon="' + escapeHtml(name) + '" aria-label="Remove ' + escapeHtml(name) + '">x</button>' +
-        '</span>';
-      }).join('')
-      : '<span class="muted">No Pokemon in the current habitat yet.</span>') + '</div>';
+    '<div class="habitat-toast-bottom">' +
+      '<div class="tag-list">' + (payload.pokemon.length
+        ? payload.pokemon.map((name) => {
+          return '<span class="chip">' +
+            '<span>' + escapeHtml(name) + '</span>' +
+            '<button type="button" data-remove-toast-pokemon="' + escapeHtml(name) + '" aria-label="Remove ' + escapeHtml(name) + '">x</button>' +
+          '</span>';
+        }).join('')
+        : '<span class="muted">No Pokemon in the current habitat yet.</span>') + '</div>' +
+      '<button type="button" class="habitat-toast-go" id="goToHabitatBtn">Go to habitat</button>' +
+    '</div>';
 
   bodyEl.querySelectorAll('[data-remove-toast-pokemon]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -1841,6 +2279,13 @@ function renderHabitatToast(message) {
       showHabitatFeedback(name + ' removed from the current habitat.');
     });
   });
+
+  const goToHabitatBtn = document.getElementById('goToHabitatBtn');
+  if (goToHabitatBtn) {
+    goToHabitatBtn.addEventListener('click', () => {
+      showTab('habitats');
+    });
+  }
 
   renderHabitatPreviewTrigger();
 }
@@ -2052,6 +2497,7 @@ function renderHabitatReport() {
     '<div class="report-block"><strong>Favorites shared by all</strong>' + renderCountedTags(allSharedFavoriteItems, 'shared') + '</div>',
     '<div class="report-block"><strong>Unique favorites</strong>' + renderCountedTags(data.uniqueFavorites, 'unique') + '</div>',
     '<div class="report-block"><strong>Favorite flavors</strong>' + renderCountedTags(data.flavorCounts, 'flavor') + '</div>',
+    '<div class="report-block"><strong>Ideal habitats</strong>' + renderCountedTags(data.idealHabitatCounts, 'ideal-habitat') + '</div>',
     '<div class="report-block"><strong>Habitat specialties</strong>' + renderCountedTags(data.specialtyCounts, 'specialty') + '</div>'
   ];
 
@@ -2272,7 +2718,9 @@ function syncMinSharedOptions() {
   if (!DATA.length || !selectedName) {
     select.innerHTML = '<option value="">Select a Pokemon first</option>';
     select.disabled = true;
+    document.getElementById('minSharedDisplay').disabled = true;
     searchBtn.disabled = true;
+    syncReadonlyDropdownDisplays();
     return;
   }
 
@@ -2280,7 +2728,9 @@ function syncMinSharedOptions() {
   if (!base) {
     select.innerHTML = '<option value="">Select a Pokemon first</option>';
     select.disabled = true;
+    document.getElementById('minSharedDisplay').disabled = true;
     searchBtn.disabled = true;
+    syncReadonlyDropdownDisplays();
     return;
   }
 
@@ -2298,33 +2748,43 @@ function syncMinSharedOptions() {
     select.innerHTML = '<option value="0">No shared favorites</option>';
     select.value = '0';
     select.disabled = true;
+    document.getElementById('minSharedDisplay').disabled = true;
     searchBtn.disabled = true;
+    syncReadonlyDropdownDisplays();
     return;
   }
 
   const previousValue = Number(select.value);
   renderMinSharedOptions(maxShared);
   select.disabled = false;
+  document.getElementById('minSharedDisplay').disabled = false;
   searchBtn.disabled = false;
 
   if (previousValue >= 1 && previousValue <= maxShared) {
     select.value = String(previousValue);
   }
+  syncReadonlyDropdownDisplays();
 }
 
 function renderSpecialties() {
   ALL_SPECIALTIES = getAllSpecialties(DATA);
+  ALL_IDEAL_HABITATS = getAllIdealHabitats(DATA);
   renderSelectedSpecialtyChips();
   renderSpecialtySuggestions();
+  renderIdealHabitatOptions();
+  syncAdvancedFiltersUi();
 }
 
 function getAvailableSpecialties(query) {
   const normalizedQuery = query.trim().toLowerCase();
   const matchingPokemon = selectedSpecialties.length === 0
-    ? DATA
-    : DATA.filter((pokemon) => selectedSpecialties.every((specialty) => pokemon.specialties.includes(specialty)));
+    ? DATA.filter((pokemon) => !selectedIdealHabitat || pokemon.ideal_habitat === selectedIdealHabitat)
+    : DATA.filter((pokemon) =>
+      (!selectedIdealHabitat || pokemon.ideal_habitat === selectedIdealHabitat) &&
+      selectedSpecialties.every((specialty) => pokemon.specialties.includes(specialty))
+    );
   const compatibleSpecialties = Array.from(
-    new Set(matchingPokemon.flatMap((pokemon) => pokemon.specialties || []))
+    new Set(matchingPokemon.flatMap((pokemon) => pokemon.specialties || []).filter((specialty) => specialty && specialty !== '???'))
   ).sort((a, b) => a.localeCompare(b));
 
   return compatibleSpecialties
@@ -2403,7 +2863,6 @@ function addSpecialty(specialty) {
   specialtyDropdownOpen = true;
   renderSelectedSpecialtyChips();
   renderSpecialtySuggestions();
-  updateFilterCount();
   renderPokemonSelect();
   input.focus();
 }
@@ -2414,7 +2873,6 @@ function removeSpecialty(specialty) {
   specialtyDropdownOpen = true;
   renderSelectedSpecialtyChips();
   renderSpecialtySuggestions();
-  updateFilterCount();
   renderPokemonSelect();
 }
 
@@ -2431,6 +2889,10 @@ function setupSpecialtyAutocomplete() {
     specialtyDropdownOpen = true;
     activeSuggestionIndex = -1;
     renderSpecialtySuggestions();
+  });
+
+  input.addEventListener('blur', () => {
+    requestAnimationFrame(syncComboboxCloseButtons);
   });
 
   input.addEventListener('keydown', (event) => {
@@ -2482,6 +2944,146 @@ function setupSpecialtyAutocomplete() {
     if (!combobox.contains(event.target) && !dropdown.contains(event.target)) {
       specialtyDropdownOpen = false;
       dropdown.hidden = true;
+      syncComboboxCloseButtons();
+    }
+  });
+}
+
+function setupIdealHabitatAutocomplete() {
+  const input = document.getElementById('idealHabitatSearch');
+  const dropdown = document.getElementById('idealHabitatDropdown');
+
+  input.addEventListener('focus', () => {
+    idealHabitatDropdownOpen = true;
+    renderIdealHabitatSuggestions();
+  });
+
+  input.addEventListener('input', () => {
+    if (input.value !== selectedIdealHabitat) {
+      selectedIdealHabitat = '';
+    }
+    idealHabitatDropdownOpen = true;
+    activeIdealHabitatSuggestionIndex = -1;
+    renderIdealHabitatSuggestions();
+    renderSpecialtySuggestions();
+    renderPokemonSelect();
+  });
+
+  input.addEventListener('keydown', (event) => {
+    const options = ['Any'].concat(getAvailableIdealHabitats(input.value));
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (!options.length) return;
+      activeIdealHabitatSuggestionIndex = (activeIdealHabitatSuggestionIndex + 1) % options.length;
+      renderIdealHabitatSuggestions();
+      return;
+    }
+
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (!options.length) return;
+      activeIdealHabitatSuggestionIndex = activeIdealHabitatSuggestionIndex <= 0 ? options.length - 1 : activeIdealHabitatSuggestionIndex - 1;
+      renderIdealHabitatSuggestions();
+      return;
+    }
+
+    if (event.key === 'Enter') {
+      if (!options.length) return;
+      event.preventDefault();
+      const index = activeIdealHabitatSuggestionIndex >= 0 ? activeIdealHabitatSuggestionIndex : 0;
+      const value = options[index] === 'Any' ? '' : options[index];
+      selectIdealHabitat(value);
+      return;
+    }
+
+    if (event.key === 'Escape') {
+      idealHabitatDropdownOpen = false;
+      dropdown.hidden = true;
+      syncComboboxCloseButtons();
+    }
+  });
+
+  document.getElementById('idealHabitatCombobox').addEventListener('click', () => {
+    idealHabitatDropdownOpen = true;
+    renderIdealHabitatSuggestions();
+    input.focus();
+  });
+
+  document.addEventListener('click', (event) => {
+    const combobox = document.getElementById('idealHabitatCombobox');
+    if (!combobox.contains(event.target) && !dropdown.contains(event.target)) {
+      idealHabitatDropdownOpen = false;
+      dropdown.hidden = true;
+      syncComboboxCloseButtons();
+    }
+  });
+}
+
+function setupMatchScopeDropdown() {
+  const input = document.getElementById('matchScopeDisplay');
+  const dropdown = document.getElementById('matchScopeDropdown');
+
+  input.addEventListener('focus', () => {
+    matchScopeDropdownOpen = true;
+    renderMatchScopeSuggestions();
+  });
+
+  document.getElementById('matchScopeCombobox').addEventListener('click', () => {
+    if (input.disabled) return;
+    matchScopeDropdownOpen = true;
+    renderMatchScopeSuggestions();
+    input.focus();
+  });
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      matchScopeDropdownOpen = false;
+      dropdown.hidden = true;
+      syncComboboxCloseButtons();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    const combobox = document.getElementById('matchScopeCombobox');
+    if (!combobox.contains(event.target) && !dropdown.contains(event.target)) {
+      matchScopeDropdownOpen = false;
+      dropdown.hidden = true;
+      syncComboboxCloseButtons();
+    }
+  });
+}
+
+function setupMinSharedDropdown() {
+  const input = document.getElementById('minSharedDisplay');
+  const dropdown = document.getElementById('minSharedDropdown');
+
+  input.addEventListener('focus', () => {
+    minSharedDropdownOpen = true;
+    renderMinSharedSuggestions();
+  });
+
+  document.getElementById('minSharedCombobox').addEventListener('click', () => {
+    if (input.disabled) return;
+    minSharedDropdownOpen = true;
+    renderMinSharedSuggestions();
+    input.focus();
+  });
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      minSharedDropdownOpen = false;
+      dropdown.hidden = true;
+      syncComboboxCloseButtons();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    const combobox = document.getElementById('minSharedCombobox');
+    if (!combobox.contains(event.target) && !dropdown.contains(event.target)) {
+      minSharedDropdownOpen = false;
+      dropdown.hidden = true;
+      syncComboboxCloseButtons();
     }
   });
 }
@@ -2489,11 +3091,16 @@ function setupSpecialtyAutocomplete() {
 function getFilteredPokemon() {
   const selectedSpecialties = getSelectedSpecialties();
   if (selectedSpecialties.length === 0) {
-    return DATA.slice().sort((a, b) => a.name.localeCompare(b.name));
+    return DATA
+      .filter((pokemon) => !selectedIdealHabitat || pokemon.ideal_habitat === selectedIdealHabitat)
+      .sort((a, b) => a.name.localeCompare(b.name));
   }
 
   return DATA
-    .filter((pokemon) => selectedSpecialties.every((specialty) => pokemon.specialties.includes(specialty)))
+    .filter((pokemon) =>
+      (!selectedIdealHabitat || pokemon.ideal_habitat === selectedIdealHabitat) &&
+      selectedSpecialties.every((specialty) => pokemon.specialties.includes(specialty))
+    )
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -2634,19 +3241,6 @@ function setupPokemonAutocomplete() {
   });
 }
 
-function updateFilterCount() {
-  const selected = getSelectedSpecialties();
-  const filtered = getFilteredPokemon();
-  const countEl = document.getElementById('filterCount');
-
-  if (selected.length === 0) {
-    countEl.textContent = 'Any specialties. ' + DATA.length + ' Pokemon available.';
-    return;
-  }
-
-  countEl.textContent = selected.length + ' specialty filters active. ' + filtered.length + ' Pokemon match this filter.';
-}
-
 function renderSummary(base) {
   const summary = document.getElementById('summary');
   summary.className = 'summary';
@@ -2687,10 +3281,15 @@ function renderLiveFilters(base) {
   container.hidden = false;
   container.innerHTML =
     '<div class="live-filter-subtitle">Toggle preferences to narrow the visible results live.</div>' +
-    '<div class="live-filter-row">' +
-      (base.interests.length ? renderFavoriteFilterTags(base.interests) : '') +
-      (base.flavor ? renderFlavorFilterTag(base.flavor) : '') +
-    '</div>';
+    (base.interests.length
+      ? '<div class="live-filter-group"><div class="live-filter-group-label">Favorites</div><div class="live-filter-row">' + renderFavoriteFilterTags(base.interests) + '</div></div>'
+      : '') +
+    (base.flavor
+      ? '<div class="live-filter-group"><div class="live-filter-group-label">Favorite flavor</div><div class="live-filter-row">' + renderFlavorFilterTag(base.flavor) + '</div></div>'
+      : '') +
+    (base.idealHabitat
+      ? '<div class="live-filter-group"><div class="live-filter-group-label">Ideal habitat</div><div class="live-filter-row"><button type="button" class="tag toggle-tag ideal-habitat-filter' + (activeResultIdealHabitatFilter ? ' active' : '') + '" data-ideal-habitat-filter="' + escapeHtml(base.idealHabitat) + '">' + escapeHtml(base.idealHabitat) + (activeResultIdealHabitatFilter ? ' ✓' : '') + '</button></div></div>'
+      : '');
 
   container.querySelectorAll('[data-favorite-filter]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -2712,6 +3311,14 @@ function renderLiveFilters(base) {
       renderResultsFromState();
     });
   });
+
+  container.querySelectorAll('[data-ideal-habitat-filter]').forEach((button) => {
+    button.addEventListener('click', () => {
+      activeResultIdealHabitatFilter = !activeResultIdealHabitatFilter;
+      renderLiveFilters(base);
+      renderResultsFromState();
+    });
+  });
 }
 
 function renderResultsFromState() {
@@ -2727,7 +3334,8 @@ function renderResultsFromState() {
   const { matches } = latestSearchState;
   const visibleMatches = matches.filter((item) =>
     activeResultFavoriteFilters.every((favorite) => item.sharedFavorites.includes(favorite)) &&
-    (!activeResultFlavorFilter || item.other.flavor === latestSearchState.base.flavor)
+    (!activeResultFlavorFilter || item.other.flavor === latestSearchState.base.flavor) &&
+    (!activeResultIdealHabitatFilter || item.other.idealHabitat === latestSearchState.base.idealHabitat)
   );
 
   resultsCount.textContent = visibleMatches.length + ' ranked habitat matches.';
@@ -2767,6 +3375,8 @@ function renderResultsFromState() {
           renderTags(item.other.interests, item.sharedFavorites) +
           '<div class="meta-line"><strong>Favorite flavor</strong></div>' +
           (item.other.flavor ? renderFlavorTag(item.other.flavor) : '<div class="muted">None</div>') +
+          '<div class="meta-line"><strong>Ideal habitat</strong></div>' +
+          (item.other.idealHabitat ? renderIdealHabitatTag(item.other.idealHabitat) : '<div class="muted">None</div>') +
         '</div>' +
       '</div>' +
       '<div class="card-actions">' +
@@ -2792,11 +3402,13 @@ function resetSearch() {
   latestSearchState = null;
   activeResultFavoriteFilters = [];
   activeResultFlavorFilter = false;
+  activeResultIdealHabitatFilter = false;
   selectedPokemonName = '';
   pokemonDropdownOpen = false;
   activePokemonSuggestionIndex = -1;
   document.getElementById('pokemonSearch').value = '';
   document.getElementById('matchScope').value = 'all';
+  syncReadonlyDropdownDisplays();
   syncMinSharedOptions();
   document.getElementById('summary').className = 'empty';
   document.getElementById('summary').textContent = 'Choose a starting Pokemon, then run the search to find the best habitat matches.';
@@ -2821,6 +3433,7 @@ function searchCompatibility() {
     latestSearchState = null;
     activeResultFavoriteFilters = [];
     activeResultFlavorFilter = false;
+    activeResultIdealHabitatFilter = false;
     document.getElementById('liveFilters').hidden = true;
     results.innerHTML = '';
     resultsCount.textContent = 'No search yet.';
@@ -2834,6 +3447,7 @@ function searchCompatibility() {
     latestSearchState = null;
     activeResultFavoriteFilters = [];
     activeResultFlavorFilter = false;
+    activeResultIdealHabitatFilter = false;
     document.getElementById('liveFilters').hidden = true;
     results.innerHTML = '';
     resultsCount.textContent = 'No search yet.';
@@ -2848,13 +3462,21 @@ function searchCompatibility() {
     .map((pokemon) => {
       const profile = getPokemonProfile(pokemon);
       const sharedFavorites = intersect(baseProfile.interests, profile.interests);
+      const sameIdealHabitat = baseProfile.idealHabitat && profile.idealHabitat && baseProfile.idealHabitat === profile.idealHabitat;
+      const favoriteScore = Math.round((Math.min(sharedFavorites.length, 3) / 3) * 100);
+      const idealHabitatScore = sameIdealHabitat ? 100 : 0;
       return {
         other: profile,
-        sharedFavorites
+        sharedFavorites,
+        sameIdealHabitat,
+        compatibilityScore: Math.round((favoriteScore * 0.5) + (idealHabitatScore * 0.5))
       };
     })
     .filter((item) => item.sharedFavorites.length >= minShared)
     .sort((a, b) => {
+      if (b.compatibilityScore !== a.compatibilityScore) {
+        return b.compatibilityScore - a.compatibilityScore;
+      }
       if (b.sharedFavorites.length !== a.sharedFavorites.length) {
         return b.sharedFavorites.length - a.sharedFavorites.length;
       }
@@ -2868,6 +3490,7 @@ function searchCompatibility() {
   };
   activeResultFavoriteFilters = [];
   activeResultFlavorFilter = false;
+  activeResultIdealHabitatFilter = false;
   renderLiveFilters(baseProfile);
 
   if (matches.length === 0) {
@@ -2882,9 +3505,12 @@ function searchCompatibility() {
 function enableUi() {
   document.getElementById('pokemonSearch').disabled = false;
   document.getElementById('matchScope').disabled = false;
+  document.getElementById('matchScopeDisplay').disabled = false;
+  document.getElementById('idealHabitatSearch').disabled = false;
   document.getElementById('habitatPokemonSearch').disabled = false;
   syncMinSharedOptions();
   syncHabitatActions();
+  syncReadonlyDropdownDisplays();
 }
 
 async function loadData() {
@@ -2903,15 +3529,18 @@ async function loadData() {
 
     renderSpecialties();
     setupSpecialtyAutocomplete();
+    setupIdealHabitatAutocomplete();
     setupPokemonAutocomplete();
+    setupMatchScopeDropdown();
+    setupMinSharedDropdown();
     setupHabitatPokemonAutocomplete();
     renderPokemonSelect();
-    updateFilterCount();
     enableUi();
     renderHabitatList();
     renderHabitatReport();
     renderHabitatPreviewTrigger();
     syncComboboxCloseButtons();
+    syncAdvancedFiltersUi();
 
     document.getElementById('matchScope').value = 'all';
     status.textContent = 'Loaded ' + DATA.length + ' Pokemon';
@@ -2926,22 +3555,71 @@ document.getElementById('searchBtn').addEventListener('click', searchCompatibili
 document.getElementById('matchScope').addEventListener('change', () => {
   syncMinSharedOptions();
 });
+document.getElementById('advancedFiltersToggle').addEventListener('click', () => {
+  advancedFiltersOpen = !advancedFiltersOpen;
+  syncAdvancedFiltersUi();
+});
+document.getElementById('closeSpecialtyDropdownBtn').addEventListener('mousedown', (event) => {
+  event.preventDefault();
+});
 document.getElementById('closeSpecialtyDropdownBtn').addEventListener('click', (event) => {
   event.stopPropagation();
   specialtyDropdownOpen = false;
   document.getElementById('specialtyDropdown').hidden = true;
+  document.getElementById('specialtySearch').blur();
+  syncComboboxCloseButtons();
+});
+document.getElementById('closePokemonDropdownBtn').addEventListener('mousedown', (event) => {
+  event.preventDefault();
 });
 document.getElementById('closePokemonDropdownBtn').addEventListener('click', (event) => {
   event.stopPropagation();
   pokemonDropdownOpen = false;
   document.getElementById('pokemonDropdown').hidden = true;
+  document.getElementById('pokemonSearch').blur();
+  syncComboboxCloseButtons();
+});
+document.getElementById('closeMatchScopeDropdownBtn').addEventListener('mousedown', (event) => {
+  event.preventDefault();
+});
+document.getElementById('closeMatchScopeDropdownBtn').addEventListener('click', (event) => {
+  event.stopPropagation();
+  matchScopeDropdownOpen = false;
+  document.getElementById('matchScopeDropdown').hidden = true;
+  document.getElementById('matchScopeDisplay').blur();
+  syncComboboxCloseButtons();
+});
+document.getElementById('closeMinSharedDropdownBtn').addEventListener('mousedown', (event) => {
+  event.preventDefault();
+});
+document.getElementById('closeMinSharedDropdownBtn').addEventListener('click', (event) => {
+  event.stopPropagation();
+  minSharedDropdownOpen = false;
+  document.getElementById('minSharedDropdown').hidden = true;
+  document.getElementById('minSharedDisplay').blur();
+  syncComboboxCloseButtons();
+});
+document.getElementById('closeIdealHabitatDropdownBtn').addEventListener('mousedown', (event) => {
+  event.preventDefault();
+});
+document.getElementById('closeIdealHabitatDropdownBtn').addEventListener('click', (event) => {
+  event.stopPropagation();
+  idealHabitatDropdownOpen = false;
+  document.getElementById('idealHabitatDropdown').hidden = true;
+  document.getElementById('idealHabitatSearch').blur();
+  syncComboboxCloseButtons();
 });
 document.getElementById('saveHabitatBtn').addEventListener('click', saveHabitat);
 document.getElementById('newHabitatBtn').addEventListener('click', handleNewHabitat);
+document.getElementById('closeHabitatDropdownBtn').addEventListener('mousedown', (event) => {
+  event.preventDefault();
+});
 document.getElementById('closeHabitatDropdownBtn').addEventListener('click', (event) => {
   event.stopPropagation();
   habitatPokemonDropdownOpen = false;
   document.getElementById('habitatPokemonDropdown').hidden = true;
+  document.getElementById('habitatPokemonSearch').blur();
+  syncComboboxCloseButtons();
 });
 document.getElementById('clearHabitatPokemonBtn').addEventListener('click', () => {
   habitatPokemonNames = [];

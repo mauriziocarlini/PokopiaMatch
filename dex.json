@@ -9,9 +9,10 @@
       "Soft stuff",
       "Cute stuff",
       "Lots of water",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Ivysaur",
@@ -23,9 +24,10 @@
       "Soft stuff",
       "Cute stuff",
       "Pretty flowers",
-      "Colorful stuff",
-      "Sour flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Venusaur",
@@ -38,9 +40,10 @@
       "Soft stuff",
       "Cute stuff",
       "Pretty flowers",
-      "Luxury",
-      "Sour flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Charmander",
@@ -52,9 +55,10 @@
       "Wooden stuff",
       "Hard stuff",
       "Exercise",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Charmeleon",
@@ -66,9 +70,10 @@
       "Wooden stuff",
       "Hard stuff",
       "Exercise",
-      "Rides",
-      "Spicy flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Charizard",
@@ -81,9 +86,10 @@
       "Nice breezes",
       "Wooden stuff",
       "Exercise",
-      "Luxury",
-      "Spicy flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Squirtle",
@@ -95,9 +101,10 @@
       "Cleanliness",
       "Healing",
       "Cute stuff",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Wartortle",
@@ -109,9 +116,10 @@
       "Cleanliness",
       "Healing",
       "Exercise",
-      "Hard stuff",
-      "Spicy flavors"
-    ]
+      "Hard stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Blastoise",
@@ -124,9 +132,10 @@
       "Cleanliness",
       "Healing",
       "Exercise",
-      "Luxury",
-      "Sour flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Pidgey",
@@ -139,9 +148,10 @@
       "Nice breezes",
       "Watching stuff",
       "Lots of nature",
-      "Play spaces",
-      "Sour flavors"
-    ]
+      "Play spaces"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Pidgeotto",
@@ -154,9 +164,10 @@
       "Nice breezes",
       "Watching stuff",
       "Lots of nature",
-      "Looks like food",
-      "Spicy flavors"
-    ]
+      "Looks like food"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Pidgeot",
@@ -169,9 +180,10 @@
       "Nice breezes",
       "Wooden stuff",
       "Lots of nature",
-      "Luxury",
-      "Sour flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Oddish",
@@ -183,9 +195,10 @@
       "Lots of dirt",
       "Soft stuff",
       "Pretty flowers",
-      "Lots of water",
-      "Bitter flavors"
-    ]
+      "Lots of water"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Gloom",
@@ -197,9 +210,10 @@
       "Lots of dirt",
       "Soft stuff",
       "Pretty flowers",
-      "Garbage",
-      "Dry flavors"
-    ]
+      "Garbage"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Vileplume",
@@ -212,9 +226,10 @@
       "Lots of dirt",
       "Soft stuff",
       "Pretty flowers",
-      "Colorful stuff",
-      "Bitter flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Bellossom",
@@ -227,9 +242,10 @@
       "Pretty flowers",
       "Play spaces",
       "Cute stuff",
-      "Noisy stuff",
-      "Sour flavors"
-    ]
+      "Noisy stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Paras",
@@ -241,9 +257,10 @@
       "Wooden stuff",
       "Watching stuff",
       "Lots of dirt",
-      "Looks like food",
-      "Bitter flavors"
-    ]
+      "Looks like food"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Parasect",
@@ -255,9 +272,10 @@
       "Wooden stuff",
       "Watching stuff",
       "Lots of dirt",
-      "Strange stuff",
-      "Bitter flavors"
-    ]
+      "Strange stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Venonat",
@@ -269,9 +287,10 @@
       "Wooden stuff",
       "Watching stuff",
       "Complicated stuff",
-      "Letters and words",
-      "Bitter flavors"
-    ]
+      "Letters and words"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Venomoth",
@@ -283,9 +302,10 @@
       "Wooden stuff",
       "Watching stuff",
       "Nice breezes",
-      "Pretty flowers",
-      "Bitter flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Bellsprout",
@@ -298,9 +318,10 @@
       "Wooden stuff",
       "Lots of dirt",
       "Lots of water",
-      "Pretty flowers",
-      "Dry flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Weepinbell",
@@ -313,9 +334,10 @@
       "Wooden stuff",
       "Lots of dirt",
       "Colorful stuff",
-      "Pretty flowers",
-      "Bitter flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Victreebel",
@@ -328,9 +350,10 @@
       "Wooden stuff",
       "Lots of dirt",
       "Colorful stuff",
-      "Pretty flowers",
-      "Bitter flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Slowpoke",
@@ -343,9 +366,10 @@
       "Cleanliness",
       "Strange stuff",
       "Soft stuff",
-      "Healing",
-      "Dry flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Slowbro",
@@ -358,9 +382,10 @@
       "Cleanliness",
       "Strange stuff",
       "Group activities",
-      "Healing",
-      "Dry flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Slowking",
@@ -373,9 +398,10 @@
       "Cleanliness",
       "Strange stuff",
       "Group activities",
-      "Healing",
-      "Sour flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Magnemite",
@@ -387,9 +413,10 @@
       "Metal stuff",
       "Shiny stuff",
       "Hard stuff",
-      "Group activities",
-      "Bitter flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Magneton",
@@ -401,9 +428,10 @@
       "Metal stuff",
       "Shiny stuff",
       "Gatherings",
-      "Group activities",
-      "Bitter flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Magnezone",
@@ -416,9 +444,10 @@
       "Metal stuff",
       "Luxury",
       "Gatherings",
-      "Hard stuff",
-      "Bitter flavors"
-    ]
+      "Hard stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Onix",
@@ -431,9 +460,10 @@
       "Lots of dirt",
       "Blocky stuff",
       "Slender objects",
-      "Exercise",
-      "Dry flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Steelix",
@@ -446,9 +476,10 @@
       "Lots of dirt",
       "Stone stuff",
       "Slender objects",
-      "Hard stuff",
-      "Sour flavors"
-    ]
+      "Hard stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Cubone",
@@ -460,9 +491,10 @@
       "Construction",
       "Exercise",
       "Slender objects",
-      "Group activities",
-      "Bitter flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Marowak",
@@ -474,9 +506,10 @@
       "Construction",
       "Exercise",
       "Slender objects",
-      "Luxury",
-      "Dry flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Tyrogue",
@@ -488,9 +521,10 @@
       "Group activities",
       "Fabric",
       "Stone stuff",
-      "Round stuff",
-      "Spicy flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Hitmonlee",
@@ -502,9 +536,10 @@
       "Group activities",
       "Fabric",
       "Stone stuff",
-      "Round stuff",
-      "Spicy flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Hitmonchan",
@@ -516,9 +551,10 @@
       "Group activities",
       "Fabric",
       "Stone stuff",
-      "Round stuff",
-      "Sweet flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Hitmontop",
@@ -530,9 +566,10 @@
       "Group activities",
       "Fabric",
       "Stone stuff",
-      "Round stuff",
-      "Sweet flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Koffing",
@@ -544,9 +581,10 @@
       "Gatherings",
       "Complicated stuff",
       "Soft stuff",
-      "Wobbly stuff",
-      "Bitter flavors"
-    ]
+      "Wobbly stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Weezing",
@@ -558,9 +596,10 @@
       "Gatherings",
       "Complicated stuff",
       "Soft stuff",
-      "Wobbly stuff",
-      "Bitter flavors"
-    ]
+      "Wobbly stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Tangela",
@@ -573,9 +612,10 @@
       "Lots of water",
       "Gatherings",
       "Pretty flowers",
-      "Slender objects",
-      "Sour flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Tangrowth (Professor Tangrowth)",
@@ -587,9 +627,10 @@
       "Complicated stuff",
       "Letters and words",
       "Strange stuff",
-      "Group activities",
-      "Dry flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Scyther",
@@ -601,9 +642,10 @@
       "Nice breezes",
       "Wooden stuff",
       "Sharp stuff",
-      "Exercise",
-      "Spicy flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Scizor",
@@ -615,9 +657,10 @@
       "Metal stuff",
       "Wooden stuff",
       "Hard stuff",
-      "Exercise",
-      "Bitter flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Pinsir",
@@ -630,23 +673,25 @@
       "Wooden stuff",
       "Pretty flowers",
       "Sharp stuff",
-      "Exercise",
-      "Spicy flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Magikarp",
     "specialties": [
-      "TBD"
+      "???"
     ],
     "favorites": [
       "Lots of water",
       "Ocean vibes",
       "Group activities",
       "Rides",
-      "Wobbly stuff",
-      "Sweet flavors"
-    ]
+      "Wobbly stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Gyarados",
@@ -658,9 +703,10 @@
       "Ocean vibes",
       "Nice breezes",
       "Cleanliness",
-      "Slender objects",
-      "Spicy flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Ditto",
@@ -668,8 +714,10 @@
       "Transform"
     ],
     "favorites": [
-      "None"
-    ]
+      "???"
+    ],
+    "favorite_flavor":  "???",
+    "ideal_habitat": "???"
   },
   {
     "name": "Hoothoot",
@@ -682,9 +730,10 @@
       "Nice breezes",
       "Fabric",
       "Wobbly stuff",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Noctowl",
@@ -697,9 +746,10 @@
       "Nice breezes",
       "Letters and words",
       "Containers",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Heracross",
@@ -712,9 +762,10 @@
       "Wooden stuff",
       "Pretty flowers",
       "Looks like food",
-      "Exercise",
-      "Sweet flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Volbeat",
@@ -726,9 +777,10 @@
       "Wooden stuff",
       "Shiny stuff",
       "Cute stuff",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Illumise",
@@ -740,9 +792,10 @@
       "Wooden stuff",
       "Shiny stuff",
       "Cute stuff",
-      "Group activities",
-      "Sour flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Gulpin",
@@ -754,9 +807,10 @@
       "Looks like food",
       "Round stuff",
       "Containers",
-      "Colorful stuff",
-      "Spicy flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Swalot",
@@ -768,9 +822,10 @@
       "Looks like food",
       "Round stuff",
       "Containers",
-      "Colorful stuff",
-      "Bitter flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Cacnea",
@@ -782,9 +837,10 @@
       "Pretty flowers",
       "Cute stuff",
       "Round stuff",
-      "Sharp stuff",
-      "Spicy flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Cacturne",
@@ -797,9 +853,10 @@
       "Nice breezes",
       "Luxury",
       "Shiny stuff",
-      "Sharp stuff",
-      "Dry flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Combee",
@@ -811,9 +868,10 @@
       "Nice breezes",
       "Wooden stuff",
       "Gatherings",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Vespiquen",
@@ -826,9 +884,10 @@
       "Nice breezes",
       "Wooden stuff",
       "Gatherings",
-      "Complicated stuff",
-      "Sweet flavors"
-    ]
+      "Complicated stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "West Sea Shellos",
@@ -840,9 +899,10 @@
       "Ocean vibes",
       "Cleanliness",
       "Colorful stuff",
-      "Containers",
-      "Sour flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "West Sea Gastrodon",
@@ -855,9 +915,10 @@
       "Ocean vibes",
       "Cleanliness",
       "Colorful stuff",
-      "Containers",
-      "Dry flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Drifloon",
@@ -869,9 +930,10 @@
       "Strange stuff",
       "Nice breezes",
       "Cute stuff",
-      "Round stuff",
-      "Bitter flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Drifblim",
@@ -884,9 +946,10 @@
       "Strange stuff",
       "Nice breezes",
       "Wobbly stuff",
-      "Spinning stuff",
-      "Bitter flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Drilbur",
@@ -898,9 +961,10 @@
       "Stone stuff",
       "Lots of nature",
       "Watching stuff",
-      "Sharp stuff",
-      "Sour flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Excadrill",
@@ -913,9 +977,10 @@
       "Metal stuff",
       "Exercise",
       "Watching stuff",
-      "Sharp stuff",
-      "Sour flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Timburr",
@@ -927,9 +992,10 @@
       "Construction",
       "Wooden stuff",
       "Slender objects",
-      "Blocky stuff",
-      "Spicy flavors"
-    ]
+      "Blocky stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Gurdurr",
@@ -941,9 +1007,10 @@
       "Construction",
       "Metal stuff",
       "Slender objects",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Conkeldurr",
@@ -956,9 +1023,10 @@
       "Construction",
       "Stone stuff",
       "Slender objects",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Litwick",
@@ -970,9 +1038,10 @@
       "Strange stuff",
       "Lots of fire",
       "Wobbly stuff",
-      "Blocky stuff",
-      "Bitter flavors"
-    ]
+      "Blocky stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Lampent",
@@ -984,9 +1053,10 @@
       "Strange stuff",
       "Lots of fire",
       "Wobbly stuff",
-      "Containers",
-      "Bitter flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Chandelure",
@@ -998,9 +1068,10 @@
       "Strange stuff",
       "Lots of fire",
       "Wobbly stuff",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Axew",
@@ -1012,9 +1083,10 @@
       "Luxury",
       "Lots of dirt",
       "Hard stuff",
-      "Sharp stuff",
-      "Sweet flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Fraxure",
@@ -1026,9 +1098,10 @@
       "Luxury",
       "Lots of dirt",
       "Exercise",
-      "Sharp stuff",
-      "Spicy flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Haxorus",
@@ -1041,9 +1114,10 @@
       "Luxury",
       "Lots of dirt",
       "Exercise",
-      "Sharp stuff",
-      "Sour flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Goomy",
@@ -1055,9 +1129,10 @@
       "Luxury",
       "Lots of nature",
       "Cleanliness",
-      "Healing",
-      "Sweet flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Sliggoo",
@@ -1069,9 +1144,10 @@
       "Luxury",
       "Soft stuff",
       "Cleanliness",
-      "Healing",
-      "Sweet flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Goodra",
@@ -1083,9 +1159,10 @@
       "Luxury",
       "Exercise",
       "Cleanliness",
-      "Healing",
-      "Sour flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Cramorant",
@@ -1098,9 +1175,10 @@
       "Lots of water",
       "Ocean vibes",
       "Slender objects",
-      "Looks like food",
-      "Bitter flavors"
-    ]
+      "Looks like food"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Pichu",
@@ -1112,9 +1190,10 @@
       "Glass stuff",
       "Cute stuff",
       "Pretty flowers",
-      "Fabric",
-      "Sweet flavors"
-    ]
+      "Fabric"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Pikachu (Peakychu)",
@@ -1126,9 +1205,10 @@
       "Glass stuff",
       "Cute stuff",
       "Healing",
-      "Letters and words",
-      "Sweet flavors"
-    ]
+      "Letters and words"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Raichu",
@@ -1141,9 +1221,10 @@
       "Glass stuff",
       "Group activities",
       "Round stuff",
-      "Play spaces",
-      "Sour flavors"
-    ]
+      "Play spaces"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Zubat",
@@ -1155,9 +1236,10 @@
       "Nice breezes",
       "Wooden stuff",
       "Noisy stuff",
-      "Complicated stuff",
-      "Spicy flavors"
-    ]
+      "Complicated stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Golbat",
@@ -1169,9 +1251,10 @@
       "Nice breezes",
       "Wooden stuff",
       "Noisy stuff",
-      "Complicated stuff",
-      "Spicy flavors"
-    ]
+      "Complicated stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Crobat",
@@ -1184,9 +1267,10 @@
       "Nice breezes",
       "Wooden stuff",
       "Garbage",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Meowth",
@@ -1198,9 +1282,10 @@
       "Group activities",
       "Shiny stuff",
       "Glass stuff",
-      "Luxury",
-      "Spicy flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Cool"
   },
   {
     "name": "Persian",
@@ -1213,9 +1298,10 @@
       "Group activities",
       "Shiny stuff",
       "Watching stuff",
-      "Luxury",
-      "Sour flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Cool"
   },
   {
     "name": "Psyduck",
@@ -1227,9 +1313,10 @@
       "Ocean vibes",
       "Strange stuff",
       "Complicated stuff",
-      "Healing",
-      "Dry flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Golduck",
@@ -1241,9 +1328,10 @@
       "Ocean vibes",
       "Strange stuff",
       "Complicated stuff",
-      "Sharp stuff",
-      "Dry flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Growlithe",
@@ -1256,9 +1344,10 @@
       "Stone stuff",
       "Nice breezes",
       "Letters and words",
-      "Pretty flowers",
-      "Sweet flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Arcanine",
@@ -1271,9 +1360,10 @@
       "Stone stuff",
       "Nice breezes",
       "Watching stuff",
-      "Symbols",
-      "Spicy flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Farfetch'd",
@@ -1286,9 +1376,10 @@
       "Nice breezes",
       "Wooden stuff",
       "Slender objects",
-      "Exercise",
-      "Spicy flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Grimer",
@@ -1300,9 +1391,10 @@
       "Spooky stuff",
       "Gatherings",
       "Shiny stuff",
-      "Containers",
-      "Bitter flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Muk",
@@ -1314,9 +1406,10 @@
       "Spooky stuff",
       "Gatherings",
       "Shiny stuff",
-      "Colorful stuff",
-      "Bitter flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Gastly",
@@ -1329,9 +1422,10 @@
       "Strange stuff",
       "Garbage",
       "Containers",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Haunter",
@@ -1344,9 +1438,10 @@
       "Strange stuff",
       "Garbage",
       "Wobbly stuff",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Gengar",
@@ -1359,9 +1454,10 @@
       "Strange stuff",
       "Garbage",
       "Rides",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Voltorb",
@@ -1374,9 +1470,10 @@
       "Shiny stuff",
       "Round stuff",
       "Colorful stuff",
-      "Spinning stuff",
-      "Bitter flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Electrode",
@@ -1389,9 +1486,10 @@
       "Shiny stuff",
       "Round stuff",
       "Play spaces",
-      "Spinning stuff",
-      "Sour flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Exeggcute",
@@ -1404,9 +1502,10 @@
       "Strange stuff",
       "Gatherings",
       "Watching stuff",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Exeggutor",
@@ -1419,9 +1518,10 @@
       "Strange stuff",
       "Gatherings",
       "Watching stuff",
-      "Wooden stuff",
-      "Dry flavors"
-    ]
+      "Wooden stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Happiny",
@@ -1433,9 +1533,10 @@
       "Fabric",
       "Healing",
       "Round stuff",
-      "Containers",
-      "Sweet flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Chansey",
@@ -1447,9 +1548,10 @@
       "Fabric",
       "Healing",
       "Round stuff",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Blissey",
@@ -1462,9 +1564,10 @@
       "Fabric",
       "Healing",
       "Round stuff",
-      "Group activities",
-      "Sour flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Elekid",
@@ -1476,9 +1579,10 @@
       "Glass stuff",
       "Cute stuff",
       "Round stuff",
-      "Spinning stuff",
-      "Sweet flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Electabuzz",
@@ -1490,9 +1594,10 @@
       "Glass stuff",
       "Lots of fire",
       "Sharp stuff",
-      "Exercise",
-      "Spicy flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Electivire",
@@ -1505,9 +1610,10 @@
       "Glass stuff",
       "Lots of fire",
       "Hard stuff",
-      "Exercise",
-      "Sour flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Lapras",
@@ -1519,9 +1625,10 @@
       "Ocean vibes",
       "Cleanliness",
       "Watching stuff",
-      "Healing",
-      "Sour flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Munchlax",
@@ -1533,9 +1640,10 @@
       "Lots of nature",
       "Looks like food",
       "Woblly stuff",
-      "Group activities",
-      "Dry flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Snorlax (Mosslax)",
@@ -1547,9 +1655,10 @@
       "Fabric",
       "Looks like food",
       "Watching stuff",
-      "Strange stuff",
-      "Spicy flavors"
-    ]
+      "Strange stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Spinarak",
@@ -1561,9 +1670,10 @@
       "Wooden stuff",
       "Garbage",
       "Rides",
-      "Colorful stuff",
-      "Bitter flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Ariados",
@@ -1575,9 +1685,10 @@
       "Wooden stuff",
       "Garbage",
       "Rides",
-      "Colorful stuff",
-      "Sour flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Mareep",
@@ -1590,9 +1701,10 @@
       "Shiny stuff",
       "Glass stuff",
       "Cute stuff",
-      "Fabric",
-      "Sweet flavors"
-    ]
+      "Fabric"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Flaaffy",
@@ -1605,9 +1717,10 @@
       "Shiny stuff",
       "Glass stuff",
       "Cute stuff",
-      "Rides",
-      "Bitter flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Ampharos",
@@ -1620,9 +1733,10 @@
       "Shiny stuff",
       "Glass stuff",
       "Cute stuff",
-      "Pretty flowers",
-      "Sour flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Azurill",
@@ -1635,9 +1749,10 @@
       "Cute stuff",
       "Cleanliness",
       "Healing",
-      "Rides",
-      "Sour flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Marill",
@@ -1650,9 +1765,10 @@
       "Cute stuff",
       "Cleanliness",
       "Round stuff",
-      "Symbols",
-      "Sour flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Azumarill",
@@ -1665,9 +1781,10 @@
       "Cute stuff",
       "Construction",
       "Wobbly stuff",
-      "Symbols",
-      "Sour flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Paldean Wooper",
@@ -1679,9 +1796,10 @@
       "Lots of dirt",
       "Stone stuff",
       "Cleanliness",
-      "Group activities",
-      "Sour flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Clodsire",
@@ -1694,9 +1812,10 @@
       "Lots of dirt",
       "Lots of water",
       "Cleanliness",
-      "Round stuff",
-      "Bitter flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Smeargle (Smearguru)",
@@ -1708,9 +1827,10 @@
       "Fabric",
       "Strange stuff",
       "Colorful stuff",
-      "Shiny stuff",
-      "Dry flavors"
-    ]
+      "Shiny stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Torchic",
@@ -1722,9 +1842,10 @@
       "Stone stuff",
       "Cute stuff",
       "Containers",
-      "Pretty flowers",
-      "Sweet flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Combusken",
@@ -1737,9 +1858,10 @@
       "Stone stuff",
       "Exercise",
       "Containers",
-      "Construction",
-      "Spicy flavors"
-    ]
+      "Construction"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Blaziken",
@@ -1752,9 +1874,10 @@
       "Luxury",
       "Exercise",
       "Containers",
-      "Construction",
-      "Spicy flavors"
-    ]
+      "Construction"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Wingull",
@@ -1767,9 +1890,10 @@
       "Nice breezes",
       "Cleanliness",
       "Ocean vibes",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Pelipper",
@@ -1782,9 +1906,10 @@
       "Nice breezes",
       "Cleanliness",
       "Ocean vibes",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Makuhita",
@@ -1797,9 +1922,10 @@
       "Construction",
       "Fabric",
       "Round stuff",
-      "Wooden stuff",
-      "Sweet flavors"
-    ]
+      "Wooden stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Hariyama",
@@ -1812,9 +1938,10 @@
       "Construction",
       "Fabric",
       "Round stuff",
-      "Rides",
-      "Spicy flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Absol",
@@ -1826,9 +1953,10 @@
       "Nice breezes",
       "Letters and words",
       "Complicated stuff",
-      "Exercise",
-      "Dry flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Piplup",
@@ -1840,9 +1968,10 @@
       "Ocean vibes",
       "Nice breezes",
       "Cleanliness",
-      "Containers",
-      "Sweet flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Prinplup",
@@ -1855,9 +1984,10 @@
       "Ocean vibes",
       "Nice breezes",
       "Cleanliness",
-      "Containers",
-      "Dry flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Empoleon",
@@ -1870,9 +2000,10 @@
       "Ocean vibes",
       "Metal stuff",
       "Cleanliness",
-      "Letters and words",
-      "Bitter flavors"
-    ]
+      "Letters and words"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Audino",
@@ -1884,9 +2015,10 @@
       "Fabric",
       "Healing",
       "Cute stuff",
-      "Round stuff",
-      "Bitter flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Trubbish",
@@ -1898,9 +2030,10 @@
       "Containers",
       "Complicated stuff",
       "Shiny stuff",
-      "Gatherings",
-      "Bitter flavors"
-    ]
+      "Gatherings"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Garbodor",
@@ -1913,9 +2046,10 @@
       "Containers",
       "Complicated stuff",
       "Shiny stuff",
-      "Gatherings",
-      "Sour flavors"
-    ]
+      "Gatherings"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Zorua",
@@ -1927,9 +2061,10 @@
       "Luxury",
       "Glass stuff",
       "Cute stuff",
-      "Group activities",
-      "Sour flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Zoroark",
@@ -1942,9 +2077,10 @@
       "Luxury",
       "Glass stuff",
       "Strange stuff",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Minccino",
@@ -1956,9 +2092,10 @@
       "Fabric",
       "Rides",
       "Cute stuff",
-      "Cleanliness",
-      "Sweet flavors"
-    ]
+      "Cleanliness"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Cinccino",
@@ -1971,9 +2108,10 @@
       "Fabric",
       "Rides",
       "Cute stuff",
-      "Cleanliness",
-      "Sour flavors"
-    ]
+      "Cleanliness"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Grubbin",
@@ -1985,9 +2123,10 @@
       "Electronics",
       "Watching stuff",
       "Lots of dirt",
-      "Containers",
-      "Dry flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Charjabug",
@@ -2000,9 +2139,10 @@
       "Electronics",
       "Watching stuff",
       "Glass stuff",
-      "Blocky stuff",
-      "Bitter flavors"
-    ]
+      "Blocky stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Vikavolt",
@@ -2015,9 +2155,10 @@
       "Electronics",
       "Exercise",
       "Glass stuff",
-      "Nice breezes",
-      "Dry flavors"
-    ]
+      "Nice breezes"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Mimikyu",
@@ -2029,9 +2170,10 @@
       "Cute stuff",
       "Electronics",
       "Fabric",
-      "Group activities",
-      "Bitter flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Pawmi",
@@ -2043,9 +2185,10 @@
       "Shiny stuff",
       "Cute stuff",
       "Glass stuff",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Pawmo",
@@ -2058,9 +2201,10 @@
       "Shiny stuff",
       "Exercise",
       "Glass stuff",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Pawmot",
@@ -2073,9 +2217,10 @@
       "Shiny stuff",
       "Exercise",
       "Healing",
-      "Group activities",
-      "Dry flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Curly Form Tatsugiri",
@@ -2087,9 +2232,10 @@
       "Ocean vibes",
       "Group activities",
       "Slender objects",
-      "Gatherings",
-      "Sour flavors"
-    ]
+      "Gatherings"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Ekans",
@@ -2101,9 +2247,10 @@
       "Watching stuff",
       "Lots of nature",
       "Slender objects",
-      "Spinning stuff",
-      "Spicy flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Arbok",
@@ -2115,9 +2262,10 @@
       "Watching stuff",
       "Lots of nature",
       "Slender objects",
-      "Spinning stuff",
-      "Spicy flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Cleffa",
@@ -2129,9 +2277,10 @@
       "Round stuff",
       "Colorful stuff",
       "Healing",
-      "Rides",
-      "Sweet flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Clefairy",
@@ -2143,9 +2292,10 @@
       "Play spaces",
       "Pretty flowers",
       "Healing",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Clefable",
@@ -2158,9 +2308,10 @@
       "Play spaces",
       "Pretty flowers",
       "Healing",
-      "Group activities",
-      "Sour flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Igglybuff",
@@ -2172,9 +2323,10 @@
       "Cute stuff",
       "Play spaces",
       "Healing",
-      "Noisy stuff",
-      "Sweet flavors"
-    ]
+      "Noisy stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Jigglypuff",
@@ -2186,9 +2338,10 @@
       "Cute stuff",
       "Play spaces",
       "Healing",
-      "Wobbly stuff",
-      "Sweet flavors"
-    ]
+      "Wobbly stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Wigglytuff",
@@ -2201,9 +2354,10 @@
       "Cute stuff",
       "Play spaces",
       "Healing",
-      "Group activities",
-      "Sour flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Diglett",
@@ -2215,9 +2369,10 @@
       "Play spaces",
       "Cute stuff",
       "Group activities",
-      "Slender objects",
-      "Bitter flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Dugtrio",
@@ -2230,9 +2385,10 @@
       "Play spaces",
       "Gatherings",
       "Group activities",
-      "Slender objects",
-      "Spicy flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Machop",
@@ -2245,9 +2401,10 @@
       "Construction",
       "Stone stuff",
       "Hard stuff",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Machoke",
@@ -2260,9 +2417,10 @@
       "Construction",
       "Stone stuff",
       "Hard stuff",
-      "Group activities",
-      "Sour flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Machamp",
@@ -2275,9 +2433,10 @@
       "Construction",
       "Stone stuff",
       "Hard stuff",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Geodude",
@@ -2289,9 +2448,10 @@
       "Hard stuff",
       "Spinning stuff",
       "Round stuff",
-      "Exercise",
-      "Dry flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Graveler",
@@ -2303,9 +2463,10 @@
       "Hard stuff",
       "Spinning stuff",
       "Round stuff",
-      "Exercise",
-      "Bitter flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Golem",
@@ -2318,9 +2479,10 @@
       "Hard stuff",
       "Spinning stuff",
       "Round stuff",
-      "Exercise",
-      "Sour flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Magby",
@@ -2332,9 +2494,10 @@
       "Stone stuff",
       "Watching stuff",
       "Cute stuff",
-      "Wobbly stuff",
-      "Sweet flavors"
-    ]
+      "Wobbly stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Magmar",
@@ -2346,9 +2509,10 @@
       "Stone stuff",
       "Electronics",
       "Hard stuff",
-      "Exercise",
-      "Sweet flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Magmortar",
@@ -2361,9 +2525,10 @@
       "Stone stuff",
       "Electronics",
       "Hard stuff",
-      "Exercise",
-      "Dry flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Bonsly",
@@ -2375,9 +2540,10 @@
       "Hard stuff",
       "Lots of nature",
       "Wooden stuff",
-      "Round stuff",
-      "Sour flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Sudowoodo",
@@ -2389,9 +2555,10 @@
       "Hard stuff",
       "Lots of nature",
       "Wooden stuff",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Murkrow",
@@ -2404,9 +2571,10 @@
       "Nice breezes",
       "Group activities",
       "Luxury",
-      "Fabric",
-      "Bitter flavors"
-    ]
+      "Fabric"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Honchkrow",
@@ -2419,9 +2587,10 @@
       "Nice breezes",
       "Spooky stuff",
       "Letters and words",
-      "Glass stuff",
-      "Bitter flavors"
-    ]
+      "Glass stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Larvitar",
@@ -2434,9 +2603,10 @@
       "Lots of dirt",
       "Luxury",
       "Shiny stuff",
-      "Looks like food",
-      "Sweet flavors"
-    ]
+      "Looks like food"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Pupitar",
@@ -2449,9 +2619,10 @@
       "Hard stuff",
       "Luxury",
       "Shiny stuff",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Tyranitar",
@@ -2464,9 +2635,10 @@
       "Hard stuff",
       "Luxury",
       "Shiny stuff",
-      "Exercise",
-      "Spicy flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Lotad",
@@ -2478,9 +2650,10 @@
       "Lots of nature",
       "Cleanliness",
       "Containers",
-      "Noisy stuff",
-      "Dry flavors"
-    ]
+      "Noisy stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Lombre",
@@ -2492,9 +2665,10 @@
       "Lots of nature",
       "Cleanliness",
       "Containers",
-      "Noisy stuff",
-      "Bitter flavors"
-    ]
+      "Noisy stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Ludicolo",
@@ -2507,9 +2681,10 @@
       "Lots of nature",
       "Play spaces",
       "Containers",
-      "Noisy stuff",
-      "Dry flavors"
-    ]
+      "Noisy stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Mawile",
@@ -2522,9 +2697,10 @@
       "Cute stuff",
       "Colorful stuff",
       "Looks like food",
-      "Group activities",
-      "Dry flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Torkoal",
@@ -2536,9 +2712,10 @@
       "Stone stuff",
       "Metal stuff",
       "Hard stuff",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Kricketot",
@@ -2550,9 +2727,10 @@
       "Wooden stuff",
       "Noisy stuff",
       "Colorful stuff",
-      "Watching stuff",
-      "Bitter flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Kricketune",
@@ -2564,9 +2742,10 @@
       "Wooden stuff",
       "Noisy stuff",
       "Colorful stuff",
-      "Watching stuff",
-      "Spicy flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Chatot",
@@ -2581,7 +2760,8 @@
       "Play spaces",
       "Noisy stuff",
       "Sweet falvors"
-    ]
+    ],
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Riolu",
@@ -2593,9 +2773,10 @@
       "Fabric",
       "Construction",
       "Gatherings",
-      "Watching stuff",
-      "Spicy flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Lucario",
@@ -2607,9 +2788,10 @@
       "Metal stuff",
       "Construction",
       "Complicated stuff",
-      "Healing",
-      "Dry flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Rotom (DJ Rotom)",
@@ -2621,9 +2803,10 @@
       "Glass stuff",
       "Noisy stuff",
       "Group activities",
-      "Blocky stuff",
-      "Bitter flavors"
-    ]
+      "Blocky stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Larvesta",
@@ -2636,9 +2819,10 @@
       "Lots of fire",
       "Sharp stuff",
       "Wooden stuff",
-      "Symbols",
-      "Bitter flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Volcarona",
@@ -2651,9 +2835,10 @@
       "Lots of fire",
       "Letters and words",
       "Wooden stuff",
-      "Symbols",
-      "Dry flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Rowlet",
@@ -2665,9 +2850,10 @@
       "Wooden stuff",
       "Nice breezes",
       "Containers",
-      "Spinning stuff",
-      "Dry flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Dartrix",
@@ -2680,9 +2866,10 @@
       "Wooden stuff",
       "Nice breezes",
       "Slender objects",
-      "Cleanliness",
-      "Sour flavors"
-    ]
+      "Cleanliness"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Decidueye",
@@ -2695,9 +2882,10 @@
       "Spooky stuff",
       "Wooden stuff",
       "Nice breezes",
-      "Letters and words",
-      "Dry flavors"
-    ]
+      "Letters and words"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Scorbunny",
@@ -2709,9 +2897,10 @@
       "Stone stuff",
       "Soft stuff",
       "Group activities",
-      "Sharp stuff",
-      "Dry flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Raboot",
@@ -2723,9 +2912,10 @@
       "Stone stuff",
       "Play spaces",
       "Group activities",
-      "Containers",
-      "Dry flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Cinderace",
@@ -2738,9 +2928,10 @@
       "Stone stuff",
       "Play spaces",
       "Group activities",
-      "Round stuff",
-      "Spicy flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Skwovet",
@@ -2753,9 +2944,10 @@
       "Wooden stuff",
       "Watching stuff",
       "Looks like food",
-      "Round stuff",
-      "Dry flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Greedent (Chef Dente)",
@@ -2767,9 +2959,10 @@
       "Metal stuff",
       "Group activities",
       "Looks like food",
-      "Luxury",
-      "Sweeet flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Sweeet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Rolycoly",
@@ -2782,9 +2975,10 @@
       "Lots of fire",
       "Hard stuff",
       "Metal stuff",
-      "Rides",
-      "Sour flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Carkol",
@@ -2797,9 +2991,10 @@
       "Lots of fire",
       "Hard stuff",
       "Metal stuff",
-      "Rides",
-      "Spicy flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Coalossal",
@@ -2812,9 +3007,10 @@
       "Lots of fire",
       "Hard stuff",
       "Metal stuff",
-      "Rides",
-      "Spicy flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Toxel",
@@ -2826,9 +3022,10 @@
       "Shiny stuff",
       "Noisy stuff",
       "Glass stuff",
-      "Garbage",
-      "Sweet flavors"
-    ]
+      "Garbage"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Amped Form Toxtricity",
@@ -2841,9 +3038,10 @@
       "Play spaces",
       "Noisy stuff",
       "Slender objects",
-      "Sharp stuff",
-      "Spicy flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Fidough",
@@ -2855,9 +3053,10 @@
       "Watching stuff",
       "Soft stuff",
       "Lots of fire",
-      "Letters and words",
-      "Sweet flavors"
-    ]
+      "Letters and words"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Dachsbun",
@@ -2870,9 +3069,10 @@
       "Watching stuff",
       "Group activities",
       "Lots of fire",
-      "Looks like food",
-      "Sour flavors"
-    ]
+      "Looks like food"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Charcadet",
@@ -2884,9 +3084,10 @@
       "Stone stuff",
       "Strange stuff",
       "Exercise",
-      "Luxury",
-      "Sweet flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Armarouge",
@@ -2899,9 +3100,10 @@
       "Stone stuff",
       "Strange stuff",
       "Exercise",
-      "Luxury",
-      "Spicy flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Ceruledge",
@@ -2914,9 +3116,10 @@
       "Stone stuff",
       "Spooky stuff",
       "Strange stuff",
-      "Luxury",
-      "Bitter flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Glimmet",
@@ -2928,9 +3131,10 @@
       "Hard stuff",
       "Garbage",
       "Shiny stuff",
-      "Complicated stuff",
-      "Bitter flavors"
-    ]
+      "Complicated stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Glimmora",
@@ -2942,9 +3146,10 @@
       "Hard stuff",
       "Garbage",
       "Shiny stuff",
-      "Complicated stuff",
-      "Bitter flavors"
-    ]
+      "Complicated stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Chest Form Gimmighoul",
@@ -2956,9 +3161,10 @@
       "Metal stuff",
       "Strange stuff",
       "Shiny stuff",
-      "Complicated stuff",
-      "Bitter flavors"
-    ]
+      "Complicated stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Gholdengo",
@@ -2970,9 +3176,10 @@
       "Metal stuff",
       "Strange stuff",
       "Shiny stuff",
-      "Complicated stuff",
-      "Dry flavors"
-    ]
+      "Complicated stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Vulpix",
@@ -2984,9 +3191,10 @@
       "Soft stuff",
       "Cute stuff",
       "Round stuff",
-      "Pretty flowers",
-      "Bitter flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Ninetales",
@@ -2998,9 +3206,10 @@
       "Soft stuff",
       "Watching stuff",
       "Luxury",
-      "Pretty flowers",
-      "Dry flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Poliwag",
@@ -3012,9 +3221,10 @@
       "Cleanliness",
       "Round stuff",
       "Rides",
-      "Spinning stuff",
-      "Sweet flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Poliwhirl",
@@ -3026,9 +3236,10 @@
       "Cleanliness",
       "Lots of nature",
       "Exercise",
-      "Spinning stuff",
-      "Bitter flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Poliwrath",
@@ -3041,9 +3252,10 @@
       "Cleanliness",
       "Construction",
       "Exercise",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Politoed",
@@ -3056,9 +3268,10 @@
       "Play spaces",
       "Noisy stuff",
       "Gatherings",
-      "Group activities",
-      "Sour flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Abra",
@@ -3070,9 +3283,10 @@
       "Wobbly stuff",
       "Metal stuff",
       "Soft stuff",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Kadabra",
@@ -3084,9 +3298,10 @@
       "Wobbly stuff",
       "Metal stuff",
       "Containers",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Alakazam",
@@ -3099,9 +3314,10 @@
       "Wobbly stuff",
       "Metal stuff",
       "Letters and words",
-      "Watching stuff",
-      "Bitter flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Mime Jr.",
@@ -3113,9 +3329,10 @@
       "Cute stuff",
       "Rides",
       "Play spaces",
-      "Colorful stuff",
-      "Sweet flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Mr. Mime",
@@ -3128,9 +3345,10 @@
       "Cute stuff",
       "Rides",
       "Wobbly stuff",
-      "Watching stuff",
-      "Bitter flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Porygon",
@@ -3142,9 +3360,10 @@
       "Strange stuff",
       "Blocky stuff",
       "Construction",
-      "Colorful stuff",
-      "Bitter flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Porygon2",
@@ -3156,9 +3375,10 @@
       "Strange stuff",
       "Round stuff",
       "Construction",
-      "Colorful stuff",
-      "Sour flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Porygon-Z",
@@ -3170,9 +3390,10 @@
       "Strange stuff",
       "Fabric",
       "Watching stuff",
-      "Colorful stuff",
-      "Dry flavors"
-    ]
+      "Colorful stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Dratini",
@@ -3184,9 +3405,10 @@
       "Lots of fire",
       "Cleanliness",
       "Cute stuff",
-      "Slender objects",
-      "Sweet flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Dragonair",
@@ -3198,9 +3420,10 @@
       "Lots of fire",
       "Cleanliness",
       "Glass stuff",
-      "Slender objects",
-      "Sweet flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Dragonite",
@@ -3213,9 +3436,10 @@
       "Nice breezes",
       "Cleanliness",
       "Symbols",
-      "Pretty flowers",
-      "Dry flavors"
-    ]
+      "Pretty flowers"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Cyndaquil",
@@ -3227,9 +3451,10 @@
       "Fabric",
       "Slender objects",
       "Metal stuff",
-      "Rides",
-      "Sweet flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Quilava",
@@ -3241,9 +3466,10 @@
       "Fabric",
       "Slender objects",
       "Metal stuff",
-      "Rides",
-      "Sweet flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Typhlosion",
@@ -3256,9 +3482,10 @@
       "Fabric",
       "Slender objects",
       "Metal stuff",
-      "Rides",
-      "Dry flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Misdreavus",
@@ -3270,9 +3497,10 @@
       "Strange stuff",
       "Shiny stuff",
       "Colorful stuff",
-      "Watching stuff",
-      "Dry flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Mismagius",
@@ -3285,9 +3513,10 @@
       "Strange stuff",
       "Noisy stuff",
       "Wobbly stuff",
-      "Group activities",
-      "Bitter flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Girafarig",
@@ -3299,9 +3528,10 @@
       "Strange stuff",
       "Rides",
       "Watching stuff",
-      "Slender objects",
-      "Sour flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Farigiraf",
@@ -3314,9 +3544,10 @@
       "Strange stuff",
       "Rides",
       "Watching stuff",
-      "Slender objects",
-      "Sour flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Ralts",
@@ -3328,9 +3559,10 @@
       "Cute stuff",
       "Healing",
       "Watching stuff",
-      "Symbols",
-      "Sweet flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Kirlia",
@@ -3342,9 +3574,10 @@
       "Cute stuff",
       "Healing",
       "Watching stuff",
-      "Symbols",
-      "Sweet flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Gardevoir",
@@ -3357,9 +3590,10 @@
       "Luxury",
       "Healing",
       "Watching stuff",
-      "Symbols",
-      "Sour flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Gallade",
@@ -3372,9 +3606,10 @@
       "Exercise",
       "Healing",
       "Construction",
-      "Fabric",
-      "Spicy flavors"
-    ]
+      "Fabric"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Plusle",
@@ -3386,9 +3621,10 @@
       "Glass stuff",
       "Soft stuff",
       "Cute stuff",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Minun",
@@ -3400,9 +3636,10 @@
       "Glass stuff",
       "Soft stuff",
       "Cute stuff",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Trapinch",
@@ -3415,9 +3652,10 @@
       "Hard stuff",
       "Strange stuff",
       "Watching stuff",
-      "Exercise",
-      "Spicy flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Vibrava",
@@ -3430,9 +3668,10 @@
       "Lots of fire",
       "Lots of nature",
       "Luxury",
-      "Noisy stuff",
-      "Bitter flavors"
-    ]
+      "Noisy stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Flygon",
@@ -3445,9 +3684,10 @@
       "Lots of fire",
       "Lots of nature",
       "Stone stuff",
-      "Wooden stuff",
-      "Sour flavors"
-    ]
+      "Wooden stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Swablu",
@@ -3459,9 +3699,10 @@
       "Nice breezes",
       "Cute stuff",
       "Watching stuff",
-      "Cleanliness",
-      "Sweet flavors"
-    ]
+      "Cleanliness"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Altaria",
@@ -3474,9 +3715,10 @@
       "Nice breezes",
       "Cute stuff",
       "Watching stuff",
-      "Noisy stuff",
-      "Sour flavors"
-    ]
+      "Noisy stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Duskull",
@@ -3488,9 +3730,10 @@
       "Strange stuff",
       "Rides",
       "Glass stuff",
-      "Fabric",
-      "Bitter flavors"
-    ]
+      "Fabric"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Dusclops",
@@ -3502,9 +3745,10 @@
       "Strange stuff",
       "Rides",
       "Soft stuff",
-      "Containers",
-      "Sour flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Dusknoir",
@@ -3517,9 +3761,10 @@
       "Strange stuff",
       "Rides",
       "Group activities",
-      "Containers",
-      "Bitter flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Beldum",
@@ -3531,9 +3776,10 @@
       "Strange stuff",
       "Hard stuff",
       "Complicated stuff",
-      "Stone stuff",
-      "Sour flavors"
-    ]
+      "Stone stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Cool"
   },
   {
     "name": "Metang",
@@ -3545,9 +3791,10 @@
       "Strange stuff",
       "Hard stuff",
       "Complicated stuff",
-      "Stone stuff",
-      "Bitter flavors"
-    ]
+      "Stone stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Cool"
   },
   {
     "name": "Metagross",
@@ -3560,9 +3807,10 @@
       "Strange stuff",
       "Hard stuff",
       "Exercise",
-      "Luxury",
-      "Dry flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Cool"
   },
   {
     "name": "Snivy",
@@ -3575,9 +3823,10 @@
       "Wooden stuff",
       "Lots of water",
       "Wobbly stuff",
-      "Shiny stuff",
-      "Sour flavors"
-    ]
+      "Shiny stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Servine",
@@ -3590,9 +3839,10 @@
       "Wooden stuff",
       "Lots of water",
       "Cleanliness",
-      "Shiny stuff",
-      "Bitter flavors"
-    ]
+      "Shiny stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Serperior",
@@ -3605,9 +3855,10 @@
       "Wooden stuff",
       "Lots of water",
       "Containers",
-      "Slender objects",
-      "Dry flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Froakie",
@@ -3619,9 +3870,10 @@
       "Ocean vibes",
       "Cleanliness",
       "Watching stuff",
-      "Containers",
-      "Spicy flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Frogadier",
@@ -3633,9 +3885,10 @@
       "Ocean vibes",
       "Cleanliness",
       "Watching stuff",
-      "Exercise",
-      "Spicy flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Greninja",
@@ -3648,9 +3901,10 @@
       "Ocean vibes",
       "Cleanliness",
       "Shiny stuff",
-      "Exercise",
-      "Bitter flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Dedenne",
@@ -3662,9 +3916,10 @@
       "Cute stuff",
       "Watching stuff",
       "Group activities",
-      "Looks like food",
-      "Sweet flavors"
-    ]
+      "Looks like food"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Noibat",
@@ -3676,9 +3931,10 @@
       "Fabric",
       "Watching stuff",
       "Luxury",
-      "Looks like food",
-      "Spicy flavors"
-    ]
+      "Looks like food"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Noivern",
@@ -3691,9 +3947,10 @@
       "Lots of fire",
       "Watching stuff",
       "Play spaces",
-      "Looks like food",
-      "Dry flavors"
-    ]
+      "Looks like food"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Rookidee",
@@ -3705,9 +3962,10 @@
       "Shiny stuff",
       "Containers",
       "Slender objects",
-      "Wooden stuff",
-      "Sour flavors"
-    ]
+      "Wooden stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Corvisquire",
@@ -3719,9 +3977,10 @@
       "Shiny stuff",
       "Containers",
       "Slender objects",
-      "Wooden stuff",
-      "Dry flavors"
-    ]
+      "Wooden stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Corviknight",
@@ -3734,9 +3993,10 @@
       "Metal stuff",
       "Shiny stuff",
       "Containers",
-      "Wooden stuff",
-      "Bitter flavors"
-    ]
+      "Wooden stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Dreepy",
@@ -3749,9 +4009,10 @@
       "Spooky stuff",
       "Rides",
       "Strange stuff",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Drakloak",
@@ -3764,9 +4025,10 @@
       "Spooky stuff",
       "Rides",
       "Strange stuff",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Dragapult",
@@ -3779,9 +4041,10 @@
       "Spooky stuff",
       "Rides",
       "Strange stuff",
-      "Group activities",
-      "Spicy flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Sprigatito",
@@ -3793,9 +4056,10 @@
       "Pretty flowers",
       "Containers",
       "Colorful stuff",
-      "Cute stuff",
-      "Sweet flavors"
-    ]
+      "Cute stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Floragato",
@@ -3807,9 +4071,10 @@
       "Pretty flowers",
       "Sharp stuff",
       "Colorful stuff",
-      "Cute stuff",
-      "Sour flavors"
-    ]
+      "Cute stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Meowscarada",
@@ -3822,9 +4087,10 @@
       "Pretty flowers",
       "Shiny stuff",
       "Luxury",
-      "Cute stuff",
-      "Dry flavors"
-    ]
+      "Cute stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Wattrel",
@@ -3836,9 +4102,10 @@
       "Nice breezes",
       "Ocean vibes",
       "Gatherings",
-      "Complicated stuff",
-      "Spicy flavors"
-    ]
+      "Complicated stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Kilowattrel",
@@ -3851,9 +4118,10 @@
       "Nice breezes",
       "Ocean vibes",
       "Gatherings",
-      "Slender objects",
-      "Dry flavors"
-    ]
+      "Slender objects"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Tinkatink",
@@ -3865,9 +4133,10 @@
       "Metal stuff",
       "Construction",
       "Looks like food",
-      "Exercise",
-      "Sweet flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Tinkatuff",
@@ -3879,9 +4148,10 @@
       "Metal stuff",
       "Construction",
       "Group activities",
-      "Exercise",
-      "Sour flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Tinkaton (Tinkmaster)",
@@ -3893,9 +4163,10 @@
       "Metal stuff",
       "Construction",
       "Blocky stuff",
-      "Exercise",
-      "Spicy flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Aerodactyl",
@@ -3907,9 +4178,10 @@
       "Nice breezes",
       "Hard stuff",
       "Shiny stuff",
-      "Spinning stuff",
-      "Sour flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Cranidos",
@@ -3921,9 +4193,10 @@
       "Hard stuff",
       "Wobbly stuff",
       "Group activities",
-      "Exercise",
-      "Spicy flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Rampardos",
@@ -3936,9 +4209,10 @@
       "Hard stuff",
       "Metal stuff",
       "Luxury",
-      "Exercise",
-      "Dry flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Shieldon",
@@ -3950,9 +4224,10 @@
       "Hard stuff",
       "Metal stuff",
       "Luxury",
-      "Round stuff",
-      "Sweet flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Bastiodon",
@@ -3965,9 +4240,10 @@
       "Hard stuff",
       "Metal stuff",
       "Luxury",
-      "Exercise",
-      "Bitter flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Tyrunt",
@@ -3979,9 +4255,10 @@
       "Hard stuff",
       "Lots of fire",
       "Luxury",
-      "Exercise",
-      "Sweet flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Tyrantrum",
@@ -3994,9 +4271,10 @@
       "Hard stuff",
       "Lots of fire",
       "Luxury",
-      "Exercise",
-      "Sour flavors"
-    ]
+      "Exercise"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dry"
   },
   {
     "name": "Amaura",
@@ -4008,9 +4286,10 @@
       "Hard stuff",
       "Shiny stuff",
       "Group activities",
-      "Containers",
-      "Dry flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Cool"
   },
   {
     "name": "Aurorus",
@@ -4023,9 +4302,10 @@
       "Hard stuff",
       "Shiny stuff",
       "Noisy stuff",
-      "Symbols",
-      "Sour flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Cool"
   },
   {
     "name": "Eevee",
@@ -4037,9 +4317,10 @@
       "Stone stuff",
       "Cute stuff",
       "Letters and words",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Vaporeon",
@@ -4051,9 +4332,10 @@
       "Cleanliness",
       "Cute stuff",
       "Pretty flowers",
-      "Watching stuff",
-      "Sweet flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Jolteon",
@@ -4065,9 +4347,10 @@
       "Shiny stuff",
       "Cute stuff",
       "Glass stuff",
-      "Sharp stuff",
-      "Spicy flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Flareon",
@@ -4079,9 +4362,10 @@
       "Wooden stuff",
       "Cute stuff",
       "Metal stuff",
-      "Rides",
-      "Spicy flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Espeon",
@@ -4093,9 +4377,10 @@
       "Nice breezes",
       "Cute stuff",
       "Complicated stuff",
-      "Watching stuff",
-      "Sweet flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Umbreon",
@@ -4107,9 +4392,10 @@
       "Luxury",
       "Cute stuff",
       "Letters and words",
-      "Watching stuff",
-      "Bitter flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Leafeon",
@@ -4121,9 +4407,10 @@
       "Pretty flowers",
       "Cute stuff",
       "Fabric",
-      "Healing",
-      "Sour flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Glaceon",
@@ -4135,9 +4422,10 @@
       "Shiny stuff",
       "Cute stuff",
       "Glass stuff",
-      "Group activities",
-      "Sweet flavors"
-    ]
+      "Group activities"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Cool"
   },
   {
     "name": "Sylveon",
@@ -4149,23 +4437,25 @@
       "Lots of nature",
       "Fabric",
       "Noisy stuff",
-      "Round stuff",
-      "Sweet flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Kyogre",
     "specialties": [
-      "TBD"
+      "???"
     ],
     "favorites": [
       "Lots of water",
       "Ocean vibes",
       "Luxury",
       "Shiny stuff",
-      "Glass stuff",
-      "Dry flavors"
-    ]
+      "Glass stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Raikou",
@@ -4177,9 +4467,10 @@
       "Nice breezes",
       "Shiny stuff",
       "Glass stuff",
-      "Luxury",
-      "Dry flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Entei",
@@ -4191,9 +4482,10 @@
       "Stone stuff",
       "Symbols",
       "Exercise",
-      "Luxury",
-      "Bitter flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Suicune",
@@ -4205,9 +4497,10 @@
       "Ocean vibes",
       "Cleanliness",
       "Watching stuff",
-      "Healing",
-      "Sour flavors"
-    ]
+      "Healing"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Volcanion",
@@ -4219,9 +4512,10 @@
       "Lots of water",
       "Stone stuff",
       "Containers",
-      "Symbols",
-      "Spicy flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Articuno",
@@ -4233,9 +4527,10 @@
       "Nice breezes",
       "Shiny stuff",
       "Symbols",
-      "Luxury",
-      "Sour flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Cool"
   },
   {
     "name": "Zapdos",
@@ -4247,9 +4542,10 @@
       "Nice breezes",
       "Glass stuff",
       "Symbols",
-      "Luxury",
-      "Spicy flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Moltres",
@@ -4261,37 +4557,40 @@
       "Nice breezes",
       "Stone stuff",
       "Symbols",
-      "Luxury",
-      "Spicy flavors"
-    ]
+      "Luxury"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Lugia",
     "specialties": [
-      "TBD"
+      "???"
     ],
     "favorites": [
       "Strange stuff",
       "Nice breezes",
       "Lots of water",
       "Ocean vibes",
-      "Symbols",
-      "Dry flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Ho-oh",
     "specialties": [
-      "TBD"
+      "???"
     ],
     "favorites": [
       "Lots of fire",
       "Wooden stuff",
       "Nice breezes",
       "Lots of nature",
-      "Symbols",
-      "Spicy flavors"
-    ]
+      "Symbols"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Mewtwo",
@@ -4303,9 +4602,10 @@
       "Watching stuff",
       "Letters and words",
       "Complicated stuff",
-      "Stone stuff",
-      "Dry flavors"
-    ]
+      "Stone stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Dark"
   },
   {
     "name": "Mew",
@@ -4317,9 +4617,10 @@
       "Watching stuff",
       "Luxury",
       "Complicated stuff",
-      "Play spaces",
-      "Sweet flavors"
-    ]
+      "Play spaces"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "East Sea Shellos",
@@ -4331,9 +4632,10 @@
       "Ocean vibes",
       "Cleanliness",
       "Colorful stuff",
-      "Containers",
-      "Sour flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "East Sea Gastrodon",
@@ -4346,9 +4648,10 @@
       "Ocean vibes",
       "Cleanliness",
       "Colorful stuff",
-      "Containers",
-      "Dry flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Hoppip",
@@ -4360,9 +4663,10 @@
       "Lots of nature",
       "Nice breezes",
       "Pretty flowers",
-      "Wobbly stuff",
-      "Sweet flavors"
-    ]
+      "Wobbly stuff"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Skiploom",
@@ -4374,9 +4678,10 @@
       "Lots of nature",
       "Nice breezes",
       "Pretty flowers",
-      "Spinning stuff",
-      "Dry flavors"
-    ]
+      "Spinning stuff"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Jumpluff",
@@ -4389,9 +4694,10 @@
       "Lots of nature",
       "Nice breezes",
       "Pretty flowers",
-      "Round stuff",
-      "Sour flavors"
-    ]
+      "Round stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Droopy Form Tatsugiri",
@@ -4403,9 +4709,10 @@
       "Ocean vibes",
       "Group activities",
       "Spinning stuff",
-      "Blocky objects",
-      "Sweet flavors"
-    ]
+      "Blocky objects"
+    ],
+    "favorite_flavor":  "Sweet flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Stretchy Form Tatsugiri",
@@ -4417,9 +4724,10 @@
       "Ocean vibes",
       "Group activities",
       "Letters and words",
-      "Containers",
-      "Spicy flavors"
-    ]
+      "Containers"
+    ],
+    "favorite_flavor":  "Spicy flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Pikachu",
@@ -4431,9 +4739,10 @@
       "Glass stuff",
       "Group activities",
       "Round stuff",
-      "Rides",
-      "Sour flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Bright"
   },
   {
     "name": "Snorlax",
@@ -4446,9 +4755,10 @@
       "Fabric",
       "Looks like food",
       "Wobbly stuff",
-      "Rides",
-      "Dry flavors"
-    ]
+      "Rides"
+    ],
+    "favorite_flavor":  "Dry flavors",
+    "ideal_habitat": "Warm"
   },
   {
     "name": "Low Key Form Toxtricity",
@@ -4461,9 +4771,10 @@
       "Play spaces",
       "Noisy stuff",
       "Slender objects",
-      "Sharp stuff",
-      "Bitter flavors"
-    ]
+      "Sharp stuff"
+    ],
+    "favorite_flavor":  "Bitter flavors",
+    "ideal_habitat": "Humid"
   },
   {
     "name": "Sableye",
@@ -4475,8 +4786,9 @@
       "Shiny stuff",
       "Luxury",
       "Looks like food",
-      "Watching stuff",
-      "Sour flavors"
-    ]
+      "Watching stuff"
+    ],
+    "favorite_flavor":  "Sour flavors",
+    "ideal_habitat": "Dark"
   }
 ]
