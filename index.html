@@ -53,12 +53,13 @@
   }
 
   .page {
-    width: min(1480px, calc(100% - 28px));
-    margin: 16px auto 24px;
-    height: calc(100dvh - 32px);
-    min-height: 0;
-    display: grid;
-    grid-template-rows: auto auto minmax(0, 1fr);
+    width: min(1480px, 100%);
+    margin: 0 auto;
+    padding: 16px 14px 14px;
+    height: 100dvh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
     gap: 14px;
     overflow: hidden;
   }
@@ -74,7 +75,7 @@
   }
 
   .hero {
-    padding: 0;
+    padding: 6px 0 2px;
     background: transparent;
     border: 0;
     box-shadow: none;
@@ -187,11 +188,12 @@
     display: grid;
     grid-template-columns: minmax(300px, 0.82fr) minmax(360px, 1fr) minmax(360px, 0.96fr);
     gap: 18px;
-    align-items: start;
+    align-items: stretch;
+    flex: 1 1 auto;
     min-height: 0;
-    height: 100%;
+    height: auto;
     padding-bottom: 0;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .panel {
@@ -218,25 +220,13 @@
     min-height: 0;
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
-    scroll-padding-bottom: 120px;
-    scrollbar-gutter: stable;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(24, 20, 16, 0.38) transparent;
+    scroll-padding-bottom: clamp(40px, 24vh, 220px);
     padding-right: 6px;
-    padding-bottom: 120px;
-  }
-
-  .planner-column::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  .planner-column::-webkit-scrollbar-thumb {
-    border: 3px solid transparent;
-    background: rgba(24, 20, 16, 0.38);
-    background-clip: padding-box;
+    padding-bottom: clamp(40px, 24vh, 220px);
   }
 
   .step-header {
@@ -1511,17 +1501,13 @@
   }
 
   @media (max-width: 920px) {
-    body {
-      overflow: hidden;
-    }
-
     .hero {
       margin-bottom: 16px;
     }
 
     .page {
-      height: calc(100dvh - 32px);
-      min-height: 0;
+      height: 100dvh;
+      min-height: 100dvh;
       overflow: hidden;
     }
 
@@ -1547,9 +1533,12 @@
 
     .mobile-board-nav {
       display: flex;
+      align-items: flex-start;
+      flex: 0 0 auto;
       gap: 8px;
       overflow-x: auto;
-      padding-bottom: 2px;
+      min-height: 40px;
+      padding: 0 0 4px;
     }
 
     .mobile-board-nav button {
@@ -1586,6 +1575,10 @@
 
     .planner-column {
       scroll-snap-align: start;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: clamp(40px, 20vh, 180px);
     }
 
     .result-meta {
@@ -1599,10 +1592,10 @@
 
   @media (max-width: 620px) {
     .page {
-      width: min(100% - 18px, 1120px);
-      margin: 12px auto 24px;
-      height: calc(100dvh - 24px);
-      min-height: 0;
+      width: 100%;
+      padding: 12px 9px 9px;
+      height: 100dvh;
+      min-height: 100dvh;
       gap: 10px;
     }
 
@@ -3072,6 +3065,9 @@ function setupSpecialtyAutocomplete() {
   document.getElementById('specialtyCombobox').addEventListener('click', (event) => {
     if (event.target.closest('.dropdown-caret')) {
       specialtyDropdownOpen = !specialtyDropdownOpen;
+      if (!specialtyDropdownOpen) {
+        input.blur();
+      }
     } else {
       specialtyDropdownOpen = true;
       input.focus();
@@ -3147,6 +3143,9 @@ function setupIdealHabitatAutocomplete() {
   document.getElementById('idealHabitatCombobox').addEventListener('click', (event) => {
     if (event.target.closest('.dropdown-caret')) {
       idealHabitatDropdownOpen = !idealHabitatDropdownOpen;
+      if (!idealHabitatDropdownOpen) {
+        input.blur();
+      }
     } else {
       idealHabitatDropdownOpen = true;
       input.focus();
@@ -3303,6 +3302,9 @@ function setupPokemonAutocomplete() {
   document.getElementById('pokemonCombobox').addEventListener('click', (event) => {
     if (event.target.closest('.dropdown-caret')) {
       pokemonDropdownOpen = !pokemonDropdownOpen;
+      if (!pokemonDropdownOpen) {
+        input.blur();
+      }
     } else {
       pokemonDropdownOpen = true;
       input.focus();
@@ -3717,12 +3719,7 @@ document.getElementById('closeIdealHabitatDropdownBtn').addEventListener('click'
 });
 document.getElementById('saveHabitatBtn').addEventListener('click', saveHabitat);
 document.getElementById('clearHabitatPokemonBtn').addEventListener('click', () => {
-  habitatPokemonNames = [];
-  renderHabitatSelectedPokemon();
-  syncHabitatActions();
-  renderHabitatReport();
-  renderResultsFromState();
-  hideHabitatToast();
+  clearHabitatDraft();
 });
 document.getElementById('openSavedHabitatsBtn').addEventListener('click', () => {
   setSavedHabitatsDrawer(true);
