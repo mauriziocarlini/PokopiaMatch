@@ -823,6 +823,11 @@
     line-height: 1.3;
   }
 
+  a.tag {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
   .tag.shared {
     background: var(--shared);
   }
@@ -1892,6 +1897,7 @@
   </div>
 <script>
 let DATA = [];
+let FAVORITE_LINKS = {};
 let ALL_SPECIALTIES = [];
 let ALL_IDEAL_HABITATS = [];
 let selectedSpecialties = [];
@@ -1920,6 +1926,7 @@ const DEFAULT_ADVANCED_FILTER_ORDER = ['specialties', 'idealHabitat'];
 let advancedFilterOrder = DEFAULT_ADVANCED_FILTER_ORDER.slice();
 let modalResolve = null;
 let saveToastTimer = null;
+const FLAVOR_GUIDE_URL = 'https://www.serebii.net/pokemonpokopia/flavors.shtml';
 
 function escapeHtml(value) {
   return String(value)
@@ -1973,11 +1980,27 @@ function getSelectedSpecialties() {
   return selectedSpecialties.slice();
 }
 
+function getFavoriteLink(name) {
+  return FAVORITE_LINKS && typeof FAVORITE_LINKS[name] === 'string' ? FAVORITE_LINKS[name] : '';
+}
+
+function renderFavoriteChip(name, className, extraAttributes) {
+  const link = getFavoriteLink(name);
+  const classes = 'tag' + (className ? ' ' + className : '');
+  const attrs = extraAttributes ? ' ' + extraAttributes : '';
+
+  if (link) {
+    return '<a class="' + classes + '" href="' + escapeHtml(link) + '" target="_blank" rel="noopener noreferrer"' + attrs + '>' + escapeHtml(name) + '</a>';
+  }
+
+  return '<span class="' + classes + '"' + attrs + '>' + escapeHtml(name) + '</span>';
+}
+
 function renderTags(items, sharedItems) {
   const sharedSet = new Set(sharedItems || []);
   return '<div class="tag-list">' + items.map((item) => {
     const tagClass = sharedSet.has(item) ? ' shared' : ' faded';
-    return '<span class="tag' + tagClass + '">' + escapeHtml(item) + '</span>';
+    return renderFavoriteChip(item, tagClass.trim());
   }).join('') + '</div>';
 }
 
@@ -1993,7 +2016,7 @@ function renderIdealHabitatTag(idealHabitat) {
 }
 
 function renderFlavorTag(flavor) {
-  return '<div class="tag-list"><span class="tag flavor">' + escapeHtml(flavor) + '</span></div>';
+  return '<div class="tag-list"><a class="tag flavor" href="' + escapeHtml(FLAVOR_GUIDE_URL) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(flavor) + '</a></div>';
 }
 
 function renderFavoriteFilterTags(items) {
@@ -2609,6 +2632,13 @@ function renderCountedTags(items, variant) {
   return '<div class="report-tags">' + items.map((item) => {
     const countBadge = item.owners.length > 1 ? '<span class="tag-count">' + item.owners.length + '</span>' : '';
     const title = escapeHtml(item.owners.join(', '));
+    const link = variant === 'shared' || variant === 'unique' || variant === 'flavor';
+    if (link) {
+      const href = variant === 'flavor' ? FLAVOR_GUIDE_URL : getFavoriteLink(item.name);
+      if (href) {
+        return '<a class="tag ' + variant + '" href="' + escapeHtml(href) + '" target="_blank" rel="noopener noreferrer" data-tooltip="' + title + '">' + escapeHtml(item.name) + countBadge + '</a>';
+      }
+    }
     return '<span class="tag ' + variant + '" data-tooltip="' + title + '">' + escapeHtml(item.name) + countBadge + '</span>';
   }).join('') + '</div>';
 }
@@ -3634,12 +3664,20 @@ function enableUi() {
 
 async function loadData() {
   try {
-    const response = await fetch('./dex.json');
-    if (!response.ok) {
-      throw new Error('HTTP ' + response.status);
+    const [dexResponse, favoriteLinksResponse] = await Promise.all([
+      fetch('./dex.json'),
+      fetch('./favorites_links.json')
+    ]);
+
+    if (!dexResponse.ok) {
+      throw new Error('HTTP ' + dexResponse.status);
+    }
+    if (!favoriteLinksResponse.ok) {
+      throw new Error('HTTP ' + favoriteLinksResponse.status);
     }
 
-    const rawData = await response.json();
+    const rawData = await dexResponse.json();
+    FAVORITE_LINKS = await favoriteLinksResponse.json();
     DATA = rawData
       .filter((item) => item && item.name && Array.isArray(item.specialties) && Array.isArray(item.favorites))
       .sort((a, b) => a.name.localeCompare(b.name));
