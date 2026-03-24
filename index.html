@@ -44,7 +44,7 @@
 
   body {
     margin: 0;
-    min-height: 100vh;
+    min-height: 100svh;
     overflow-x: hidden;
     overflow-y: hidden;
     color: var(--ink);
@@ -55,9 +55,9 @@
   .page {
     width: min(1480px, 100%);
     margin: 0 auto;
-    padding: 16px 14px 14px;
-    height: 100dvh;
-    min-height: 100dvh;
+    padding: 16px 14px 0px;
+    height: 100svh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -108,8 +108,11 @@
     display: inline-flex;
     align-items: center;
     min-height: 34px;
-    padding-right: 42px;
     transform-origin: center;
+  }
+
+  #openSavedHabitatsBtn.has-count {
+    padding-right: 42px;
   }
 
   #openSavedHabitatsBtn.pulse {
@@ -224,9 +227,9 @@
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
-    scroll-padding-bottom: clamp(40px, 24vh, 220px);
+    scroll-padding-bottom: clamp(40px, 24vh, 24px);
     padding-right: 6px;
-    padding-bottom: clamp(40px, 24vh, 220px);
+    padding-bottom: clamp(40px, 24vh, 24px);
   }
 
   .step-header {
@@ -323,6 +326,16 @@
   .toggle-switch.active::after {
     transform: translate(16px, -50%);
     background: #fff;
+  }
+
+  .toggle-switch:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+    background: #efeee9;
+  }
+
+  .toggle-switch:disabled::after {
+    background: #f6f4ec;
   }
 
   .step-kicker {
@@ -729,6 +742,17 @@
     color: var(--ink);
   }
 
+  #showLessCompatibleBtn.active {
+    background: #efb1a8;
+    color: var(--ink);
+  }
+
+  #showLessCompatibleBtn:hover,
+  #showLessCompatibleBtn:focus {
+    background: #e59b91;
+    color: var(--ink);
+  }
+
   .summary {
     display: block;
   }
@@ -1057,15 +1081,98 @@
     align-self: center;
   }
 
-  .current-habitat-block {
-    display: grid;
+  #clearHabitatHeaderBtn,
+  #habitatHeaderScore .habitat-rating {
+    min-height: 30px;
+    padding: 5px 8px;
+    font-size: 12px;
+    line-height: 1.2;
   }
 
-  .current-habitat-block strong {
+  #habitatHeaderScore {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+
+  #habitatHeaderScore .habitat-rating {
+    margin: 0;
+    align-self: center;
+  }
+
+  .current-habitat-block {
+    display: grid;
+    gap: 12px;
+  }
+
+  .current-habitat-block h2 {
     display: block;
+    margin: 0;
     margin-bottom: 0;
     font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .current-habitat-title[hidden],
+  .current-habitat-top[hidden],
+  .current-habitat-inner[hidden],
+  .habitat-name-field[hidden] {
+    display: none;
+  }
+
+  .current-habitat-top {
+    display: grid;
+    gap: 8px;
+  }
+
+  .current-habitat-inner {
+    display: grid;
+    gap: 0;
+  }
+
+  .current-habitat-inner .report-block,
+  .current-habitat-inner .field-card {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .current-habitat-inner > * + * {
+    border-top: 1px solid rgba(24, 20, 16, 0.18);
+    padding-top: 12px;
+    margin-top: 12px;
+  }
+
+  .current-habitat-inner .habitat-report {
+    gap: 0;
+  }
+
+  .current-habitat-inner .habitat-report.filled {
+    border-top: 1px solid rgba(24, 20, 16, 0.18);
+    padding-top: 12px;
+  }
+
+  .current-habitat-inner .habitat-report .report-block + .report-block {
+    border-top: 1px solid rgba(24, 20, 16, 0.18);
+    padding-top: 12px;
+    margin-top: 12px;
+  }
+
+  .current-habitat-inner .field-card label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted) !important;
+    opacity: 1;
     text-transform: uppercase;
+  }
+
+  .habitat-name-field {
+    border-top: 1px solid rgba(24, 20, 16, 0.18) !important;
+    padding-top: 12px !important;
+    margin-top: 12px;
   }
 
   .current-habitat-empty[hidden] {
@@ -1153,7 +1260,7 @@
     color: var(--ink);
   }
 
-  .habitat-rating.perfect {
+  .habitat-rating.master {
     background: #bff7b9;
   }
 
@@ -1169,11 +1276,11 @@
     background: #faefab;
   }
 
-  .habitat-rating.mixed {
+  .habitat-rating.poor {
     background: #f6d19c;
   }
 
-  .habitat-rating.rough {
+  .habitat-rating.bad {
     background: #efb1a8;
   }
 
@@ -1197,10 +1304,21 @@
     padding: 12px;
   }
 
-  .report-block strong {
+  .report-block label {
     display: block;
     margin-bottom: 6px;
     font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .result-meta label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
     text-transform: uppercase;
   }
 
@@ -1249,7 +1367,8 @@
     border-left: 3px solid var(--line);
     background: var(--panel);
     box-shadow: -2px 0 0 var(--line);
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .saved-drawer-top {
@@ -1273,6 +1392,7 @@
 
   .habitat-item {
     padding: 14px;
+    min-width: 0;
   }
 
   .habitat-item-top {
@@ -1281,6 +1401,7 @@
     gap: 12px;
     align-items: start;
     margin-bottom: 10px;
+    min-width: 0;
   }
 
   .habitat-item-top > div:first-child {
@@ -1301,6 +1422,7 @@
     justify-content: flex-end;
     margin-left: auto;
     flex: 0 0 auto;
+    min-width: 0;
   }
 
   .habitat-item-buttons button {
@@ -1315,6 +1437,7 @@
     gap: 12px;
     margin: 10px 0;
     flex-wrap: nowrap;
+    min-width: 0;
   }
 
   .habitat-pokemon-list {
@@ -1446,10 +1569,30 @@
     overflow: auto;
   }
 
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
   .modal h3 {
     margin: 0 0 10px;
     font-size: 14px;
     line-height: 1.5;
+  }
+
+  .modal-header h3 {
+    margin: 0;
+  }
+
+  .modal-close {
+    width: auto;
+    min-width: 0;
+    min-height: 30px;
+    padding: 4px 8px;
+    flex: 0 0 auto;
   }
 
   .modal-body {
@@ -1493,7 +1636,7 @@
   }
 
   .empty {
-    padding: 14px;
+    padding: 12px;
     font-size: 13px;
     line-height: 1.6;
     color: var(--muted);
@@ -1510,8 +1653,8 @@
     }
 
     .page {
-      height: 100dvh;
-      min-height: 100dvh;
+      height: 100svh;
+      min-height: 100svh;
       overflow: hidden;
     }
 
@@ -1582,7 +1725,7 @@
       height: 100%;
       overflow-y: auto;
       overflow-x: hidden;
-      padding-bottom: clamp(40px, 20vh, 180px);
+      padding-bottom: clamp(40px, 20vh, 18px);
     }
 
     .result-meta {
@@ -1597,9 +1740,9 @@
   @media (max-width: 620px) {
     .page {
       width: 100%;
-      padding: 12px 9px 9px;
-      height: 100dvh;
-      min-height: 100dvh;
+      padding: 12px 9px 0px;
+      height: 100svh;
+      min-height: 100svh;
       gap: 10px;
     }
 
@@ -1660,6 +1803,20 @@
       align-items: center;
     }
 
+    .habitat-item-top,
+    .habitat-pokemon-row {
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .habitat-item-buttons {
+      width: 100%;
+      flex: 1 1 100%;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      margin-left: 0;
+    }
+
     .modal-backdrop {
       align-items: flex-start;
       padding: 12px;
@@ -1684,7 +1841,7 @@
       <div class="hero-top">
         <div>
           <h1>POKOPIA HABITAT PLANNER</h1>
-          <p class="intro">Choose a starter, review matches, and save habitats.</p>
+          <p class="intro">Choose a Pokémon, review matches, and save habitats.</p>
         </div>
         <div class="hero-actions">
           <button type="button" class="secondary small" id="globalResetBtn">Reset</button>
@@ -1704,7 +1861,7 @@
         <div class="step-header step-header-split">
           <div>
             <div class="step-kicker">Step 1</div>
-            <h2>Choose a starter</h2>
+            <h2>Choose a Pokémon</h2>
           </div>
           <div class="step-header-side">
             <span class="filter-icon" aria-hidden="true"></span>
@@ -1779,7 +1936,7 @@
 
         <div class="panel-section">
           <div class="field">
-            <label for="pokemonSearch">Pokemon</label>
+            <label for="pokemonSearch">Pokémon</label>
             <div class="specialty-picker">
               <div class="specialty-input-wrap" id="pokemonCombobox">
                 <div class="combobox-row">
@@ -1787,13 +1944,13 @@
                     id="pokemonSearch"
                     class="specialty-search"
                     type="text"
-                    placeholder="Choose a Pokemon"
+                    placeholder="Choose a Pokémon"
                     autocomplete="off"
-                    aria-label="Search Pokemon"
+                    aria-label="Search Pokémon"
                     disabled
                   >
                   <span class="dropdown-caret" id="pokemonCaret" aria-hidden="true"></span>
-                  <button type="button" class="combobox-close" id="closePokemonDropdownBtn" aria-label="Close Pokemon search" hidden>X</button>
+                  <button type="button" class="combobox-close" id="closePokemonDropdownBtn" aria-label="Close Pokémon search" hidden>X</button>
                 </div>
               </div>
               <div class="specialty-dropdown" id="pokemonDropdown" hidden></div>
@@ -1814,7 +1971,7 @@
           </div>
         </div>
         <div class="results-shell">
-          <div id="summary" class="empty">Choose a starter to generate habitat matches.</div>
+          <div id="summary" class="empty">Choose a Pokémon to generate habitat matches.</div>
           <div class="field" id="resultFiltersPanel" hidden>
             <div class="advanced-toggle-row">
               <h2>Advanced filters</h2>
@@ -1839,30 +1996,33 @@
             <div class="step-kicker">Step 3</div>
             <h2>Output</h2>
           </div>
-          <div class="step-header-side" id="habitatHeaderScore"></div>
+          <div class="step-header-side">
+            <button type="button" class="secondary small" id="clearHabitatHeaderBtn" hidden>Clear</button>
+          </div>
         </div>
         <div class="output-main">
           <div class="report-block current-habitat-block" id="habitatPokemonCombobox">
-            <strong>Current habitat</strong>
-            <div class="habitat-selected-bar" id="habitatSelectedBar" hidden>
-              <div class="habitat-selected" id="habitatSelectedPokemon"></div>
-              <button type="button" class="secondary small" id="clearHabitatPokemonBtn">Clear</button>
+            <h2 id="currentHabitatTitle" class="current-habitat-title">Current habitat</h2>
+            <div id="currentHabitatTop" class="current-habitat-top">
+              <div class="habitat-selected-bar" id="habitatSelectedBar" hidden>
+                <div class="habitat-selected" id="habitatSelectedPokemon"></div>
+                <div id="habitatHeaderScore"></div>
+              </div>
+              <div class="muted current-habitat-empty" id="currentHabitatEmpty">Add up to 4 Pokémon.</div>
             </div>
-            <div class="muted current-habitat-empty" id="currentHabitatEmpty">Add up to 4 Pokemon from the starter or match cards.</div>
-          </div>
-          <div id="habitatReport" class="habitat-report">
-            <div class="report-block">
-              <strong>Status</strong>
-              <div class="muted current-habitat-empty status-empty">Add at least 2 Pokemon to review habitat compatibility.</div>
-            </div>
-          </div>
-          <div class="field field-card">
-            <label for="habitatName">Habitat details</label>
-            <div class="specialty-input-wrap">
-              <input id="habitatName" class="specialty-search" type="text" placeholder="Name this habitat">
-            </div>
-            <div class="habitat-actions">
-              <button type="button" class="primary" id="saveHabitatBtn" disabled>Save habitat</button>
+            <div id="currentHabitatInner" class="current-habitat-inner">
+              <div id="habitatReport" class="habitat-report">
+                <div class="muted current-habitat-empty status-empty">Add at least 2 Pokémon to calculate habitat compatibility.</div>
+              </div>
+              <div id="habitatNameField" class="field field-card habitat-name-field">
+                <label for="habitatName">Habitat name</label>
+                <div class="specialty-input-wrap">
+                  <input id="habitatName" class="specialty-search" type="text" placeholder="Name this habitat">
+                </div>
+                <div class="habitat-actions">
+                  <button type="button" class="primary" id="saveHabitatBtn" disabled>Save habitat</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1886,7 +2046,10 @@
   <div id="tooltip" class="tooltip" hidden></div>
   <div id="modalBackdrop" class="modal-backdrop" hidden>
     <div class="modal">
-      <h3 id="modalTitle">Confirm</h3>
+      <div class="modal-header">
+        <h3 id="modalTitle">Confirm</h3>
+        <button type="button" class="secondary small modal-close" id="modalCloseBtn" aria-label="Close dialog">X</button>
+      </div>
       <div id="modalBody" class="modal-body"></div>
       <div id="modalActions" class="modal-actions"></div>
     </div>
@@ -1981,7 +2144,14 @@ function getSelectedSpecialties() {
 }
 
 function getFavoriteLink(name) {
-  return FAVORITE_LINKS && typeof FAVORITE_LINKS[name] === 'string' ? FAVORITE_LINKS[name] : '';
+  if (!FAVORITE_LINKS || !name) return '';
+  if (typeof FAVORITE_LINKS[name] === 'string') {
+    return FAVORITE_LINKS[name];
+  }
+
+  const normalizedName = String(name).trim().toLowerCase();
+  const matchedKey = Object.keys(FAVORITE_LINKS).find((key) => key.trim().toLowerCase() === normalizedName);
+  return matchedKey && typeof FAVORITE_LINKS[matchedKey] === 'string' ? FAVORITE_LINKS[matchedKey] : '';
 }
 
 function renderFavoriteChip(name, className, extraAttributes) {
@@ -2114,10 +2284,12 @@ function syncResultFiltersUi() {
   const wrap = document.getElementById('resultFiltersPanel');
   const panel = document.getElementById('resultAdvancedFilters');
   const button = document.getElementById('resultFiltersToggle');
+  const disabled = !latestSearchState;
   wrap.hidden = !resultAdvancedFiltersOpen || !latestSearchState;
   panel.hidden = !resultAdvancedFiltersOpen;
   button.classList.toggle('active', resultAdvancedFiltersOpen);
   button.setAttribute('aria-pressed', resultAdvancedFiltersOpen ? 'true' : 'false');
+  button.disabled = disabled;
 }
 
 function getPokemonProfile(pokemon) {
@@ -2254,7 +2426,7 @@ function getHabitatScoreData(names) {
 function getHabitatRating(data) {
   if (!data || data.score === null) {
     return {
-      label: 'Needs 2 Pokemon',
+      label: 'Needs 2 Pokémon',
       className: 'pending',
       level: 0
     };
@@ -2268,7 +2440,7 @@ function getHabitatRating(data) {
   if (allPerfectPairs && fullyAlignedGroup && allSameIdealHabitat) {
     return {
       label: 'Master',
-      className: 'perfect',
+      className: 'master',
       level: 4,
       icon: 'autoawesome'
     };
@@ -2301,14 +2473,14 @@ function getHabitatRating(data) {
   if (data.score >= 36) {
     return {
       label: 'Poor',
-      className: 'mixed',
+      className: 'poor',
       level: 1
     };
   }
 
   return {
     label: 'Bad',
-    className: 'rough',
+    className: 'bad',
     level: 0
   };
 }
@@ -2350,6 +2522,10 @@ function writeHabitats(habitats) {
   localStorage.setItem(HABITATS_STORAGE_KEY, JSON.stringify(habitats));
 }
 
+function getNextHabitatNumber(habitats) {
+  return habitats.length + 1;
+}
+
 function showTooltip(text, x, y) {
   const tooltip = document.getElementById('tooltip');
   tooltip.textContent = text;
@@ -2387,10 +2563,12 @@ function openModal(config) {
   } else {
     body.textContent = config.body || '';
   }
-  actions.innerHTML = config.actions.map((action, index) => {
+  const modalActions = Array.isArray(config.actions) ? config.actions : [];
+  actions.innerHTML = modalActions.map((action, index) => {
     const extraClass = action.kind ? ' ' + action.kind : '';
     return '<button type="button" class="' + (action.className || 'secondary') + extraClass + '" data-modal-action="' + index + '">' + escapeHtml(action.label) + '</button>';
   }).join('');
+  actions.hidden = modalActions.length === 0;
 
   backdrop.hidden = false;
 
@@ -2398,7 +2576,7 @@ function openModal(config) {
     modalResolve = resolve;
     actions.querySelectorAll('[data-modal-action]').forEach((button) => {
       button.addEventListener('click', () => {
-        const action = config.actions[Number(button.getAttribute('data-modal-action'))];
+        const action = modalActions[Number(button.getAttribute('data-modal-action'))];
         closeModal(action.value);
       });
     });
@@ -2464,9 +2642,11 @@ function setSavedHabitatsDrawer(open) {
 
 function renderSavedHabitatsSummary() {
   const count = readHabitats().length;
+  const button = document.getElementById('openSavedHabitatsBtn');
   const badge = document.getElementById('savedHabitatsCount');
   badge.hidden = count === 0;
   badge.textContent = String(count);
+  button.classList.toggle('has-count', count > 0);
 }
 
 function renderAdvancedFiltersOrder() {
@@ -2555,6 +2735,7 @@ function renderHabitatSelectedPokemon() {
   const bar = document.getElementById('habitatSelectedBar');
   const container = document.getElementById('habitatSelectedPokemon');
   const empty = document.getElementById('currentHabitatEmpty');
+  const clearButton = document.getElementById('clearHabitatHeaderBtn');
   const count = document.getElementById('outputTabCount');
   const outputTabButton = document.querySelector('.mobile-board-nav button[data-board-column="2"]');
 
@@ -2568,9 +2749,11 @@ function renderHabitatSelectedPokemon() {
   wrap.classList.toggle('has-chips', habitatPokemonNames.length > 0);
   bar.hidden = habitatPokemonNames.length === 0;
   empty.hidden = habitatPokemonNames.length > 0;
+  clearButton.hidden = habitatPokemonNames.length === 0;
   count.hidden = habitatPokemonNames.length === 0;
   count.textContent = String(habitatPokemonNames.length);
   outputTabButton.classList.toggle('has-count', habitatPokemonNames.length > 0);
+  syncOutputEmptyState();
 
   container.querySelectorAll('[data-remove-habitat-pokemon]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -2581,6 +2764,19 @@ function renderHabitatSelectedPokemon() {
       renderResultsFromState();
     });
   });
+}
+
+function syncOutputEmptyState() {
+  const title = document.getElementById('currentHabitatTitle');
+  const top = document.getElementById('currentHabitatTop');
+  const inner = document.getElementById('currentHabitatInner');
+  const nameField = document.getElementById('habitatNameField');
+  const isEmpty = habitatPokemonNames.length === 0;
+
+  title.hidden = isEmpty;
+  top.hidden = isEmpty;
+  inner.hidden = false;
+  nameField.hidden = isEmpty;
 }
 
 function addHabitatPokemon(name) {
@@ -2650,8 +2846,10 @@ function renderHabitatReport() {
 
   if (habitatPokemonNames.length < 2 || data.score === null) {
     scoreEl.innerHTML = '';
+    reportEl.classList.remove('filled');
     reportEl.innerHTML =
-      '<div class="report-block"><strong>Status</strong><div class="muted current-habitat-empty status-empty">Add at least 2 Pokemon to review habitat compatibility.</div></div>';
+      '<div class="muted current-habitat-empty status-empty">Add at least 2 Pokémon to review habitat compatibility.</div>';
+    syncOutputEmptyState();
     return;
   }
 
@@ -2663,15 +2861,17 @@ function renderHabitatReport() {
   }));
 
   const highlights = [
-    '<div class="report-block"><strong>Favorites shared by all</strong>' + renderCountedTags(allSharedFavoriteItems, 'shared') + '</div>',
-    '<div class="report-block"><strong>Unique favorites</strong>' + renderCountedTags(data.uniqueFavorites, 'unique') + '</div>',
-    '<div class="report-block"><strong>Favorite flavors</strong>' + renderCountedTags(data.flavorCounts, 'flavor') + '</div>',
-    '<div class="report-block"><strong>Ideal habitats</strong>' + renderCountedTags(data.idealHabitatCounts, 'ideal-habitat') + '</div>',
-    '<div class="report-block"><strong>Habitat specialties</strong>' + renderCountedTags(data.specialtyCounts, 'specialty') + '</div>'
+    '<div class="report-block"><label>Favorites shared by all</label>' + renderCountedTags(allSharedFavoriteItems, 'shared') + '</div>',
+    '<div class="report-block"><label>Unique favorites</label>' + renderCountedTags(data.uniqueFavorites, 'unique') + '</div>',
+    '<div class="report-block"><label>Favorite flavors</label>' + renderCountedTags(data.flavorCounts, 'flavor') + '</div>',
+    '<div class="report-block"><label>Ideal habitats</label>' + renderCountedTags(data.idealHabitatCounts, 'ideal-habitat') + '</div>',
+    '<div class="report-block"><label>Habitat specialties</label>' + renderCountedTags(data.specialtyCounts, 'specialty') + '</div>'
   ];
 
+  reportEl.classList.add('filled');
   reportEl.innerHTML = highlights.join('');
   attachTooltipHandlers(reportEl);
+  syncOutputEmptyState();
 }
 
 function clearHabitatDraft() {
@@ -2704,11 +2904,11 @@ function renderHabitatDetailsHtml(habitat) {
       '<div class="tag-list">' + (habitat.pokemon || []).map((name) => '<span class="tag pokemon">' + escapeHtml(name) + '</span>').join('') + '</div>' +
       renderHabitatRating(rating) +
     '</div>' +
-    '<div class="report-block"><strong>Favorites shared by all</strong>' + renderCountedTags(allSharedFavoriteItems, 'shared') + '</div>' +
-    '<div class="report-block"><strong>Unique favorites</strong>' + renderCountedTags(scoreData.uniqueFavorites, 'unique') + '</div>' +
-    '<div class="report-block"><strong>Favorite flavors</strong>' + renderCountedTags(scoreData.flavorCounts, 'flavor') + '</div>' +
-    '<div class="report-block"><strong>Ideal habitats</strong>' + renderCountedTags(scoreData.idealHabitatCounts, 'ideal-habitat') + '</div>' +
-    '<div class="report-block"><strong>Habitat specialties</strong>' + renderCountedTags(scoreData.specialtyCounts, 'specialty') + '</div>' +
+    '<div class="report-block"><label>Favorites shared by all</label>' + renderCountedTags(allSharedFavoriteItems, 'shared') + '</div>' +
+    '<div class="report-block"><label>Unique favorites</label>' + renderCountedTags(scoreData.uniqueFavorites, 'unique') + '</div>' +
+    '<div class="report-block"><label>Favorite flavors</label>' + renderCountedTags(scoreData.flavorCounts, 'flavor') + '</div>' +
+    '<div class="report-block"><label>Ideal habitats</label>' + renderCountedTags(scoreData.idealHabitatCounts, 'ideal-habitat') + '</div>' +
+    '<div class="report-block"><label>Habitat specialties</label>' + renderCountedTags(scoreData.specialtyCounts, 'specialty') + '</div>' +
   '</div>';
 }
 
@@ -2720,7 +2920,7 @@ function clearResultsUiOnly() {
   showLessCompatible = false;
   resultAdvancedFiltersOpen = false;
   document.getElementById('summary').className = 'empty';
-  document.getElementById('summary').textContent = 'Choose a starter to generate habitat matches.';
+  document.getElementById('summary').textContent = 'Choose a Pokémon to generate habitat matches.';
   document.getElementById('resultFiltersPanel').hidden = true;
   document.getElementById('liveFilters').hidden = true;
   document.getElementById('liveFilters').innerHTML = '';
@@ -2800,14 +3000,13 @@ function renderHabitatList() {
   container.innerHTML = habitats.map((habitat) => {
     const scoreData = getHabitatScoreData(habitat.pokemon || []);
     const rating = getHabitatRating(scoreData);
-    const title = habitat.name || 'Untitled habitat';
+    const title = habitat.name || ('Habitat #' + (habitats.indexOf(habitat) + 1));
     return '<article class="habitat-item">' +
       '<div class="habitat-item-top">' +
         '<div>' +
           '<h3>' + escapeHtml(title) + '</h3>' +
         '</div>' +
         '<div class="habitat-item-buttons">' +
-          '<button type="button" class="secondary small" data-view-habitat="' + habitat.id + '">View</button>' +
           '<button type="button" class="secondary small" data-edit-habitat="' + habitat.id + '">Edit</button>' +
           '<button type="button" class="danger small" data-delete-habitat="' + habitat.id + '">Delete</button>' +
         '</div>' +
@@ -2818,20 +3017,6 @@ function renderHabitatList() {
       '</div>' +
     '</article>';
   }).join('');
-
-  container.querySelectorAll('[data-view-habitat]').forEach((button) => {
-    button.addEventListener('click', async () => {
-      const habitat = readHabitats().find((item) => item.id === button.getAttribute('data-view-habitat'));
-      if (!habitat) return;
-      await openModal({
-        title: habitat.name || 'Untitled habitat',
-        html: renderHabitatDetailsHtml(habitat),
-        actions: [
-          { label: 'Close', value: 'close', className: 'secondary small' }
-        ]
-      });
-    });
-  });
 
   container.querySelectorAll('[data-edit-habitat]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -2860,8 +3045,16 @@ async function saveHabitat() {
   if (!draft.pokemon.length) return false;
 
   const habitats = readHabitats();
-  const duplicateByName = draft.name
-    ? habitats.find((item) => item.name.trim().toLowerCase() === draft.name.trim().toLowerCase() && item.id !== draft.id)
+  const existingHabitat = editingHabitatId
+    ? habitats.find((item) => item.id === editingHabitatId)
+    : null;
+  const resolvedName = draft.name && draft.name.trim()
+    ? draft.name.trim()
+    : (existingHabitat && existingHabitat.name
+      ? existingHabitat.name
+      : 'Habitat #' + getNextHabitatNumber(habitats));
+  const duplicateByName = resolvedName
+    ? habitats.find((item) => item.name.trim().toLowerCase() === resolvedName.toLowerCase() && item.id !== draft.id)
     : null;
 
   if (duplicateByName) {
@@ -2883,7 +3076,7 @@ async function saveHabitat() {
 
   const payload = {
     id: editingHabitatId || draft.id || String(Date.now()),
-    name: draft.name,
+    name: resolvedName,
     notes: draft.notes,
     pokemon: draft.pokemon,
     finder: draft.finder
@@ -2898,6 +3091,7 @@ async function saveHabitat() {
 
   writeHabitats(habitats);
   editingHabitatId = payload.id;
+  document.getElementById('habitatName').value = payload.name;
   renderHabitatList();
   syncHabitatActions();
   renderHabitatReport();
@@ -3245,7 +3439,7 @@ function renderPokemonSuggestions() {
 
   if (available.length === 0) {
     activePokemonSuggestionIndex = -1;
-    dropdown.innerHTML = '<div class="specialty-empty">No Pokemon match.</div>';
+    dropdown.innerHTML = '<div class="specialty-empty">No Pokémon match.</div>';
     dropdown.hidden = false;
     return;
   }
@@ -3501,11 +3695,11 @@ function renderResultsFromState() {
       '</div>' +
       '<div class="result-meta">' +
         '<div>' +
-          '<strong>Favorites</strong>' +
+          '<label>Favorites</label>' +
           renderTags(item.other.interests, item.sharedFavorites) +
-          '<div class="meta-line"><strong>Favorite flavor</strong></div>' +
+          '<div class="meta-line"><label>Favorite flavor</label></div>' +
           (item.other.flavor ? renderFlavorTag(item.other.flavor) : '<div class="muted">None</div>') +
-          '<div class="meta-line"><strong>Ideal habitat</strong></div>' +
+          '<div class="meta-line"><label>Ideal habitat</label></div>' +
           (item.other.idealHabitat ? renderIdealHabitatTag(item.other.idealHabitat) : '<div class="muted">None</div>') +
         '</div>' +
       '</div>' +
@@ -3536,7 +3730,7 @@ function resetSearch() {
   activePokemonSuggestionIndex = -1;
   document.getElementById('pokemonSearch').value = '';
   document.getElementById('summary').className = 'empty';
-  document.getElementById('summary').textContent = 'Choose a starter to generate habitat matches.';
+  document.getElementById('summary').textContent = 'Choose a Pokémon to generate habitat matches.';
   document.getElementById('resultFiltersPanel').hidden = true;
   document.getElementById('liveFilters').hidden = true;
   document.getElementById('liveFilters').innerHTML = '';
@@ -3545,6 +3739,7 @@ function resetSearch() {
   document.getElementById('resultsTabCount').hidden = true;
   document.querySelector('.mobile-board-nav button[data-board-column="1"]').classList.remove('has-count');
   showLessCompatible = false;
+  syncResultFiltersUi();
   syncComboboxCloseButtons();
   scrollToBoardColumn(0);
 }
@@ -3583,7 +3778,7 @@ function searchCompatibility() {
 
   if (!selectedName) {
     summary.className = 'empty';
-    summary.textContent = 'Choose a starter to generate habitat matches.';
+    summary.textContent = 'Choose a Pokémon to generate habitat matches.';
     latestSearchState = null;
     document.getElementById('resultFiltersPanel').hidden = true;
     activeResultFavoriteFilters = [];
@@ -3597,7 +3792,7 @@ function searchCompatibility() {
   const base = DATA.find((pokemon) => pokemon.name === selectedName);
   if (!base) {
     summary.className = 'empty';
-    summary.textContent = 'That Pokemon is not in this dex.';
+    summary.textContent = 'That Pokémon is not in this dex.';
     latestSearchState = null;
     document.getElementById('resultFiltersPanel').hidden = true;
     activeResultFavoriteFilters = [];
@@ -3648,7 +3843,7 @@ function searchCompatibility() {
   if (!matches.some((item) => item.sharedFavorites.length >= 3)) {
     document.getElementById('resultFiltersPanel').hidden = true;
     document.getElementById('liveFilters').hidden = true;
-    results.innerHTML = '<div class="empty">No matches reached the default compatibility view for this starter.</div>';
+    results.innerHTML = '<div class="empty">No compatible matches found. Try adjusting your filters.</div>';
     scrollToBoardColumn(1);
     return;
   }
@@ -3708,15 +3903,17 @@ document.getElementById('advancedFiltersToggle').addEventListener('click', () =>
   syncAdvancedFiltersUi();
 });
 document.getElementById('resultFiltersToggle').addEventListener('click', () => {
+  if (!latestSearchState) return;
   resultAdvancedFiltersOpen = !resultAdvancedFiltersOpen;
   syncResultFiltersUi();
 });
-document.getElementById('showLessCompatibleBtn').addEventListener('click', () => {
+document.getElementById('showLessCompatibleBtn').addEventListener('click', (event) => {
   showLessCompatible = !showLessCompatible;
   if (latestSearchState) {
     renderLiveFilters(latestSearchState.base);
     renderResultsFromState();
   }
+  event.currentTarget.blur();
 });
 document.getElementById('closeSpecialtyDropdownBtn').addEventListener('mousedown', (event) => {
   event.preventDefault();
@@ -3755,7 +3952,7 @@ document.getElementById('closeIdealHabitatDropdownBtn').addEventListener('click'
   syncComboboxCloseButtons();
 });
 document.getElementById('saveHabitatBtn').addEventListener('click', saveHabitat);
-document.getElementById('clearHabitatPokemonBtn').addEventListener('click', () => {
+document.getElementById('clearHabitatHeaderBtn').addEventListener('click', () => {
   clearHabitatDraft();
 });
 document.getElementById('openSavedHabitatsBtn').addEventListener('click', () => {
@@ -3763,6 +3960,9 @@ document.getElementById('openSavedHabitatsBtn').addEventListener('click', () => 
 });
 document.getElementById('closeSavedHabitatsBtn').addEventListener('click', () => {
   setSavedHabitatsDrawer(false);
+});
+document.getElementById('modalCloseBtn').addEventListener('click', () => {
+  closeModal('close');
 });
 document.getElementById('savedHabitatsBackdrop').addEventListener('click', (event) => {
   if (event.target.id === 'savedHabitatsBackdrop') {
